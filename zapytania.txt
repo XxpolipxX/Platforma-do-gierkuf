@@ -1,0 +1,16 @@
+#ranking TOP 10
+SELECT
+	`users`.`username`,
+    `scores`.`score`
+FROM
+	`scores`
+JOIN `users` ON `users`.`id` = `scores`.`user_id`
+WHERE `scores`.`game_id` = ?
+ORDER BY `scores`.`score` DESC
+LIMIT 10
+;
+
+#dodanie usera
+INSERT INTO `users` (`username`, `email`, `password_hash`) VALUES (?, ?, ?);
+
+#
