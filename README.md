@@ -8,3 +8,4 @@ Dostępne gry w naszym serwisie to:
 - [ ] Saper
 - [ ] Tetris
 - [ ] Tic Tac Toe
+- [ ] Dino run ???
