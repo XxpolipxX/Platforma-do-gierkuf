@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Snake</title>
+    <link rel="stylesheet" href="snake.css">
+</head>
+<body>
+    <div class="menu">
+        <div class="title">Snake The Game</div>
+        <div class="przyciski">
+            <button id="play">Zagraj</button>
+            <button onclick="options()">Opcje</button>
+        </div>
+        <div class="opcje hide">
+            <div class="trudnosc">Poziom trudności</div>
+            <div class="wybor">
+                <button id="easy">Łatwy</button>
+                <button id="norm">Normalny</button>
+                <button id="hard">Trudny</button>
+            </div>
+            <div class="wielkosc">Wielkość mapy</div>
+            <div class="wybor2">
+                <button id="small">Mała (20x20)</button>
+                <button id="med">Średnia (30x30)</button>
+                <button id="big">Ogromna (50x50)</button>
+            </div>
+            <button id="OK"onclick="OK()">OK</button>
+        </div>
+    </div>
+    <div id="end"class="gameOver hide">Gra skończona!<p id="output"></p>
+        <button id="again"onclick="again()">Try again</button>
+    </div>
+    <canvas id="plansza"></canvas>
+    
+    <script defer src="snake.js"></script> <!-- Walony "defer"! bez defera skrypt zostaje uruchomiony mimo, że strona HTML nie została do końca załadowana (zmarnowałem 20 min duh!) -->
+</body>
+</html>

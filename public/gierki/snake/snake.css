@@ -1,0 +1,85 @@
+* {
+    text-align: center;
+    font-family: 'Courier New';
+}
+body {
+    display: flex;
+    justify-content: space-around;
+}
+.menu, .opcje, .gameOver {
+    display: grid;
+    grid:
+        'title title title title'
+        'button button button button'; 
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(gray, lime);
+    position: absolute;
+    align-items: center;
+}
+.title {
+    grid-area: title;
+    font-size: 80px;
+}
+.przyciski {
+    grid-area: button;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+.przyciski > button, .wybor > button, .wybor2 > button {
+    margin: 20px;
+    padding: 20px;
+}
+.opcje{
+    opacity: 1;
+    grid:
+        'OK OK'
+        'trudnosc wielkosc'
+        'wybor wybor2';
+
+}
+#OK {
+    grid-area: OK;
+    margin: 50px;
+    padding: 20px;
+}
+.wybor, .wybor2 {
+    grid-area: wybor;
+    display: flex;
+    flex-direction: column;
+}
+.wybor2{
+    grid-area: wybor2;
+}
+.hide {
+    display: none;
+}
+.wybor button:focus {
+    color: white;
+    background-color: black;
+}
+.wybor2 button:focus {
+    color: white;
+    background-color: black;
+}
+#again {
+    padding: 30px;
+    margin-left: 100px;
+    margin-right: 100px;
+    grid-area: again;
+}
+#end {
+    color: white;
+    font-size: 50px;
+    grid-area: end;
+}
+.gameOver {
+    grid:
+    'end'
+    'again';
+    background-color: transparent;
+    opacity: 1;
+}
