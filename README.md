@@ -7,3 +7,4 @@ Dostępne gry w naszym serwisie to:
 Snake
 Saper
 Tetris
+Tic Tac Toe
