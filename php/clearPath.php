@@ -1,0 +1,28 @@
+<?php
+    function clearURL() {
+        // pobranie obecnego url
+        $url = $_SERVER['REQUEST_URI'];
+
+        // usunięcie rozszerzeń plików
+        // index.php   --> index
+         $url = preg_replace('/\.(php|html|htm)$/i', '', $url);
+
+         // usunięcie public/ z ścieżki
+         $url = preg_replace('#public/#', '', $url);
+
+         // usunięcie indexa na koniec
+         $url = preg_replace('#/index$#i', '', $url);
+
+
+         // JS do zmiany widocznej ścieżki bez przeładowywania strony
+         echo "
+            <script>
+                const czystaSciezka = '" . $url . "';
+                if(window.location.pathname != czystaSciezka) {
+                    window.history.replaceState({}, '', czystaSciezka);
+                }
+            </script>";
+    }
+
+    clearURL();
+?>

@@ -42,21 +42,21 @@
         </div>
         <div class="logowanie">
             <div class="text">
-                <form action="#">
+                <form id="formularz-zarejestruj">
                     <h2>Zarejestruj się</h2>
                     <div class="pole">
                         <span class="icona"><i class='bxr  bx-user'></i> </span>
-                        <input type="text" required>
+                        <input type="text" name="login" required>
                         <label >Login</label>
                     </div>
                     <div class="pole">
                         <span class="icona"><i class='bx  bxs-envelope'></i> </span>
-                        <input type="email" required>
+                        <input type="email" name="email" required>
                         <label >Email</label>
                     </div>
                     <div class="pole">
                         <span class="icona"><i class='bx  bxs-lock' ></i> </span>
-                        <input type="password" required>
+                        <input type="password" name="password" required>
                         <label >Hasło</label>
                     </div>
                     <div class="zapamietaj_nie-pamietam">
@@ -68,5 +68,8 @@
             </div>
         </div>   
     </div>
+
+    <div id="wynik"></div>
+    <script src="./zarejestruj.js"></script>
 </body>
 </html>
