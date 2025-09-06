@@ -1,0 +1,203 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:sans-serif,
+}
+body{
+    background-color: #020410;
+}
+header{
+    position:fixed ;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 12.5%;
+    background-color: transparent ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+.menu a{
+    position: relative;
+    font-size: 16px;
+    color: #e4e4e4;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 30px;
+}
+
+.background {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: url('background.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: blur(10px);
+}
+
+.container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    height: 550px;
+    background: url('background.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.container  .logotyp{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 58%;
+    height: 100%;
+    background-color: transparent;
+    padding: 80px;
+    color: #e4e4e4;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.container .logo{
+    font-size: 30px;
+}
+.logo i {
+    font-size: 1.3em;
+}
+
+.container  .logowanie{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(100% - 58%);
+    height: 100%;
+    background-color: transparent;
+}
+.pisanie h2{
+     font-size: 40px;
+     line-height: 1;
+}
+.pisanie h2 span{
+     font-size: 25px;
+}
+.pisanie p{
+    font-size: 16px;
+    margin: 20px 0;
+}
+.ikony a i{
+    font-size: 22px;
+    color: #e4e4e4;
+    margin-right: 10px;
+    transition: .5 ease;
+}
+.ikony a:hover i{
+    transform:scale(1.2);
+}
+.logowanie .text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    backdrop-filter: blur(20px);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: #e4e4e4;
+}
+.text h2 {
+    font-size: 32px;
+    text-align: center;
+}
+.text .pole{
+    position: relative;
+    width: 340px;
+    height: 50px;
+    border-bottom: 2px solid #e4e4e4;
+    margin: 30px 0;
+}
+.pole input{
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #e4e4e4;
+    font-weight: 500;
+    padding-right: 28px;
+}
+
+.pole label{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    font-size: 16px;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s ease;
+}
+/* email i hasło idzie do gory*/
+.pole input:focus~label,
+.pole input:valid~label{
+    top: -5px;
+}
+.pole .icona{
+    position: absolute;
+    top: 13px;
+    right: 0;
+    font-size: 19px;
+}
+.zapamietaj_nie-pamietam{
+    font-size: 14.5px;
+    font-weight: 500;
+    margin: -15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+.zapamietaj_nie-pamietam  label input{
+    accent-color: #e4e4e4;
+    margin-right: 3px;
+}
+.zapamietaj_nie-pamietam a{
+    color: #e4e4e4;
+    text-decoration: none;
+}
+.zapamietaj_nie-pamietam a:hover{
+    text-decoration: underline;
+}
+.guzik{
+    width: 100%;
+    height: 45px;
+    background-color: #c4103d;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #e4e4e4;
+    font-weight: 500;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+}
+.nowe-konto{
+    font-size: 14.5px;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 25px;
+}
+.nowe-konto p a{
+    color: #e4e4e4;
+    font-weight: 600;
+    text-decoration: none;
+}
+.nowe-konto p a:hover{
+    text-decoration: underline;
+}
