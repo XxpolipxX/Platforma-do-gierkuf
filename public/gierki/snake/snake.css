@@ -6,7 +6,7 @@ body {
     display: flex;
     justify-content: space-around;
 }
-.menu, .opcje, .gameOver {
+.menu, .options, .gameOver {
     display: grid;
     grid:
         'title title title title'
@@ -33,7 +33,7 @@ body {
     margin: 20px;
     padding: 20px;
 }
-.opcje{
+.options{
     opacity: 1;
     grid:
         'OK OK'
