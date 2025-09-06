@@ -9,3 +9,11 @@ Dostępne gry w naszym serwisie to:
 - [ ] Tetris
 - [ ] Tic Tac Toe
 - [ ] Dino run ???
+
+
+## 🛠 Wykorzystane technologie
+- HTML5, CSS3, JavaScript (ES6+)
+- PHP 8.2.12
+- 10.4.32-MariaDB MySQL
+- Boxicons(https://boxicons.com/) — ikony
+- pakiet XAMPP v3.3.0
