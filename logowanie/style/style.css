@@ -6,6 +6,7 @@
 }
 body{
     background-color: #020410;
+    overflow: hidden;
 }
 header{
     position:fixed ;
@@ -38,7 +39,19 @@ header{
     background-position: center;
     filter: blur(10px);
 }
-
+#wideo {
+    width: 100vw;
+}
+#wideoback {
+    width: 75vw;
+    height: 550px;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    object-fit: cover;
+    object-position: center;
+}
 .container{
     position: absolute;
     top: 50%;

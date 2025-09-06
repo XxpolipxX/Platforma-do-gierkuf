@@ -2,3 +2,4 @@ ustawienia audio (głównie mute)
 większe punkty i czas (czcionka)
 powiadomenie obok pkt (np. +1, +5);
 muzyka w menu głównym
+złote japko cooldown
