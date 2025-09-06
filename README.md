@@ -17,3 +17,4 @@ Dostępne gry w naszym serwisie to:
 - 10.4.32-MariaDB MySQL
 - Boxicons(https://boxicons.com/) — ikony
 - pakiet XAMPP v3.3.0
+- AJAX - Wysyłanie danych za pomocą JSON z plików JS do PHP
