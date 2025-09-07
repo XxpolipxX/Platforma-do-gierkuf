@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Wrz 04, 2025 at 07:00 PM
+-- Generation Time: Wrz 07, 2025 at 10:41 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -83,6 +83,18 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email`, `password_hash`, `current_win_streak`, `max_win_streak`, `created_at`) VALUES
+(1, 'login', '123@123', '$2y$10$IiUneEA553hKjQIW4TiA0eS/2hbwQH/abUirR1ZYS/Vzn/s5nD1FC', 0, 0, '2025-09-06 22:32:53'),
+(2, 'login2', '123@2', '$2y$10$8YvhVtXIdU0dduMcjiNnGO7K6bC3RJekFIHjz14E9qCa7c8ZT4lzC', 0, 0, '2025-09-07 19:21:07'),
+(3, 'login3', 'email@1', '$2y$10$HMnJozCpvg9gesqYfnRQTuo.tzrZ8oqP2QympJhjF4zt1ZhWJmc6a', 0, 0, '2025-09-07 19:27:40'),
+(4, 'login4', 'email@2', '$2y$10$RXn.PS.KU92jtCgf0A1C5elhxusH2.JTks9GEfO8WI2XlD6T0Vo2m', 0, 0, '2025-09-07 19:29:45'),
+(5, 'login5', 'email@5', '$2y$10$eVD./T8xBEyU.Zg8IGlEH.1Kp6N7daD749k0iI2LBUdWdnpqlLbWq', 0, 0, '2025-09-07 20:37:04'),
+(6, 'login6', 'email@6', '$2y$10$sk3JUVLxeDIH11SQjVYlMO0/s/oolTbpYliys7KX0zsYH/XycwhWe', 0, 0, '2025-09-07 20:37:20');
+
+--
 -- Indeksy dla zrzutów tabel
 --
 
@@ -146,7 +158,7 @@ ALTER TABLE `scores`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
