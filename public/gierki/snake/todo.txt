@@ -1,5 +1,14 @@
-ustawienia audio (głównie mute)
-większe punkty i czas (czcionka)
-powiadomenie obok pkt (np. +1, +5);
+ustawienia audio (głównie mute) +
+większe punkty i czas (czcionka) +
+powiadomenie obok pkt (np. +1, +5); +
 muzyka w menu głównym
-złote japko cooldown
+złote japko cooldown +
+
+animacje menu
+informacja o pkt na ekranie przegranej (mnożnik)
+można przekonwertować liczbę licznika na actual czas
+dodać wgl mnożnik do pkt w grze
+Cały CSS i animacje przcisków
+dodać dźwięki do checkboxów
+można dodać menu pauzy po naciśnięciu ESC
+timer po wyjściu z pauzy do gry (3sek)
