@@ -8,12 +8,29 @@ formularzLogowania.addEventListener('submit', function (e) {
 
     // wysłanie danych do php
     fetch('zaloguj.php', {
-        method: 'POST',     // metoda wysyłania danych
-        body: formData      // format wysłanych danych
+        method: 'POST',
+        body: new FormData(formularzLogowania)
     })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('wynik').innerHTML = data;
+        .then(async response => {
+            const text = await response.text();
+            console.log("Odpowiedź PHP:", text); // tu zobaczysz dokładny błąd lub JSON
+            try {
+                return JSON.parse(text);
+            } catch {
+                throw new Error("PHP nie zwróciło JSON-a");
+            }
         })
-        .catch(error => console.error('Błąd: ', error));
+        .then(data => {
+            const { success, message, user } = data;
+
+            if (success) {
+                const { id, login } = user;
+                console.log(`ID: ${id}, LOGIN: ${login}`);
+                alert(message);
+            } else {
+                alert(message);
+            }
+        })
+        .catch(error => console.error('Błąd:', error));
+
 });
