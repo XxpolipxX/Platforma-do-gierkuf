@@ -9,30 +9,37 @@
     <div class="menu">
         <div class="title">Snake The Game</div>
         <div class="przyciski">
-            <button id="play">Zagraj</button>
-            <button onclick="options()">Opcje</button>
+            <button onclick="options()">Zagraj</button>
+            <button onclick="">Leaderboards</button>
         </div>
         <div class="options hide">
+            <button id="wstecz" onclick="wstecz()">Wstecz</button>
+            <label id="mute_sfx">SFX sounds<input id="sfx_check" checked type="checkbox"></label>
+            <label id="mute_music">Music<input id="music_check" checked type="checkbox"></label>
+            <button id="play">OK</button>
             <div class="trudnosc">Poziom trudności</div>
             <div class="wybor">
                 <button id="easy"><input id="radio1" name="diff_set" type="radio"> Łatwy</button>
-                <button id="norm"><input id="radio2" name="diff_set" type="radio">Normalny</button>
+                <button id="norm"><input checked id="radio2" name="diff_set" type="radio">Normalny</button>
                 <button id="hard"><input id="radio3" name="diff_set" type="radio"> Trudny</button>
             </div>
             <div class="wielkosc">Wielkość mapy</div>
             <div class="wybor2">
-                <button id="small"><input id="radio4" name="map_size" type="radio"> Mała (20x20)</button>
+                <button id="small"><input checked id="radio4" name="map_size" type="radio"> Mała (20x20)</button>
                 <button id="med"><input id="radio5" name="map_size" type="radio"> Średnia (30x30)</button>
                 <button id="big"><input id="radio6" name="map_size" type="radio"> Ogromna (50x50)</button>
             </div>
-            <button id="OK"onclick="OK()">OK</button>
         </div>
     </div>
     <div id="end"class="gameOver hide">Gra skończona!<p id="output"></p>
         <button id="again"onclick="again()">Try again</button>
     </div>
+    <div class="menu_area">
+        <div class="slider">
+            <img id="slider" src="./slide.png" alt="">
+        </div>
+    </div>
     <canvas id="plansza"></canvas>
-    
     <script defer src="snake.js"></script> <!-- Walony "defer"! bez defera skrypt zostaje uruchomiony mimo, że strona HTML nie została do końca załadowana (zmarnowałem 20 min duh!) -->
 </body>
 </html>

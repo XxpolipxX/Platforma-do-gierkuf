@@ -1,10 +1,14 @@
 * {
     text-align: center;
-    font-family: 'Courier New';
+}
+@font-face {
+    font-family: snakeFont;
+    src: url(./snake_font.otf);
 }
 body {
     display: flex;
     justify-content: space-around;
+    overflow-x: hidden;
 }
 .menu, .options, .gameOver {
     display: grid;
@@ -33,18 +37,54 @@ body {
     margin: 20px;
     padding: 20px;
 }
+
 .options{
     opacity: 1;
     grid:
-        'OK OK'
+        'btn mute'
+        'btn mute'
         'trudnosc wielkosc'
         'wybor wybor2';
-
+    grid-auto-flow:column ;
 }
-#OK {
-    grid-area: OK;
-    margin: 50px;
-    padding: 20px;
+.trudnosc, .wielkosc {
+    background: linear-gradient(rgb(1, 203, 1), lime);
+    margin-left: 40px;
+    margin-right: 40px;
+    padding: 5%;
+}
+#mute_sfx {
+    grid-area: mute;
+    width: max-content;
+    justify-self: center;
+}
+#mute_music {
+    grid-area: mute;
+    width: max-content;
+    justify-self: center;
+    position: relative;
+    margin-top: 20%;
+}
+#wstecz, #play, #again {
+    padding: 10px;
+    font-family: snakeFont;
+    font-size: 30px;
+    background: rgb(65, 207, 255);
+    border-radius: 3rem;
+    outline: none;
+    border: rgb(66, 66, 66) 3px solid;
+}
+#wstecz {
+    grid-area: btn;
+    margin-left: 10px;
+    margin-top: 33%;
+    margin-bottom: 5%;
+}
+#play {
+    grid-area: btn;
+    margin-left: 10px;
+    position: relative;
+    margin-top: -27%;
 }
 .wybor, .wybor2 {
     grid-area: wybor;
@@ -66,7 +106,6 @@ body {
     background-color: black;
 }
 #again {
-    padding: 30px;
     margin-left: 100px;
     margin-right: 100px;
     grid-area: again;
@@ -82,4 +121,35 @@ body {
     'again';
     background-color: transparent;
     opacity: 1;
+}
+img {
+    transform: translate(200%);
+}
+.move-left{
+    animation-name: slide-left;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    transform: translate(200%);
+}
+.move-right{
+    animation-name: slide-right;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    transform: translate(-200%);
+}
+.menu_area{
+    position: absolute;
+    background-color: transparent;
+    width: 500px;
+    height: 500px;
+    overflow: hidden;
+    pointer-events: none;
+}
+@keyframes slide-left {
+    from {transform: translate(150%);}
+    to {transform: translate(-150%);}
+}
+@keyframes slide-right {
+    from {transform: translate(-150%);}
+    to {transform: translate(150%);}
 }
