@@ -39,6 +39,13 @@
         $zapytanie->bindParam(':email', $email, PDO::PARAM_STR);
         $zapytanie->execute();
 
+        // sprawdzenie długości hasła minimum 8 znaków
+        if(strlen($password) < 8) {
+            $response['message'] = "Hasło powinno składać się z co najmniej 8 znaków";
+            echo json_encode($response);
+            exit;
+        }
+
         if($zapytanie->fetch()) {
             $response['message'] = 'Użytkownik z tym emailem już istnieje';
             echo json_encode($response);
