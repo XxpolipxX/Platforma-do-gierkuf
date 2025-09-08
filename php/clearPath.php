@@ -1,4 +1,8 @@
 <?php
+    if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
+        header('Location: ../index.php');
+        exit;
+    }
     function clearURL() {
         // pobranie obecnego url
         $url = $_SERVER['REQUEST_URI'];

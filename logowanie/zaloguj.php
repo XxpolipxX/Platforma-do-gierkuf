@@ -1,4 +1,8 @@
 <?php
+    if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
+        header('Location: ../index.php');
+        exit;
+    }
     // pokazywanie błędów
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
