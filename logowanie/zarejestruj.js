@@ -10,17 +10,6 @@ formularzRejestrowania.addEventListener('submit', function (e) {
         method: 'POST',
         body: formData
     })
-        // .then(response => response.json())
-        // .then(data => {
-        //     // udało się zarejestrować
-        //     if (data.success) {
-        //         alert(data.message);
-        //         formularzRejestrowania.reset();
-        //     } else {
-        //         alert(data.message);    // istnieje taki user, mail zajęty itp.
-        //     }
-        // })
-        // .catch(error => console.error('Błąd: ', error));
         .then(async response => {
             const text = await response.text();
             console.log("Odpowiedź PHP:", text);    // błędy JSON
@@ -35,6 +24,8 @@ formularzRejestrowania.addEventListener('submit', function (e) {
             if (data.success) {
                 alert(data.message);
                 formularzRejestrowania.reset();
+                // przekierowanie na logowanie się
+                window.location.href = './zaloguj.html';
             } else {
                 alert(data.message);    // istnieje taki user,  mail zajęty itp
             }
