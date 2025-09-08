@@ -79,3 +79,62 @@ Dostępne gry w naszym serwisie to:
 
 🎉 **Powodzenia w instalacji i korzystaniu z projektu!**  
 Jeśli wszystko przebiegło pomyślnie, możesz od razu zacząć testować funkcjonalności aplikacji 🚀
+
+
+
+## 🗄️ Opis bazy danych
+
+Projekt korzysta z bazy danych **MariaDB 10.4.32**.  
+Baza składa się z kilku tabel przechowujących informacje potrzebne do działania aplikacji.
+
+### **1. users** – tabela użytkowników
+| Kolumna       | Typ danych        | Klucz | Opis                                   |
+|--------------|------------------|-------|---------------------------------------|
+| id           | INT          | PK    | Unikalny identyfikator użytkownika   |
+| username     | VARCHAR(50)      | UNIQUE| Login użytkownika                   |
+| email        | VARCHAR(100)     | UNIQUE| Adres e-mail użytkownika            |
+| password_hash     | VARCHAR(255)     |       | Zahashowane hasło za pomocą funkcji języka PHP password_hash, gdzie jako argumenty są podane hasło bez hashowania i PASSWORD_DEFAULT                   |
+| current_win_streak         |INT  |     | Przechowuje obecną serię wygranych gier w trybie wieloosobwym. W przypadku gier dla pojedynczego gracza nie ma znaczenia i nie jest aktualizowana                    |
+|max_win_streak         |INT  |     | Przechowuje maksymalną serię wygranych gier w trybie wieloosobwym, którą użytkownik osiągnął. W przypadku gier dla pojedynczego gracza nie ma znaczenia i nie jest aktualizowana                    |
+| created_at   | TIMESTAMP        |       | Data utworzenia konta               |
+
+---
+
+### **2. games** – tabela gier znajdujących się na naszej platformie  
+| Kolumna      | Typ danych   | Klucz | Opis                              |
+|-------------|-------------|-------|----------------------------------|
+| id          | INT     | PK    | Unikalny identyfikator gry     |
+| name     | VARCHAR(50)     |  UNIQUE   | Nazwa gry w serwisie    |
+| description       | TEXT|       | Opis gry                      |
+| max_players     | INT        |       | Maksymalna ilość graczy, która może grać razem w grę. Domyślnie jest to 1, dla gier dla dwóch osób będzie to 2                     |
+| created_at  | TIMESTAMP   |       | Data utworzenia gry            |
+
+---
+
+### **3. scores** – tabela przechowywująca wyniki osiągnięte przez graczy  
+| Kolumna      | Typ danych   | Klucz | Opis                              |
+|-------------|-------------|-------|----------------------------------|
+| id          | INT     | PK    | Unikalny identyfikator wyniku     |
+| user_id     | INT     |  FK   | Unikalny identyfikator użytkownika, który osiągnął wynik    |
+| game_id       | INT|   FK    | Unikalny identyfikator gry, w której został osiągnięty wynik                      |
+| score     | INT        |       | Liczba punktów zdobytych                     |
+| created_at  | TIMESTAMP   |       | Data utworzenia wyniku            |
+
+---
+
+### **4. multiplayer_rooms** – tabela przechowywująca pokoje wykorzystywane przez graczy do gry dla dwóch osób  
+| Kolumna      | Typ danych   | Klucz | Opis                              |
+|-------------|-------------|-------|----------------------------------|
+| id          | INT     | PK    | Unikalny identyfikator pokoju     |
+| game_id     | INT     |  FK   | Unikalny identyfikator gry, w którą będą grali gracze    |
+| player1_id       | INT|   FK    | Unikalny identyfikator pierwszego użytkownika, który będzie grał w grę                      |
+| player2_id     | INT        |  FK     | Unikalny identyfikator drugiego użytkownika, który będzie grał w grę                     |
+| join_code  | CHAR(6)   |   UNIQUE    | Kod dołączenia do pokoju przez drugiego gracza            |
+| status  | ENUM('waiting', 'in_progress', 'finished')   |       | Status gry. `waiting` - czeka na 2 gracza, `in_progress` - trwa rozgrywka, `finished` - rozgrywka została zakończona            |
+| winner_id  | INT   |  FK     | Unikalny identyfikator użytkownika, który wygrał            |
+| created_at  | TIMESTAMP   |       | Data utworzenia pokoju            |
+
+💡 **Uwagi techniczne**:
+- Wszystkie relacje obsługiwane są za pomocą **PDO**.
+- Dla kluczy obcych ustawiono **ON DELETE CASCADE**.
+- Hasła użytkowników są szyfrowane za pomocą funkcji `password_hash()` w języku PHP.
