@@ -1,14 +1,32 @@
-# Platforma-do-gierkuf
-Platforma do grania w giereczki
+# 🎮 Platforma do grania w gry przeglądarkowe
 
-Platforma ma za zadanie umożliwienie zalogowanym użytkownikom zagranie w gry przeglądarkowe, a także tworzenie rankingu punktowego z innymi użytkownikami. Aplikacja nie posiada hostingu - działa na serwerze lokalnym
+**Platforma** to aplikacja webowa umożliwiająca zalogowanym użytkownikom rozgrywkę w gry przeglądarkowe oraz rywalizację z innymi graczami dzięki systemowi punktów i rankingów.  
+Aplikacja działa **lokalnie** – nie posiada hostingu, więc uruchamiana jest na własnym serwerze (np. poprzez **XAMPP**).
 
-Dostępne gry w naszym serwisie to:
-- [x] Snake (trzeba wypucować)
-- [ ] Saper
-- [ ] Tetris
-- [ ] Tic Tac Toe
-- [ ] Dino run ???
+---
+
+## ✨ Funkcjonalności platformy
+- 🔐 **Logowanie i rejestracja** — dostęp do gier tylko dla zalogowanych użytkowników  
+- 🕹 **Rozgrywka online** — możliwość gry w różne klasyczne gry przeglądarkowe  
+- 🏆 **Ranking punktowy** — rywalizacja między użytkownikami na podstawie zdobytych punktów  
+- 📊 **Profil gracza** — podgląd swoich wyników oraz statystyk  
+- ⚙️ **Serwer lokalny** — aplikacja działa w środowisku **XAMPP** z wykorzystaniem **PHP** i **MariaDB**
+
+---
+
+## 🎲 Dostępne gry
+
+| Gra          | Status          | Opis                              |
+|-------------|----------------|------------------------------------|
+| 🐍 Snake    | 🔧 Do poprawy   | Klasyczna gra, zbieranie punktów i wzrost węża |
+| 💣 Saper    | ✅ Gotowa       | Odkrywaj pola i unikaj min        |
+| 🧩 Tetris   | ✅ Gotowa       | Układaj klocki, zdobywaj punkty   |
+| ❌ Tic Tac Toe | ✅ Gotowa   | Popularna gra w kółko i krzyżyk   |
+| 🦖 Dino Run | ❓ Do potwierdzenia | Gra inspirowana trybem offline w Chrome |
+
+---
+
+💡 **Info:** Aplikacja jest wciąż rozwijana — planowane są kolejne gry oraz usprawnienia w systemie rankingu.
 
 
 ## 🛠 Wykorzystane technologie
