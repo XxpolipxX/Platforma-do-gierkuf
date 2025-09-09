@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Wrz 07, 2025 at 10:41 PM
+-- Generation Time: Wrz 09, 2025 at 02:13 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -49,6 +49,7 @@ CREATE TABLE `multiplayer_rooms` (
   `join_code` char(6) NOT NULL,
   `status` enum('waiting','in_progress','finished') DEFAULT 'waiting',
   `winner_id` int(11) DEFAULT NULL,
+  `loser_id` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -92,7 +93,10 @@ INSERT INTO `users` (`id`, `username`, `email`, `password_hash`, `current_win_st
 (3, 'login3', 'email@1', '$2y$10$HMnJozCpvg9gesqYfnRQTuo.tzrZ8oqP2QympJhjF4zt1ZhWJmc6a', 0, 0, '2025-09-07 19:27:40'),
 (4, 'login4', 'email@2', '$2y$10$RXn.PS.KU92jtCgf0A1C5elhxusH2.JTks9GEfO8WI2XlD6T0Vo2m', 0, 0, '2025-09-07 19:29:45'),
 (5, 'login5', 'email@5', '$2y$10$eVD./T8xBEyU.Zg8IGlEH.1Kp6N7daD749k0iI2LBUdWdnpqlLbWq', 0, 0, '2025-09-07 20:37:04'),
-(6, 'login6', 'email@6', '$2y$10$sk3JUVLxeDIH11SQjVYlMO0/s/oolTbpYliys7KX0zsYH/XycwhWe', 0, 0, '2025-09-07 20:37:20');
+(6, 'login6', 'email@6', '$2y$10$sk3JUVLxeDIH11SQjVYlMO0/s/oolTbpYliys7KX0zsYH/XycwhWe', 0, 0, '2025-09-07 20:37:20'),
+(7, 'loginTestowy', '123@1233333', '$2y$10$mfqDggoQXrpWqEzqVpCLwuHw0Kw6ST0322nu.2n27rxvMf8iCnQA6', 0, 0, '2025-09-08 20:35:35'),
+(8, 'gdsgsd', '21323123@31421sdfgds', '$2y$10$TKQhTjTd2EX/aSGUcCQoS.QsErHwUb2XY8nESpoor/qCeJIvaewvK', 0, 0, '2025-09-08 20:37:21'),
+(9, '13231gfdgdf', 'dfhbserhz@hrtfhf', '$2y$10$GauDMl6ktlQrgCZbJRMbkOHgSrnzhNOhTM49Z4Uzp.eHFE8rbxxcK', 0, 0, '2025-09-08 20:37:38');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -114,7 +118,8 @@ ALTER TABLE `multiplayer_rooms`
   ADD KEY `game_id` (`game_id`),
   ADD KEY `player1_id` (`player1_id`),
   ADD KEY `player2_id` (`player2_id`),
-  ADD KEY `winner_id` (`winner_id`);
+  ADD KEY `winner_id` (`winner_id`),
+  ADD KEY `loser_id` (`loser_id`);
 
 --
 -- Indeksy dla tabeli `scores`
@@ -158,7 +163,7 @@ ALTER TABLE `scores`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
@@ -171,7 +176,8 @@ ALTER TABLE `multiplayer_rooms`
   ADD CONSTRAINT `multiplayer_rooms_ibfk_1` FOREIGN KEY (`game_id`) REFERENCES `games` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `multiplayer_rooms_ibfk_2` FOREIGN KEY (`player1_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `multiplayer_rooms_ibfk_3` FOREIGN KEY (`player2_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `multiplayer_rooms_ibfk_4` FOREIGN KEY (`winner_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
+  ADD CONSTRAINT `multiplayer_rooms_ibfk_4` FOREIGN KEY (`winner_id`) REFERENCES `users` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `multiplayer_rooms_ibfk_5` FOREIGN KEY (`loser_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `scores`

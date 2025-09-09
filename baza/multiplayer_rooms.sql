@@ -6,11 +6,13 @@ CREATE TABLE `multiplayer_rooms` (
     `join_code` CHAR(6) UNIQUE NOT NULL,
     `status` ENUM('waiting', 'in_progress', 'finished') DEFAULT 'waiting',
     `winner_id` INT DEFAULT NULL,
+    `loser_id` INT DEFAULT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (game_id) REFERENCES games(id) ON DELETE CASCADE,
     FOREIGN KEY (player1_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (player2_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (winner_id) REFERENCES users(id) ON DELETE SET NULL
+    FOREIGN KEY (winner_id) REFERENCES users(id) ON DELETE SET NULL,
+    FOREIGN KEY (loser_id) REFERENCES users(id) ON DELETE SET NULL
 );
 
 #głównie dla multi
