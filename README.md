@@ -19,9 +19,9 @@ Aplikacja działa **lokalnie** – nie posiada hostingu, więc uruchamiana jest 
 | Gra          | Status          | Opis                              |
 |-------------|----------------|------------------------------------|
 | 🐍 Snake    | 🔧 Do poprawy   | Klasyczna gra, zbieranie punktów i wzrost węża |
-| 💣 Saper    | ✅ Gotowa       | Odkrywaj pola i unikaj min        |
-| 🧩 Tetris   | ✅ Gotowa       | Układaj klocki, zdobywaj punkty   |
-| ❌ Tic Tac Toe | ✅ Gotowa   | Popularna gra w kółko i krzyżyk   |
+| 💣 Saper    | ❌ Do zrobienia       | Odkrywaj pola i unikaj min        |
+| 🧩 Tetris   | ❌ Do zrobienia       | Układaj klocki, zdobywaj punkty   |
+| ❌ Tic Tac Toe | ❌ Do zrobienia   | Popularna gra w kółko i krzyżyk   |
 | 🦖 Dino Run | ❓ Do potwierdzenia | Gra inspirowana trybem offline w Chrome |
 
 ---
@@ -150,6 +150,7 @@ Baza składa się z kilku tabel przechowujących informacje potrzebne do działa
 | join_code  | CHAR(6)   |   UNIQUE    | Kod dołączenia do pokoju przez drugiego gracza            |
 | status  | ENUM('waiting', 'in_progress', 'finished')   |       | Status gry. `waiting` - czeka na 2 gracza, `in_progress` - trwa rozgrywka, `finished` - rozgrywka została zakończona            |
 | winner_id  | INT   |  FK     | Unikalny identyfikator użytkownika, który wygrał            |
+| loser_id  | INT   |  FK     | Unikalny identyfikator użytkownika, który przegrał            |
 | created_at  | TIMESTAMP   |       | Data utworzenia pokoju            |
 
 💡 **Uwagi techniczne**:
