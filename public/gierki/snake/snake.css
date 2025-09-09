@@ -5,10 +5,56 @@
     font-family: snakeFont;
     src: url(./snake_font.otf);
 }
+@font-face {
+    font-family: titleFont;
+    src: url(./title.otf);
+}
 body {
     display: flex;
     justify-content: space-around;
     overflow-x: hidden;
+}
+.click {
+    display: flex;;
+    width: 500px;
+    height: 500px;
+    background-color: black;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.496);
+    font-family: snakeFont;
+    align-items: center;
+    font-size: 50px;
+    justify-content: center;
+    position: absolute;
+}
+.pauza {
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.202);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color: lime;
+    font-family: snakeFont;
+    font-size: 35px;
+}
+.numbers {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    pointer-events: none;
+}
+.one, .two, .three {
+    width: 500px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 160px;
+    font-family: snakeFont;
+    color: rgba(255, 255, 255, 0.165);
+    background-color: rgba(255, 255, 255, 0.202);
 }
 .menu, .options, .gameOver {
     display: grid;
@@ -17,13 +63,19 @@ body {
         'button button button button'; 
     width: 500px;
     height: 500px;
-    background: linear-gradient(gray, lime);
+    background: linear-gradient(180deg,rgba(0, 0, 0, 1) 0%, rgb(20, 140, 136) 100%);
     position: absolute;
     align-items: center;
 }
 .title {
     grid-area: title;
     font-size: 80px;
+    font-family: titleFont;
+    color: lime;
+    text-shadow: 
+        0 0 20px lime,
+        0 0 30px lime
+        ;
 }
 .przyciski {
     grid-area: button;
@@ -34,8 +86,10 @@ body {
     padding-right: 100px;
 }
 .przyciski > button, .wybor > button, .wybor2 > button {
-    margin: 20px;
-    padding: 20px;
+    margin-bottom: 10px;
+    margin-left: 12px;
+    padding: 5%;
+    margin-right: 12px;
 }
 
 .options{
@@ -48,37 +102,98 @@ body {
     grid-auto-flow:column ;
 }
 .trudnosc, .wielkosc {
-    background: linear-gradient(rgb(1, 203, 1), lime);
+    background-color: rgba(0, 255, 251, 0.502);
     margin-left: 40px;
     margin-right: 40px;
     padding: 5%;
+    border: rgb(0, 255, 247) 5px solid;
+    border-radius: 1rem;
+    color: black;
+    font-size: 20px;
+    font-family: snakeFont;
+        box-shadow: 
+        0 0 10px rgb(0, 255, 247)
+        ;
 }
 #mute_sfx {
     grid-area: mute;
     width: max-content;
+    font-size: 25px;
+    justify-self: center;
+    margin-bottom: 30%;
+    color: lime;
+    text-shadow: 
+        0 0 20px lime,
+        0 0 25px lime;
+    font-family: snakeFont;
+}
+#sfx_vol {
+    display: block;
+    grid-area: mute;
+    margin-bottom: 10%;
+    width: 70%;
+    justify-self: center;
+}
+#music_vol {
+    display: block;
+    grid-area: mute;
+    margin-top: 50%;
+    width: 70%;
     justify-self: center;
 }
 #mute_music {
     grid-area: mute;
+    color: lime;
+    font-size: 25px;
     width: max-content;
     justify-self: center;
     position: relative;
-    margin-top: 20%;
+    margin-top: 30%;
+        text-shadow: 
+        0 0 20px lime,
+        0 0 25px lime;
+    font-family: snakeFont;
 }
-#wstecz, #play, #again {
+#wstecz, #play, #again, #options, #board {
     padding: 10px;
+    color: lime;
+    text-shadow: 
+        0 0 20px lime,
+        0 0 30px lime;
     font-family: snakeFont;
     font-size: 30px;
-    background: rgb(65, 207, 255);
-    border-radius: 3rem;
+    background: transparent;
+    border-radius: 1rem;
     outline: none;
-    border: rgb(66, 66, 66) 3px solid;
+    border: lime 5px solid;
+    box-shadow: 
+        0 0 10px lime,
+        0px 10px rgb(0, 110, 0);
+    transition: .15s ease-in-out;
+}
+
+#wstecz:active, #play:active, #again:active, #options:active, #board:active {
+    box-shadow: 
+        0 0 10px lime;
+    position: relative;
+    top: 8px;
+    transition: none;
+}
+
+#wstecz:hover, #play:hover, #again:hover, #options:hover, .wybor button:hover, .wybor2 button:hover, #board:hover {
+    color: black;
+    background-color: rgba(0, 255, 0, 0.333);
 }
 #wstecz {
     grid-area: btn;
     margin-left: 10px;
-    margin-top: 33%;
-    margin-bottom: 5%;
+    margin-top: 40%;
+}
+#options {
+    margin-bottom: 20px;
+}
+#board{
+
 }
 #play {
     grid-area: btn;
@@ -93,6 +208,20 @@ body {
 }
 .wybor2{
     grid-area: wybor2;
+}
+.wybor2 button, .wybor button {
+    color: lime;
+    text-shadow: 
+        0 0 20px lime;
+    font-family: snakeFont;
+    background: transparent;
+    border: lime 5px solid;
+    font-size: 20px;
+    border-radius: 1rem;
+        box-shadow: 
+        0 0 20px lime
+        ;
+    transition: .15s ease-in-out;
 }
 .hide {
     display: none;
@@ -114,6 +243,10 @@ body {
     color: white;
     font-size: 50px;
     grid-area: end;
+    font-family: snakeFont;
+    text-shadow: 
+        0 0 20px lime;
+    color: lime;
 }
 .gameOver {
     grid:

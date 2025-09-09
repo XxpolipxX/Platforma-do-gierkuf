@@ -6,16 +6,19 @@
     <link rel="stylesheet" href="snake.css">
 </head>
 <body>
-    <div class="menu">
-        <div class="title">Snake The Game</div>
+    <div class="click"><span id="startText">Kliknij aby zacząć</span></div>
+    <div class="menu hide">
+        <div class="title">Snake 3.0</div>
         <div class="przyciski">
-            <button onclick="options()">Zagraj</button>
-            <button onclick="">Leaderboards</button>
+            <button id="options" onclick="options()">Zagraj</button>
+            <button id="board" onclick="">Leaderboards</button>
         </div>
         <div class="options hide">
             <button id="wstecz" onclick="wstecz()">Wstecz</button>
             <label id="mute_sfx">SFX sounds<input id="sfx_check" checked type="checkbox"></label>
+            <input type="range" min="1" max="100" value="50" id="sfx_vol">
             <label id="mute_music">Music<input id="music_check" checked type="checkbox"></label>
+            <input type="range" min="1" max="100" value="50" id="music_vol">
             <button id="play">OK</button>
             <div class="trudnosc">Poziom trudności</div>
             <div class="wybor">
@@ -34,6 +37,17 @@
     <div id="end"class="gameOver hide">Gra skończona!<p id="output"></p>
         <button id="again"onclick="again()">Try again</button>
     </div>
+    <div class="pauza hide">
+        Pauza
+        <span id="diff"></span>
+        <button id="again"onclick="PauseRestart()">Restart</button>
+    </div>
+    <div class="numbers">
+        <div class="one hide">1</div>
+        <div class="two hide">2</div>
+        <div class="three hide">3</div>
+    </div>
+    
     <div class="menu_area">
         <div class="slider">
             <img id="slider" src="./slide.png" alt="">

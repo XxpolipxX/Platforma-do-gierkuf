@@ -2,28 +2,95 @@
 
 //dźwięk
 
-let menu_music = new Audio("");
+let menu_music = new Audio("./audio/menu_music.mp3");
+menu_music.loop = true;
 let game_music = new Audio("./audio/music.mp3");
+game_music.volume = 0.5;
+let pause_music = new Audio("./audio/pause_music.mp3");
+pause_music.volume = 0.5;
 game_music.loop = true;
+pause_music.loop = true;
 let eatingGold = new Audio("./audio/eat.mp3");
-let eatingApple = new Audio("./audio/crunch.mp3")
+eatingGold.volume = 0.5;
+let eatingApple = new Audio("./audio/crunch.mp3");
+eatingApple.volume = 0.5;
 let start = new Audio("./audio/start.mp3");
+start.volume = 0.5;
 let start_set = new Audio("./audio/start_aftersett.mp3");
+start_set.volume = 0.5;
 let back = new Audio("./audio/wstecz.mp3");
-let death = new Audio("./audio/snakedeath.mp3")
+back.volume = 0.5;
+let death = new Audio("./audio/snakedeath.mp3");
+death.volume = 0.5;
+let fst = new Audio("./audio/przejscie.mp3");
+fst.volume = 0.5;
+let on = new Audio("./audio/on.mp3");
+let off = new Audio("./audio/off.mp3");
+let sfx_vol = document.getElementById("sfx_vol");
+let music_vol = document.getElementById("music_vol");
+let tick = new Audio ("./audio/tick.mp3");
 
 //mute
-
 let mute_music = document.getElementById("music_check");
 let mute_sfx = document.getElementById("sfx_check");
+function On(on_sound){
+    let smth = on_sound.cloneNode();
+    smth.play();
+}
+function Off(off_sound){
+    let smth = off_sound.cloneNode();
+    smth.play();
+}
+mute_sfx.addEventListener("change", () => {
+    if(mute_sfx.checked){
+        On(on);
+        sfx_vol.style.display = "block";
+    } else {
+        mute_check();
+        sfx_vol.style.display = "none";
+    }
+})
+mute_music.addEventListener("change", () => {
+    if(mute_music.checked){
+        mute_check();
+        On(on);
+        music_vol.style.display = "block";
+    } else {
+        mute_check();
+        Off(off);
+        music_vol.style.display = "none";
+    }
+})
+
+sfx_vol.addEventListener("input", () => {
+    let Vol = sfx_vol.value / 100;
+    eatingApple.volume = Vol;
+    eatingGold.volume = Vol;
+    start.volume = Vol;
+    start_set.volume = Vol;
+    back.volume = Vol;
+    death.volume = Vol;
+    fst.volume = Vol;
+    on.volume = Vol;
+    off.volume = Vol;
+})
+music_vol.addEventListener("input", () => {
+    let Vol = music_vol.value / 100;
+    menu_music.volume = Vol;
+    game_music.volume = Vol;
+    pause_music.volume = Vol;
+})
 
 function mute_check(){
     if (!mute_music.checked){
         game_music.muted = true;
         menu_music.muted = true;
+        pause_music.muted = true;
+        return true;
     } else {
         game_music.muted = false;
         menu_music.muted = false;
+        pause_music.muted = false;
     }
 
     if (!mute_sfx.checked){
@@ -33,6 +100,9 @@ function mute_check(){
         death.muted = true;
         back.muted = true;
         eatingApple.muted = true;
+        fst.muted = true;
+        on.muted = true;
+        off.muted = true;
     } else {
         eatingGold.muted = false;
         start.muted = false;
@@ -40,6 +110,9 @@ function mute_check(){
         death.muted = false;
         back.muted = false;
         eatingApple.muted = false;
+        fst.muted = false;
+        on.muted = false;
+        off.muted = false;
     }
 }
 
@@ -49,7 +122,24 @@ let play = document.getElementById("play");
 let Over = document.querySelector(".gameOver");
 let pkt = document.getElementById("output");
 let slider = document.getElementById("slider");
+let pauza = document.querySelector(".pauza");
+let menu_area =  document.querySelector(".menu_area");
+let click = document.querySelector(".click");
+let startText = document.getElementById("startText");
+let one = document.querySelector(".one");
+let two = document.querySelector(".two");
+let three = document.querySelector(".three");
+let numbers = document.querySelector(".numbers");
 
+click.addEventListener("click", () => {             //"kliknij aby rozpocząć" po kliknięciu
+    menu_music.play();
+    menu_music.volume = 0.3;
+    startText.style.display = "none";
+    setTimeout(() => click.classList.add("hide"), 4000);
+    setTimeout(() => slider.classList.add("move-left"), 3450)
+    setTimeout(() => slider.classList.remove("move-left"), 4700);
+    setTimeout(() => menu.classList.remove("hide"), 4000);
+})
 //plansza
 
 let plansza;
@@ -58,6 +148,8 @@ let blockSize = 25;  //wielkość bloku jednego
 let rows = 20;
 let columns = 20;
 let ctx;
+let diff = "Normalny (x1)"
+
 
 //wonsz
 let snakeX = blockSize*10;
@@ -71,6 +163,7 @@ let appleX;
 let appleY;
 let score = 0;
 let chance;
+let point_mult = 1;
 
 //złote japko
 let goldX;
@@ -91,8 +184,8 @@ let opcje = document.querySelector(".options");
 function options(){
     setTimeout(() => opcje.classList.remove("hide"), 600);   //cooldown po naciśnięciu Play
     slider.classList.add("move-left");
-    void slider.offsetWidth;
     setTimeout(() => slider.classList.remove("move-left"), 1000);
+    setTimeout(() => fst.play(), 350)
     start.play();
 }
 function wstecz(){
@@ -101,22 +194,29 @@ function wstecz(){
     slider.classList.add("move-right");
     setTimeout(() => slider.classList.remove("move-right"), 1000)
     back.play();
+    setTimeout(() => fst.play(), 200)
 }
 let clock = 1000/12 //(120 milisek.)
 let easy = document.getElementById("easy");
 easy.addEventListener("click", () => {
     radio1.checked = true;
-    clock = 1000/10
+    clock = 1000/8
+    point_mult = 0.75;
+    diff = "Łatwy (x0.75)";
 })
 let norm = document.getElementById("norm");
 norm.addEventListener("click", () => {
     radio2.checked = true;
-    clock = 1000/12
+    clock = 1000/10
+    point_mult = 1;
+    diff = "Normalny (x1)"
 })
 let hard = document.getElementById("hard");
 hard.addEventListener("click", () => {
     radio3.checked = true;
-    clock = 1000/20
+    clock = 1000/15
+    point_mult = 1.5;
+    diff = "Trudny (x1.5)";
 })
 let small = document.getElementById("small");
 small.addEventListener("click", () => {
@@ -124,7 +224,8 @@ small.addEventListener("click", () => {
     columns = 20
     blockSize = 25;
     goldTime = 2000;
-    menu.style.width = menu.style.height = opcje.style.width = opcje.style.height = Over.style.width = Over.style.height = "500px"
+    menu.style.width = menu.style.height = opcje.style.width = opcje.style.height = Over.style.width = Over.style.height = menu_area.style.width = menu_area.style.height = pauza.style.width = pauza.style.height = numbers.style.width = numbers.style.height = "500px"
+    one.style.width = one.style.height = two.style.width = two.style.height = three.style.width = three.style.height = "500px"
     radio4.checked = true;
 })
 let med = document.getElementById("med");
@@ -133,7 +234,8 @@ med.addEventListener("click", () => {
     columns = 30
     blockSize = 20
     goldTime = 3000;
-    menu.style.width = menu.style.height = opcje.style.width = opcje.style.height = Over.style.width = Over.style.height = "600px"
+    menu.style.width = menu.style.height = opcje.style.width = opcje.style.height = Over.style.width = Over.style.height = menu_area.style.width = menu_area.style.height = pauza.style.width = pauza.style.height = numbers.style.width = numbers.style.height = "600px"
+    one.style.width = one.style.height = two.style.width = two.style.height = three.style.width = three.style.height = "600px"
     radio5.checked = true;
 
 })
@@ -143,7 +245,8 @@ big.addEventListener("click", () => {
     columns = 50
     blockSize = 15
     goldTime = 4000;
-    menu.style.width = menu.style.height = opcje.style.width = opcje.style.height = Over.style.width = Over.style.height = "750px"
+    menu.style.width = menu.style.height = opcje.style.width = opcje.style.height = Over.style.width = Over.style.height = menu_area.style.width = menu_area.style.height = pauza.style.width = pauza.style.height = numbers.style.width = numbers.style.height = "750px"
+    one.style.width = one.style.height = two.style.width = two.style.height = three.style.width = three.style.height = "750px"
     radio6.checked = true;
 })
 
@@ -176,20 +279,8 @@ function golden_apple(){                                      //szansa (10%) na 
     }
 }
 
-let time = 0;
-let timeStart;
-let koniec;
-let timer;
-function timerStart(){
-    timeStart = new Date().getTime();
-    timer = setInterval(() =>{
-        const now = new Date().getTime();
-        time = Math.floor((now - timeStart) / 1000);
-    })
-}
-function timerEnd(){
-    clearInterval(timer);
-}
+
+
 
 let gameOver = false;
 
@@ -197,26 +288,37 @@ let gameOver = false;
 
 //ponowne menu główne
 function again(){
-    menu.classList.remove("hide");
+    setTimeout(() => menu.classList.remove("hide"), 400);
     X = 0;
     Y = 0;
-    clock = 1000/12;
     snakeBody = [];
     gameOver = false
     score = 0;
-    timeStart = koniec = time = 0;
+    menu_music.play();
+    slider.classList.add("move-right");
+    setTimeout(() => plansza.classList.add("hide"), 1000);
+    setTimeout(() => slider.classList.remove("move-right"), 1000)
     randomSnake();
-    Over.classList.add("hide");
+    setTimeout(() => Over.classList.add("hide"), 400);
+    setTimeout(() => fst.play(), 200)
+}
+
+function PauseRestart(){
+    game_music.pause();
+    pause_music.pause();
+    pauza.classList.add("hide");
+    again();
 }
 
 let game;
-
+let eventCheck = false;
 play.addEventListener("click", () => {      //rozpoczęcie gry
     clearInterval(game);
-    setTimeout(() => plansza.classList.remove("hide"), 600);
+    setTimeout(() => plansza.classList.remove("hide"), 500);
     slider.classList.add("move-left");
     setTimeout(() => slider.classList.remove("move-left"), 1000);
-    setTimeout(() => menu.classList.add("hide"), 500);
+    setTimeout(() => menu.classList.add("hide"), 550);
+    menu_music.pause();
     start_set.play();
     plansza.height = rows*blockSize;
     plansza.width = columns*blockSize;
@@ -225,11 +327,15 @@ play.addEventListener("click", () => {      //rozpoczęcie gry
     mute_check();
     randomApple();
     randomSnake();
-    timerStart();
-    document.addEventListener("keyup", keyUp);
+    if(!eventCheck){
+        document.addEventListener("keyup", keyUp);
+        eventCheck = true;
+    }
     game_music.currentTime = 0;
+    pause_music.currentTime = 0;
 
     setTimeout(() => game_music.play(), 1000)
+    setTimeout(() => pause_music.play(), 1000)
     update();
     ctx.clearRect(0, 0, plansza.width, plansza.height);
     game = setInterval(update, clock) // prędkość zegara całej gry
@@ -241,7 +347,8 @@ play.addEventListener("click", () => {      //rozpoczęcie gry
         //koniec gry
         if(gameOver){
         Over.classList.remove("hide");
-        pkt.innerHTML = "Score: " + score + "<br>Czas: " + time;
+        let final_score = Math.floor(score*point_mult)
+        pkt.innerHTML = "Zdobyte punkty: " + score + "<br>Mnożnik pkt: x" + point_mult + "<br>Wynik końcowy: " + final_score;
         clearInterval(game);
         game_music.pause();
         plansza.classList.add("hide");
@@ -283,8 +390,8 @@ play.addEventListener("click", () => {      //rozpoczęcie gry
         randomApple();
         golden_apple();
     }
-    let point_target = 30;
-    let point_posY = 50;
+    let point_target = 20;
+    let point_posY = 30;
     let point_posX = 90;
 
 
@@ -302,7 +409,6 @@ play.addEventListener("click", () => {      //rozpoczęcie gry
     
     
     if (snakeX == appleX && snakeY == appleY){      //zjedzenie japka
-        // ctx.clearRect(0, 0, plansza.width, plansza.height);
         eat();
     }
     if(snakeX == goldX && snakeY == goldY){         //zjedzenie złotego japka
@@ -323,19 +429,18 @@ play.addEventListener("click", () => {      //rozpoczęcie gry
     for(let i = 0; i < snakeBody.length; i++){
         ctx.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize) //snakeBody [X][Y]; interpretacja graficzna ciała wensza (części dodawanych)
     }
-    
+
     ctx.font = "20px snakeFont";
     ctx.fillStyle = "#fff"
-    ctx.fillText("Czas: " + time, 10, 20)               //Interpretacja graficzna Czasu
-    ctx.fillStyle = "#fff"
-    ctx.fillText("Punkty: " + score, 10, 50);           //Interpretacja grafincza Pkt
+    ctx.fillText("Punkty: " + score, 10, 30);           //Interpretacja grafincza Pkt
+    
 
     //"zasady" końca gry
     if(snakeX < 0 || snakeX >= columns*blockSize || snakeY < 0 || snakeY >= rows*blockSize){
         gameOver = true                     //uderzenie w mur (wyjście poza plansze)
         game_music.pause();
+        pause_music.pause();
         death.play();
-        timerEnd();
         clearInterval(game);
         setTimeout(() => game = setInterval(update, clock), 2000);
     }
@@ -344,48 +449,106 @@ play.addEventListener("click", () => {      //rozpoczęcie gry
         if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]){
             gameOver = true                //zjedzenie samego siebie
             game_music.pause();
+            pause_music.pause();
             death.play();
-            timerEnd();
             clearInterval(game);
             setTimeout(() => game = setInterval(update, clock), 2000);
         }
     }
 }
 
+let diffShow = document.getElementById("diff");
+let can = true;
+
+
+function tick3(){
+    three.classList.remove("hide");
+    tick.play();
+    setTimeout(() => three.classList.add("hide"), 299);
+}
+function tick2(){
+    two.classList.remove("hide");
+    tick.play();
+    setTimeout(() => two.classList.add("hide"), 299);
+}
+function tick1(){
+    one.classList.remove("hide");
+    tick.play();
+    setTimeout(() => one.classList.add("hide"), 299);
+}
+    
+
+
+function pause(){
+    if(can == false){
+        return;
+    }else{
+        pauza.classList.toggle("hide");
+        if(!pauza.classList.contains("hide")){
+            if(mute_check()){
+                game_music.muted = true;
+                pause_music.muted = true;
+            } else{
+                game_music.muted = true;
+                pause_music.muted = false;
+            }
+            clearInterval(game);
+            can = false;
+            setTimeout(() => can = true, 500)
+        } else {
+            tick3();
+            setTimeout(() => tick2(), 300);
+            setTimeout(() => tick1(), 600);
+            game_music.muted = false;
+            pause_music.muted = true;
+            mute_check();
+            setTimeout(() => game = setInterval(update, clock), 900);
+            can = false;
+            setTimeout(() => can = true, 500),
+            900
+
+        }
+    }
+    diffShow.innerHTML = "Poziom trudności: " + diff;
+}
 
 
 let move = true;
-    function keyUp(e){
-        if(move == false){
-            console.log("aa")
-            return;} else {
-        
-        if(e.code == "ArrowUp" && Y != 1){
-            X = 0;
-            Y = -1;
-            move = false;
-            setTimeout(() => move = true, 75);      //cooldown (bo spoceniec może przez przypadek umrzeć)
-        }
-        else if(e.code == "ArrowDown" && Y != -1){
-            X = 0;
-            Y = 1;
-            move = false;
-            setTimeout(() => move = true, 75);
-        }
-        else if(e.code == "ArrowLeft" && X != 1){
-            X = -1;
-            Y = 0;
-            move = false;
-            setTimeout(() => move = true, 75);
-        }
-        else if(e.code == "ArrowRight" && X != -1){
-            X = 1;
-            Y = 0;
-            move = false;
-            setTimeout(() => move = true, 75);
-        }
+function keyUp(e){
+    if(move == false){
+        console.log("aa")
+        return;} else {
+            
+            if(e.code == "ArrowUp" && Y != 1){
+                X = 0;
+                Y = -1;
+                move = false;
+                setTimeout(() => move = true, 80);      //cooldown (bo spoceniec może przez przypadek umrzeć)
             }
+            else if(e.code == "ArrowDown" && Y != -1){
+                X = 0;
+                Y = 1;
+                move = false;
+                setTimeout(() => move = true, 80);
+            }
+            else if(e.code == "ArrowLeft" && X != 1){
+                X = -1;
+                Y = 0;
+                move = false;
+                setTimeout(() => move = true, 80);
+            }
+            else if(e.code == "ArrowRight" && X != -1){
+                X = 1;
+                Y = 0;
+                move = false;
+                setTimeout(() => move = true, 80);
+            }
+            else if(e.code == "Escape"){
+                pause();
+            }
+        }
 
     }
 })
+
     
