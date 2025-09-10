@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Wrz 09, 2025 at 02:13 PM
+-- Generation Time: Wrz 10, 2025 at 12:56 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -34,6 +34,14 @@ CREATE TABLE `games` (
   `max_players` int(11) DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `games`
+--
+
+INSERT INTO `games` (`id`, `name`, `description`, `max_players`, `created_at`) VALUES
+(1, 'dino', 'Gra inspirowana trybem offline w Chrome', 1, '2025-09-10 10:55:14'),
+(2, 'snake', 'Klasyczna gra, zbieranie punktów i wzrost węża', 1, '2025-09-10 10:56:05');
 
 -- --------------------------------------------------------
 
@@ -145,7 +153,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `multiplayer_rooms`
