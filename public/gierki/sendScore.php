@@ -8,6 +8,8 @@
     // Połączenie z bazą
     require '../../php/db.php';
 
+    $pdo = $GLOBALS['pdo']; // przypisanie do lokalnej zmiennej
+
     $response = ['success' => false, 'message' => ''];
     
     if($_SERVER['REQUEST_METHOD'] !== 'POST') {

@@ -1,9 +1,12 @@
 <?php
     function sesja() {
-        session_start();
-        require '../../../php/getUserData.php';
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
 
-        if(!isset($_SESSION['user_id'])) {
+        require_once __DIR__ . '/../../php/getUserData.php';
+
+        if (!isset($_SESSION['user_id'])) {
             header('Location: ../../../logowanie/zaloguj.html');
             exit;
         }
