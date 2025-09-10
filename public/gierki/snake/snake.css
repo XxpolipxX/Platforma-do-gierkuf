@@ -61,6 +61,35 @@
     top: 7px;
 }
 
+/* instrukcje */
+
+.instrukcje, .Opis {
+    background-color: #fb408d;
+    border-color: #ffee82;
+    position: absolute;
+    left: 3%;
+    display: flex;
+    width: 25%;
+    text-align: center;
+    flex-direction: column;
+    border: 6px dashed #ffee82;
+    border-radius: 20px;
+    font-family: snakeFont;
+    font-size: larger;
+}
+p {
+    margin: 20px;
+}
+.Opis {
+    left: unset;
+    right: 2.3%;
+    width: 25%;
+    background-color: #2be9fc;
+}
+#Tab{
+    font-size: xx-large;
+    padding-top: 20px;
+}
 /* gra */
 @font-face {
     font-family: snakeFont;
@@ -81,6 +110,17 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
+#plansza {
+    border-radius: 30px;
+}
+.ramka{
+    pointer-events: none;
+    width: 500px;
+    height: 500px;
+    border: 6px solid #ffee82;
+    position: absolute;
+    border-radius: 36px;
+}
 .leaderboard{
     background-color: rgb(20, 140, 136);
     position: absolute;
@@ -89,7 +129,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-
+    border-radius: 30px;
 }
 .click {
     display: flex;;
@@ -103,6 +143,7 @@ body {
     font-size: 50px;
     justify-content: center;
     position: absolute;
+    border-radius: 30px;
 }
 .pauza {
     width: 500px;
@@ -115,12 +156,14 @@ body {
     color: lime;
     font-family: snakeFont;
     font-size: 35px;
+    border-radius: 30px;
 }
 .numbers {
     position: absolute;
     width: 500px;
     height: 500px;
     pointer-events: none;
+    border-radius: 30px;
 }
 .one, .two, .three {
     width: 500px;
@@ -131,7 +174,9 @@ body {
     font-size: 160px;
     font-family: snakeFont;
     color: rgba(255, 255, 255, 0.165);
-    background-color: rgba(255, 255, 255, 0.202);
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: 30px;
+    position: absolute;
 }
 .menu, .options, .gameOver {
     display: grid;
@@ -143,6 +188,7 @@ body {
     background: linear-gradient(180deg,rgba(0, 0, 0, 1) 0%, rgb(20, 140, 136) 100%);
     position: absolute;
     align-items: center;
+    border-radius: 30px;
 }
 .title {
     grid-area: title;
@@ -354,6 +400,7 @@ img {
     height: 500px;
     overflow: hidden;
     pointer-events: none;
+    border-radius: 30px;
 }
 @keyframes slide-left {
     from {transform: translate(150%);}

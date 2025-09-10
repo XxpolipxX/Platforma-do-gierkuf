@@ -5,8 +5,44 @@
     <title>Snake</title>
     <link rel="stylesheet" href="snake.css">
         <link href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css" rel="stylesheet">
-</head>
-<body>
+    </head>
+    <body>
+        <div class="instrukcje">
+            <span id="Tab">STEROWANIE</span><br>
+            <p>
+                PORUSZANIE SIĘ <br><br>
+                Strzałka do góry - góra <br>
+                Strzałka w dół - dół <br>
+                Strzałka w lewo - lewo <br>
+                Strzałka w prawo - prawo <br><br>
+                MENU <br><br>
+                ESC - pauza <br>
+            </p>
+            <span id="Tab">DŹWIĘKI</span>
+            <p>
+                Gra posiada dźwięki sfx jak i również muzykę. <br>
+                Gracz ma możliwość wyłączenia dźwięków sfx oraz muzyki w opcjach wyboru trybu gry. <br><br>
+                Dostępne są również suwaki, które dostosują głośność danego typu dźwięków.
+            </p>
+        </div>
+        <canvas id="plansza"></canvas>
+        <div class="Opis">
+    <span id="Tab">ZASADY GRY</span><br>
+    <p>
+        Gracz ma za zadanie uzbierać jak najwięcej jabłek, nie ginąc. <br><br>
+        Wąż może umrzeć na dwa sposoby - wychodząc poza pole gry lub zachaczając o swój własny ogon. <br><br>
+        Gracz może napotkać na złote jabłko; zjadając zwykłe jabłko istnieje 10% szansy, że na planszy pojawi się ów złote jabłko.
+        Lecz uważaj! Jabłko w krótkim czasie może zniknąć z planszy; czas obecności jabłka zależny jest od wiekości planszy: <br><br>
+        Plansza mała - 2 sekundy,<br>
+        Plansza średnia - 3 sekundy,<br>
+        Plansza ogrommna - 5 sekund. <br><br>
+        Za zjedzenie zwykłego jabłka gracz otrzymuje +1pkt, natomiast za zjedzenie złotego: +5pkt. <br><br>
+        Istnieją 3 tryby trudności: <br>
+        - ŁATWY - wąż porusza się powoli, mnożnik pkt = x0.75;<br>
+        - NORMALNY - wąż porusza się średnio, mnożnik pkt = x1;<br>
+        - TRUDNY - wąż porusza się szybko, mnożnik pkt = x1.5;<br><br>
+    </p>
+    </div>
     <div class="header">
         <nav class="nawigacja">
             <a href="../../../menu/index.html">Home</a>
@@ -14,6 +50,7 @@
             <button id="wyloguj"><i class='bxr  bx-arrow-out-right-square-half'></i>Wyloguj się</button>
         </nav>
     </div>
+    <div class="ramka"></div>
     <div class="click"><span id="startText">Kliknij aby zacząć</span></div>
     <div class="menu hide">
         <div class="title">Snake 3.0</div>
@@ -65,7 +102,6 @@
             <img id="slider" src="./slide.png" alt="">
         </div>
     </div>
-    <canvas id="plansza"></canvas>
     <script defer src="snake.js"></script> <!-- Walony "defer"! bez defera skrypt zostaje uruchomiony mimo, że strona HTML nie została do końca załadowana (zmarnowałem 20 min duh!) -->
 </body>
 </html>

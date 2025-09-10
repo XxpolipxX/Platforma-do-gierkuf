@@ -131,6 +131,7 @@ let two = document.querySelector(".two");
 let three = document.querySelector(".three");
 let numbers = document.querySelector(".numbers");
 let Table = document.querySelector(".leaderboard");
+let ramka = document.querySelector(".ramka");
 
 click.addEventListener("click", () => {             //"kliknij aby rozpocząć" po kliknięciu
     menu_music.play();
@@ -240,7 +241,7 @@ small.addEventListener("click", () => {
     blockSize = 25;
     goldTime = 2000;
     menu.style.width = menu.style.height = opcje.style.width = opcje.style.height = Over.style.width = Over.style.height = menu_area.style.width = menu_area.style.height = pauza.style.width = pauza.style.height = numbers.style.width = numbers.style.height = "500px"
-    one.style.width = one.style.height = two.style.width = two.style.height = three.style.width = three.style.height = Table.style.width = Table.style.height = "500px"
+    one.style.width = one.style.height = two.style.width = two.style.height = three.style.width = three.style.height = Table.style.width = Table.style.height = ramka.style.width = ramka.style.height = "500px"
     radio4.checked = true;
 })
 let med = document.getElementById("med");
@@ -250,7 +251,7 @@ med.addEventListener("click", () => {
     blockSize = 20
     goldTime = 3000;
     menu.style.width = menu.style.height = opcje.style.width = opcje.style.height = Over.style.width = Over.style.height = menu_area.style.width = menu_area.style.height = pauza.style.width = pauza.style.height = numbers.style.width = numbers.style.height = "600px"
-    one.style.width = one.style.height = two.style.width = two.style.height = three.style.width = three.style.height = Table.style.width = Table.style.height = "600px"
+    one.style.width = one.style.height = two.style.width = two.style.height = three.style.width = three.style.height = Table.style.width = Table.style.height = ramka.style.width = ramka.style.height = "600px"
     radio5.checked = true;
 
 })
@@ -259,9 +260,9 @@ big.addEventListener("click", () => {
     rows = 50,
     columns = 50
     blockSize = 15
-    goldTime = 4000;
+    goldTime = 5000;
     menu.style.width = menu.style.height = opcje.style.width = opcje.style.height = Over.style.width = Over.style.height = menu_area.style.width = menu_area.style.height = pauza.style.width = pauza.style.height = numbers.style.width = numbers.style.height = "750px"
-    one.style.width = one.style.height = two.style.width = two.style.height = three.style.width = three.style.height = Table.style.width = Table.style.height = "750px"
+    one.style.width = one.style.height = two.style.width = two.style.height = three.style.width = three.style.height = Table.style.width = Table.style.height = ramka.style.width = ramka.style.height = "750px"
     radio6.checked = true;
 })
 
@@ -307,7 +308,6 @@ function again(){
     X = 0;
     Y = 0;
     snakeBody = [];
-    gameOver = false
     score = 0;
     menu_music.play();
     slider.classList.add("move-right");
@@ -322,6 +322,7 @@ function PauseRestart(){
     game_music.pause();
     pause_music.pause();
     pauza.classList.add("hide");
+    can = true;
     again();
 }
 
@@ -338,10 +339,10 @@ play.addEventListener("click", () => {      //rozpoczęcie gry
     plansza.height = rows*blockSize;
     plansza.width = columns*blockSize;
     ctx = plansza.getContext('2d');
-    
     mute_check();
     randomApple();
     randomSnake();
+    gameOver = false;
     if(!eventCheck){
         document.addEventListener("keyup", keyUp);
         eventCheck = true;
@@ -495,7 +496,7 @@ function tick1(){
 
 
 function pause(){
-    if(can == false){
+    if(can == false || gameOver == true){
         return;
     }else{
         pauza.classList.toggle("hide");
