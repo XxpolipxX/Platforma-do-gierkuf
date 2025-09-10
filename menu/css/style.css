@@ -45,9 +45,9 @@ header button:hover{
     background-color: rgb(122, 46, 141);
 }
 header button:active{
-   box-shadow: none;
-   transition: 0.15s;
-   position: relative;
+    box-shadow: none;
+    transition: 0.15s;
+    position: relative;
     transform: translatey(3.75px);
 }
 header button i{
@@ -65,23 +65,56 @@ header button i{
 
 .row {
     display: flex;
-    gap: 20px;
+    gap: 40px;
     justify-content: center;
     flex-wrap:  wrap;
         }
 
-.tile {
+.tile1, .tile2, .tile3, .tile4, .tile5 {
     background: rgba(255, 255, 255, 1);
     border-radius: 12px;
-    width: 850px;
+    width: 750px;
     height: 450px;
     text-align: center;
     box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
     justify-content: center;
     align-items: center;
     display: flex;
-
         }
+.tile1 a, .tile2 a, .tile3 a, .tile4 a, .tile5 a {
+    
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+        }
+.tile1{
+    background: url('snake.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    
+}
+.tile2{
+    background: url('dino.jpeg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    
+}
+.tile3{
+    background: url('tetris.webp') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.tile4{
+    background: url('saper.png') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.tile5{
+background: url('tic\ tac\ toe.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 700px;
+}
 .background {
     position: fixed;
     top: 0;
@@ -94,11 +127,5 @@ header button i{
     z-index: -1;
         }
 
-    .tile a{
-        height: 100%;
-        width: 100%;
-        border-radius: 12px;
-        
-    }
 
 
