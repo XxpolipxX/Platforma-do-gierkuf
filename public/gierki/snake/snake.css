@@ -1,6 +1,66 @@
 * {
     text-align: center;
 }
+
+/* nawigacja */
+.header {
+    padding: 20px;
+    background-color: rgb(111, 39, 129);
+    position: absolute;
+    top: 0;
+    width: 100%;
+        }
+.header .nawigacja a{
+    color: rgba(255, 255, 255);
+    text-decoration: none;
+    padding: 10px;
+    
+}
+.nawigacja{
+    text-align: start;
+}
+.header .nawigacja a:hover{
+    background-color: rgb(94, 36, 109);
+
+}
+.header #wyloguj{
+    display: flex;
+    float: right;
+    padding: 6px;
+    position: absolute;
+    right: 40px;
+    top: 14px;
+    padding-left: 20px;
+    padding-right: -2px;
+
+}
+.header button{
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(142, 49, 165);
+    box-shadow: 2px 3.75px rgb(86, 30, 100);
+    color: rgb(255, 255, 255);
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+
+    
+}
+.header button:hover{
+    background-color: rgb(122, 46, 141);
+}
+.header button:active{
+   box-shadow: none;
+   transition: 0.15s;
+   position: relative;
+    transform: translatey(3.75px);
+}
+.header button i{
+    position: absolute;
+    left: 5px;
+    top: 7px;
+}
+
+/* gra */
 @font-face {
     font-family: snakeFont;
     src: url(./snake_font.otf);
@@ -17,6 +77,8 @@ body {
     height: 98vh;
     align-items: center;
     background-image: url("../background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .leaderboard{
     background-color: rgb(20, 140, 136);

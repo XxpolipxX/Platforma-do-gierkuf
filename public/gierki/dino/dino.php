@@ -18,8 +18,16 @@
     <title>Dino run</title>
     <link rel="stylesheet" href="dino.css">
     <script type="module" src="./main.js" defer></script>
+    <link href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
+    <div class="header">
+        <nav class="nawigacja">
+            <a href="../../../menu/index.html">Home</a>
+            <a href="#">Leaderboards</a>
+            <button id="wyloguj"><i class='bxr  bx-arrow-out-right-square-half'></i>Wyloguj się</button>
+        </nav>
+    </div>
     <div class="game-container">
         <div class="dino"></div>
         <div class="cactus-container"></div>
