@@ -18,6 +18,7 @@
 }
 .nawigacja{
     text-align: start;
+    font-family: sans-serif;
 }
 .header .nawigacja a:hover{
     background-color: rgb(94, 36, 109);
