@@ -13,6 +13,20 @@ body {
     display: flex;
     justify-content: space-around;
     overflow-x: hidden;
+    width: 100vw;
+    height: 98vh;
+    align-items: center;
+    background-image: url("../background.jpg");
+}
+.leaderboard{
+    background-color: rgb(20, 140, 136);
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
 }
 .click {
     display: flex;;

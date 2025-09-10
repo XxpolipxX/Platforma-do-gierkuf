@@ -130,6 +130,7 @@ let one = document.querySelector(".one");
 let two = document.querySelector(".two");
 let three = document.querySelector(".three");
 let numbers = document.querySelector(".numbers");
+let Table = document.querySelector(".leaderboard");
 
 click.addEventListener("click", () => {             //"kliknij aby rozpocząć" po kliknięciu
     menu_music.play();
@@ -180,7 +181,21 @@ let radio5 = document.getElementById("radio5");
 let radio6 = document.getElementById("radio6");
 let opcje = document.querySelector(".options");
 
-
+function leaderboard(){
+    setTimeout(() => Table.classList.remove("hide"), 600);
+    slider.classList.add("move-left");
+    setTimeout(() => slider.classList.remove("move-left"), 1000);
+    setTimeout(() => fst.play(), 350)
+    start.play();
+}
+function wsteczTable(){
+    setTimeout(() => Table.classList.add("hide"), 400);
+    mute_check();
+    slider.classList.add("move-right");
+    setTimeout(() => slider.classList.remove("move-right"), 1000)
+    back.play();
+    setTimeout(() => fst.play(), 200)
+}
 function options(){
     setTimeout(() => opcje.classList.remove("hide"), 600);   //cooldown po naciśnięciu Play
     slider.classList.add("move-left");
@@ -225,7 +240,7 @@ small.addEventListener("click", () => {
     blockSize = 25;
     goldTime = 2000;
     menu.style.width = menu.style.height = opcje.style.width = opcje.style.height = Over.style.width = Over.style.height = menu_area.style.width = menu_area.style.height = pauza.style.width = pauza.style.height = numbers.style.width = numbers.style.height = "500px"
-    one.style.width = one.style.height = two.style.width = two.style.height = three.style.width = three.style.height = "500px"
+    one.style.width = one.style.height = two.style.width = two.style.height = three.style.width = three.style.height = Table.style.width = Table.style.height = "500px"
     radio4.checked = true;
 })
 let med = document.getElementById("med");
@@ -235,7 +250,7 @@ med.addEventListener("click", () => {
     blockSize = 20
     goldTime = 3000;
     menu.style.width = menu.style.height = opcje.style.width = opcje.style.height = Over.style.width = Over.style.height = menu_area.style.width = menu_area.style.height = pauza.style.width = pauza.style.height = numbers.style.width = numbers.style.height = "600px"
-    one.style.width = one.style.height = two.style.width = two.style.height = three.style.width = three.style.height = "600px"
+    one.style.width = one.style.height = two.style.width = two.style.height = three.style.width = three.style.height = Table.style.width = Table.style.height = "600px"
     radio5.checked = true;
 
 })
@@ -246,7 +261,7 @@ big.addEventListener("click", () => {
     blockSize = 15
     goldTime = 4000;
     menu.style.width = menu.style.height = opcje.style.width = opcje.style.height = Over.style.width = Over.style.height = menu_area.style.width = menu_area.style.height = pauza.style.width = pauza.style.height = numbers.style.width = numbers.style.height = "750px"
-    one.style.width = one.style.height = two.style.width = two.style.height = three.style.width = three.style.height = "750px"
+    one.style.width = one.style.height = two.style.width = two.style.height = three.style.width = three.style.height = Table.style.width = Table.style.height = "750px"
     radio6.checked = true;
 })
 
