@@ -27,7 +27,7 @@ formularzLogowania.addEventListener('submit', function (e) {
                 const { id, login } = user;
                 console.log(`ID: ${id}, LOGIN: ${login}`);
                 alert(message);
-                window.location.href = '../public/gierki/wybor-gry.php';
+                window.location.href = '../public/wybor-gry.php';
             } else {
                 alert(message);
             }

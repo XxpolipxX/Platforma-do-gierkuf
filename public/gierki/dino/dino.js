@@ -1,10 +1,19 @@
-class Dino {
-  constructor() {
+import SendScore from './sendScore.js';
+
+export default class Dino {
+  constructor(userID, userLogin) {
+    // audio
     this.backgroundMusic = new Audio('./audio/music.mp3');
     this.backgroundMusic.loop = true;
 
     this.deathSound = new Audio('./audio/death.mp3');
 
+    // dane usera
+    this.userID = userID;
+    this.userLogin = userLogin;
+    
+
+    // elementy strony
     this.startGameButton = document.querySelector('.start-game');
     this.dino = document.querySelector('.dino');
     this.cactusContainer = document.querySelector('.cactus-container');
@@ -18,6 +27,7 @@ class Dino {
     this.moreFinalScoreBlock = document.querySelector('.more-final-score');
     this.restartGameButton = document.querySelector('.restart-game');
 
+    // zmienne dotyczące bezpośrednio gry
     this.isJumping = false;
     this.score = 0;
     this.finalScore = 0;
@@ -29,16 +39,20 @@ class Dino {
     this.spawnTimeout = null;
     this.cactusList = [];
 
+    console.log(`DINO endamge()   ID:${this.userID}, LOGIN:${this.userLogin}, FINALSCORE:${this.finalScore}`);
+    // start gry
     this.startGameButton.addEventListener('click', () => {
       if (this.gameStarted) return;
       this.startGame();
     });
 
+    // restart gry
     this.restartGameButton.addEventListener('click', () => {
       this.hideMessage();
       this.startGame();
     });
 
+    // start i skakanie
     document.addEventListener('keydown', (e) => {
       if (e.code === 'Enter') this.startGameButton.click();
       if (e.code === 'Space' || e.code === 'ArrowUp') {
@@ -184,10 +198,11 @@ class Dino {
     this.deathSound.play();
     this.gameStarted = false;
     this.finalScore = Math.floor(this.score * this.time / 3);
+    console.log(`DINO endamge()   ID:${this.userID}, LOGIN:${this.userLogin}, FINALSCORE:${this.finalScore}`);
+    const sendScore = new SendScore(this.userID, this.userLogin, this.finalScore);
     clearTimeout(this.spawnTimeout);
     this.showMessage();
     this.time = 0;
-    // this.startGameButton.disabled = false;
   }
 
   showMessage() {
@@ -201,5 +216,3 @@ class Dino {
     this.message.classList.add('hide');
   }
 }
-
-const dino = new Dino();

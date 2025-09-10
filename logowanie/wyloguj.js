@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     wylogujForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        fetch('../../logowanie/wyloguj.php', {
+        fetch('../logowanie/wyloguj.php', {
             method: 'POST'
         })
             .then(res => res.json())
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.success) {
                     alert(data.message);    // np.  Wylogowano
                     // przeniesienie na logowanie
-                    window.location.href = '../../logowanie/zaloguj.html';
+                    window.location.href = '../logowanie/zaloguj.html';
                 } else {
                     alert(data.message);    // np. brak ssji
                 }

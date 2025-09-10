@@ -1,10 +1,23 @@
+<?php
+    session_start();
+    require('../../../php/getUserData.php');
+
+    // czy jest sesja
+    if(!isset($_SESSION['user_id'])) {
+        header('Location: ../../../logowanie/zaloguj.html');
+        exit;
+    }
+    // pobierz dane usera
+    $user = getUserData($_SESSION['user_id']);
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <title>Dino run</title>
     <link rel="stylesheet" href="dino.css">
-    <script src="./dino.js" defer></script>
+    <script type="module" src="./main.js" defer></script>
     <link href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
@@ -33,5 +46,12 @@
         <p class="more-final-score">Finalny wynik: 0</p>
         <button class="restart-game">Zagraj ponownie</button>
     </div>
+
+    <script>
+        window.userData = <?php echo json_encode([
+            'id' => $user['id'],
+            'login' => $user['username']
+        ]); ?>;
+    </script>
 </body>
 </html>
