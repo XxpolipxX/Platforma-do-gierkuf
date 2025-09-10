@@ -21,13 +21,6 @@
     $id = trim($_POST['userID'] ?? '');
     $score = trim($_POST['userScore'] ?? '');
     $gameID = trim($_POST['gameID'] ?? '');
-
-    // Walidacja pól
-    // if (!$login || !$id || !$score || !$gameID) {
-    //     $response['message'] = 'Nie udało się przesłać wymaganych danych';
-    //     echo json_encode($response);
-    //     exit;
-    // }
     if(!$login) {
         $response['message'] = 'Ni ma logina';
         echo json_encode($response);

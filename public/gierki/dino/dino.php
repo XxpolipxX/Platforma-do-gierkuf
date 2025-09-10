@@ -1,14 +1,6 @@
 <?php
-    session_start();
-    require('../../../php/getUserData.php');
-
-    // czy jest sesja
-    if(!isset($_SESSION['user_id'])) {
-        header('Location: ../../../logowanie/zaloguj.html');
-        exit;
-    }
-    // pobierz dane usera
-    $user = getUserData($_SESSION['user_id']);
+    require '../sesja-ustawienieDanychUsera.php';
+    sesja();
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +11,6 @@
     <link rel="stylesheet" href="dino.css">
     <link href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css" rel="stylesheet">
     <script type="module" src="./main.js" defer></script>
-    <!-- <script src="../../../logowanie/wyloguj.js"></script> -->
 </head>
 <body>
     <div class="header">
@@ -48,11 +39,6 @@
         <button class="restart-game">Zagraj ponownie</button>
     </div>
 
-    <script>
-        window.userData = <?php echo json_encode([
-            'id' => $user['id'],
-            'login' => $user['username']
-        ]); ?>;
-    </script>
+    <?php script() ?>
 </body>
 </html>
