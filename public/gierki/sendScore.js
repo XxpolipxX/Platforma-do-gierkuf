@@ -15,7 +15,7 @@ export default class SendScore {
     data.append('userScore', this.userScore);
     data.append('gameID', this.gameID);
 
-    fetch('./sendScore.php', {
+    fetch('../sendScore.php', {
         method: 'POST',
         body: data
     })

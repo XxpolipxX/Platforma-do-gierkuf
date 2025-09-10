@@ -1,3 +1,15 @@
+<?php
+    session_start();
+    require('../../../php/getUserData.php');
+
+    // czy jest sesja
+    if(!isset($_SESSION['user_id'])) {
+        header('Location: ../../../logowanie/zaloguj.html');
+        exit;
+    }
+    // pobierz dane usera
+    $user = getUserData($_SESSION['user_id']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,6 +78,12 @@
         </div>
     </div>
     <canvas id="plansza"></canvas>
-    <script defer src="snake.js"></script> <!-- Walony "defer"! bez defera skrypt zostaje uruchomiony mimo, że strona HTML nie została do końca załadowana (zmarnowałem 20 min duh!) -->
+    <script type="module" defer src="snake.js"></script> <!-- Walony "defer"! bez defera skrypt zostaje uruchomiony mimo, że strona HTML nie została do końca załadowana (zmarnowałem 20 min duh!) -->
+    <script>
+        window.userData = <?php echo json_encode([
+            'id' => $user['id'],
+            'login' => $user['username']
+        ]); ?>;
+    </script>
 </body>
 </html>

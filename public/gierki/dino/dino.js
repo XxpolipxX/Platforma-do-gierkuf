@@ -1,7 +1,9 @@
-import SendScore from './sendScore.js';
+import SendScore from '../sendScore.js';
 
 export default class Dino {
   constructor(userID, userLogin) {
+    // id gry
+    this.gameID = 1;
     // audio
     this.backgroundMusic = new Audio('./audio/music.mp3');
     this.backgroundMusic.loop = true;
@@ -199,7 +201,7 @@ export default class Dino {
     this.gameStarted = false;
     this.finalScore = Math.floor(this.score * this.time / 3);
     console.log(`DINO endamge()   ID:${this.userID}, LOGIN:${this.userLogin}, FINALSCORE:${this.finalScore}`);
-    const sendScore = new SendScore(this.userID, this.userLogin, this.finalScore);
+    const sendScore = new SendScore(this.userID, this.userLogin, this.finalScore, this.gameID);
     clearTimeout(this.spawnTimeout);
     this.showMessage();
     this.time = 0;
