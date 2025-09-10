@@ -22,7 +22,7 @@ Aplikacja działa **lokalnie** – nie posiada hostingu, więc uruchamiana jest 
 | 💣 Saper    | ❌ Do zrobienia       | Odkrywaj pola i unikaj min        |
 | 🧩 Tetris   | ❌ Do zrobienia       | Układaj klocki, zdobywaj punkty   |
 | ❌ Tic Tac Toe | ❌ Do zrobienia   | Popularna gra w kółko i krzyżyk   |
-| 🦖 Dino Run | ❓ Do potwierdzenia | Gra inspirowana trybem offline w Chrome |
+| 🦖 Dino Run | 🔧 Do poprawy | Gra inspirowana trybem offline w Chrome |
 
 ---
 
