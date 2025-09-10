@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const wylogujForm = document.getElementById('wyloguj');
     wylogujForm.addEventListener('submit', function (e) {
         e.preventDefault();
-
+        console.log(wylogujForm);
         fetch('../logowanie/wyloguj.php', {
             method: 'POST'
         })

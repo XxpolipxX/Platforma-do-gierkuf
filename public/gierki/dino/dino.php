@@ -17,15 +17,16 @@
     <meta charset="UTF-8">
     <title>Dino run</title>
     <link rel="stylesheet" href="dino.css">
-    <script type="module" src="./main.js" defer></script>
     <link href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css" rel="stylesheet">
+    <script type="module" src="./main.js" defer></script>
+    <!-- <script src="../../../logowanie/wyloguj.js"></script> -->
 </head>
 <body>
     <div class="header">
         <nav class="nawigacja">
             <a href="../../../menu/index.html">Home</a>
             <a href="#">Leaderboards</a>
-            <button id="wyloguj"><i class='bxr  bx-arrow-out-right-square-half'></i>Wyloguj się</button>
+            <a id="wyloguj" href="../../../logowanie/wyloguj-link.php"><button><i class='bxr  bx-arrow-out-right-square-half wyloguj-button'></i>Wyloguj się</a></button>
         </nav>
     </div>
     <div class="game-container">

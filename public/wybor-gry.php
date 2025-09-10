@@ -19,9 +19,7 @@
 </head>
 <body>
     <div id="test"></div>
-    <form id="wyloguj">
-        <button type="submit">Wyloguj się</button>
-    </form>
+    <a href="../logowanie/wyloguj-link.php">Wyloguj</a>
     <script>
         const user = <?php echo json_encode([
             'id' => $user['id'],
