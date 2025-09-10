@@ -1,4 +1,5 @@
-
+// import klasy do wysłania wyniku
+import SendScore from '../sendScore.js';
 
 //dźwięk
 
@@ -189,6 +190,9 @@ function leaderboard(){
     setTimeout(() => fst.play(), 350)
     start.play();
 }
+
+window.leaderboard = leaderboard;       // też trzeba
+
 function wsteczTable(){
     setTimeout(() => Table.classList.add("hide"), 400);
     mute_check();
@@ -197,6 +201,9 @@ function wsteczTable(){
     back.play();
     setTimeout(() => fst.play(), 200)
 }
+
+window.wsteczTable = wsteczTable;   // też trzeba
+
 function options(){
     setTimeout(() => opcje.classList.remove("hide"), 600);   //cooldown po naciśnięciu Play
     slider.classList.add("move-left");
@@ -204,6 +211,11 @@ function options(){
     setTimeout(() => fst.play(), 350)
     start.play();
 }
+
+// to je ważne bo jak jest script type module to nie widzi funkcji options()
+
+window.options = options;       // to robi tak że widzi
+
 function wstecz(){
     setTimeout(() => opcje.classList.add("hide"), 400);
     mute_check();
@@ -212,6 +224,9 @@ function wstecz(){
     back.play();
     setTimeout(() => fst.play(), 200)
 }
+
+window.wstecz = wstecz;     // tu też trzeba to dać
+
 let clock = 1000/12 //(120 milisek.)
 let easy = document.getElementById("easy");
 easy.addEventListener("click", () => {
@@ -368,6 +383,12 @@ play.addEventListener("click", () => {      //rozpoczęcie gry
         clearInterval(game);
         game_music.pause();
         plansza.classList.add("hide");
+
+        // wysłanie danych na koniec gry
+        const gameID = 2;
+        const sendScore = new SendScore(window.userData.id, window.userData.login, final_score, gameID);
+        //
+
         return;
     }
     
