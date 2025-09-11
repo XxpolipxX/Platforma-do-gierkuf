@@ -65,7 +65,7 @@ header button i{
 
 .row {
     display: flex;
-    gap: 40px;
+    gap: 55px;
     justify-content: center;
     flex-wrap:  wrap;
         }
@@ -73,30 +73,37 @@ header button i{
 .tile1, .tile2, .tile3, .tile4, .tile5 {
     background: rgba(255, 255, 255, 1);
     border-radius: 12px;
-    width: 750px;
-    height: 450px;
+    width: 600px;
+    height: 375px;
     text-align: center;
     box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
     justify-content: center;
     align-items: center;
     display: flex;
+    transition: 0.2s ease-in-out;
         }
 .tile1 a, .tile2 a, .tile3 a, .tile4 a, .tile5 a {
     
     height: 100%;
     width: 100%;
     border-radius: 12px;
+    
         }
+ .tile1:hover,.tile2:hover,.tile3:hover,.tile4:hover,.tile5:hover{
+    transform:perspective(900px) translatey(-5%) rotatex(5deg) translatez(0)  ;
+   
+ }
 .tile1{
     background: url('snake.jpg') no-repeat;
     background-size: cover;
     background-position: center;
-    
+    width: 815px;
 }
 .tile2{
     background: url('dino.jpeg') no-repeat;
     background-size: cover;
     background-position: center;
+    width: 815px;
     
 }
 .tile3{
@@ -113,7 +120,8 @@ header button i{
 background: url('tic\ tac\ toe.jpg') no-repeat;
     background-size: cover;
     background-position: center;
-    height: 700px;
+    height: 375px;
+    width: 375px;
 }
 .background {
     position: fixed;
