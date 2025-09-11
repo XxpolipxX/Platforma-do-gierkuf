@@ -4,8 +4,6 @@ let formularzLogowania = document.getElementById('formularz-logowania');
 formularzLogowania.addEventListener('submit', function (e) {
     e.preventDefault(); // nie przeładowywuje strony
 
-    const formData = new FormData(this);
-
     // wysłanie danych do php
     fetch('zaloguj.php', {
         method: 'POST',
