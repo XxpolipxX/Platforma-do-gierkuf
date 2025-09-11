@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Zaloguj sie</title>
+    <title>Zresetuj hasło</title>
     <link rel="stylesheet" href="style/style.css">
     <link href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css" rel="stylesheet">
     <link href='https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
@@ -43,7 +43,7 @@
         <div class="logowanie">
             <div class="text">
                 <form id="formularz-logowania">
-                    <h2>Zaloguj się</h2>
+                    <h2>Zresetuj hasło</h2>
                     <div class="pole">
                         <span class="icona"><i class='bxr  bx-user'></i> </span>
                         <input type="text" name="login" required>
@@ -52,13 +52,18 @@
                     <div class="pole">
                         <span class="icona"><i class='bx  bxs-lock' ></i> </span>
                         <input type="password" name="password" required>
-                        <label >Hasło</label>
+                        <label >Nowe hasło</label>
                     </div>
-                    <div class="zapamietaj_nie-pamietam">
+                    <div class="pole">
+                        <span class="icona"><i class='bx  bxs-lock' ></i> </span>
+                        <input type="password" name="passwordAgain" required>
+                        <label >Powtórz nowe hasło</label>
+                    </div>
+                    <!-- <div class="zapamietaj_nie-pamietam">
                         <label><input type="checkbox">Zapamiętaj mnie</label>
-                        <a href="./przypomnij-haslo.html">Nie pamiętasz hasła?</a>
-                    </div>
-                    <button type="submit" class="guzik">Zaloguj się</button>
+                        <a href="#">Nie pamiętasz hasła?</a>
+                    </div> -->
+                    <button type="submit" class="guzik">Zresetuj hasło</button>
                     <div class="nowe-konto">
                         <p>Nie masz konta? <a href="./zarejestruj.html" class="rejestracja">
                             Zarejestruj się</a></p>
@@ -69,6 +74,6 @@
     </div>
 
     <div id="wynik"></div>
-    <script src="./zaloguj.js"></script>
+    <script src="./przypomnij.js"></script>
 </body>
 </html>
