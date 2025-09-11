@@ -333,6 +333,8 @@ function again(){
     setTimeout(() => fst.play(), 200)
 }
 
+window.again = again;
+
 function PauseRestart(){
     game_music.pause();
     pause_music.pause();
