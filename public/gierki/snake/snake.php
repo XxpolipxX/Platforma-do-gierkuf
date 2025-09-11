@@ -92,7 +92,7 @@
         <button id="again"onclick="PauseRestart()">Restart</button>
     </div>
     <div class="leaderboard hide">
-        <div class="table">aaa</div>
+        <div class="table"></div>
         <button id="wstecz" style="margin: 20%;" onclick="wsteczTable()">Wstecz</button>
     </div>
     <div class="numbers">
