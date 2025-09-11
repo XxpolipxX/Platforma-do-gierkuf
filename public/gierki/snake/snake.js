@@ -1,6 +1,11 @@
 // import klasy do wysłania wyniku
 import SendScore from '../sendScore.js';
 
+// // leaderboard
+import GetTopTen from '../getTopTen.js';
+const getTopTen = new GetTopTen(2, '../leaderboard.php');
+getTopTen.createTablebody('snake-table');
+
 //dźwięk
 
 let menu_music = new Audio("./audio/menu_music.mp3");

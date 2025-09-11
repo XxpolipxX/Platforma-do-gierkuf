@@ -35,5 +35,6 @@
         return $json;
     }
 
-    print_r(getScore($pdo, $gameID));
+    header('Content-Type: application/json; charset=utf-8');
+    echo getScore($pdo, $gameID);
 ?>

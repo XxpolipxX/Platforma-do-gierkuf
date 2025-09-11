@@ -92,7 +92,9 @@
         <button id="again"onclick="PauseRestart()">Restart</button>
     </div>
     <div class="leaderboard hide">
-        <div class="table"></div>
+        <div class="table">
+            <table id="snake-table"></table>
+        </div>
         <button id="wstecz" style="margin: 20%;" onclick="wsteczTable()">Wstecz</button>
     </div>
     <div class="numbers">
