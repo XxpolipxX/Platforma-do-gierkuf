@@ -4,10 +4,10 @@
             session_start();
         }
 
-        require_once __DIR__ . '/../../php/getUserData.php';
+        require_once __DIR__ . '../../../php/getUserData.php';
 
         if (!isset($_SESSION['user_id'])) {
-            header('Location: ../../logowanie/zaloguj.html');
+            header('Location: ../../../logowanie/zaloguj.html');
             exit;
         }
 
