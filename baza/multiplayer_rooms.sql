@@ -1,6 +1,5 @@
 CREATE TABLE `multiplayer_rooms` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `game_id` INT NOT NULL,
     `player1_id` INT NOT NULL,
     `player2_id` INT DEFAULT NULL,
     `join_code` CHAR(6) UNIQUE NOT NULL,
@@ -8,7 +7,6 @@ CREATE TABLE `multiplayer_rooms` (
     `winner_id` INT DEFAULT NULL,
     `loser_id` INT DEFAULT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (game_id) REFERENCES games(id) ON DELETE CASCADE,
     FOREIGN KEY (player1_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (player2_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (winner_id) REFERENCES users(id) ON DELETE SET NULL,

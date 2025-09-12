@@ -140,11 +140,10 @@ Baza składa się z kilku tabel przechowujących informacje potrzebne do działa
 
 ---
 
-### **4. multiplayer_rooms** – tabela przechowywująca pokoje wykorzystywane przez graczy do gry dla dwóch osób  
+### **4. multiplayer_rooms** – tabela przechowywująca pokoje wykorzystywane przez graczy do gry w kółko i krzyżyk
 | Kolumna      | Typ danych   | Klucz | Opis                              |
 |-------------|-------------|-------|----------------------------------|
 | id          | INT     | PK    | Unikalny identyfikator pokoju     |
-| game_id     | INT     |  FK   | Unikalny identyfikator gry, w którą będą grali gracze    |
 | player1_id       | INT|   FK    | Unikalny identyfikator pierwszego użytkownika, który będzie grał w grę                      |
 | player2_id     | INT        |  FK     | Unikalny identyfikator drugiego użytkownika, który będzie grał w grę                     |
 | join_code  | CHAR(6)   |   UNIQUE    | Kod dołączenia do pokoju przez drugiego gracza            |
