@@ -44,6 +44,9 @@ header button{
 header button:hover{
     background-color: rgb(122, 46, 141);
 }
+.menu button > a{
+  padding: initial;
+}
 header button:active{
     box-shadow: none;
     transition: 0.15s;

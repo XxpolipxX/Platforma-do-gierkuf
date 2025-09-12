@@ -28,8 +28,8 @@
     <div class="header">
         <nav class="nawigacja">
             <a href="../../../menu/index.html">Home</a>
-            <a href="#">Leaderboards</a>
-            <a href="../../../logowanie/wyloguj-link.php"><button id="wyloguj"><i class='bxr  bx-arrow-out-right-square-half wyloguj-button'></i>Wyloguj się</a></button>
+            <a href="../../../leaderboard/index.html">Leaderboards</a>
+            <button id="wyloguj">            <a href="../../../logowanie/wyloguj-link.php"><i class='bxr  bx-arrow-out-right-square-half wyloguj-button'></i>Wyloguj się</a></button>
         </nav>
     </div>
     <div class="game-container">
