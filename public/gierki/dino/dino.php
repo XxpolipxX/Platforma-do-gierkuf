@@ -29,7 +29,7 @@
         <nav class="nawigacja">
             <a href="../../../menu/index.html">Home</a>
             <a href="#">Leaderboards</a>
-            <a id="wyloguj" href="../../../logowanie/wyloguj-link.php"><button><i class='bxr  bx-arrow-out-right-square-half wyloguj-button'></i>Wyloguj się</a></button>
+            <a href="../../../logowanie/wyloguj-link.php"><button id="wyloguj"><i class='bxr  bx-arrow-out-right-square-half wyloguj-button'></i>Wyloguj się</a></button>
         </nav>
     </div>
     <div class="game-container">
