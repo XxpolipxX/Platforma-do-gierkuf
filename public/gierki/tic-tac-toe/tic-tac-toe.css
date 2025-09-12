@@ -8,12 +8,73 @@
     display: none !important;
 }
 
-.container {
+.center-element-on-screen {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #fafafa;
+}
+
+.center-element-on-parent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.flex-row {
     display: flex;
     flex-direction: row;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.font-2em {
+    font-size: 2em;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.menu-container {
+    width: 80%;
+    height: 60%;
+    background-color: #d2cccc;
+}
+
+.container {
+    width: 70%;
+    height: 80%;
+    background-color: #fafafa;
+}
+
+.container button,
+.container input {
+    margin: 5%;
+    padding: 20px 50px;
+    border-radius: 10px;
+}
+
+form {
+    width: 100%;
+}
+
+#join-container button {
+    align-self: center;
 }

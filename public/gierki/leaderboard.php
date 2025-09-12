@@ -10,8 +10,6 @@
     $gameID = $_GET['gameID'];
 
     function getScore($pdo, $gameID) {
-        $response = ['success' => false, 'message' => ''];
-
         $stmt = $pdo->prepare("
             SELECT u.username AS user_name, g.name AS game_name, s.score
             FROM scores s
