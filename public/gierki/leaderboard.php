@@ -1,7 +1,4 @@
 <?php
-    require_once './sesja-ustawienieDanychUsera.php';
-    sesja();
-
     require_once __DIR__ . '/../../php/db.php';
 
     if (!isset($GLOBALS['pdo'])) {
