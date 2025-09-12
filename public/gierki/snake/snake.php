@@ -51,7 +51,7 @@
         <nav class="nawigacja">
             <a href="../../../menu/index.html">Home</a>
             <a href="#">Leaderboards</a>
-            <button id="wyloguj"><i class='bxr  bx-arrow-out-right-square-half'></i>Wyloguj się</button>
+            <a href="../../../logowanie/wyloguj-link.php"><button id="wyloguj"><i class='bxr  bx-arrow-out-right-square-half wyloguj-button'></i>Wyloguj się</a></button>
         </nav>
     </div>
     <div class="ramka"></div>
