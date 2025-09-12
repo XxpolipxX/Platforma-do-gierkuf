@@ -8,26 +8,7 @@ body{
     background-color: #020410;
     overflow: hidden;
 }
-header{
-    position:fixed ;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 25px 12.5%;
-    background-color: transparent ;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-}
-.menu a{
-    position: relative;
-    font-size: 16px;
-    color: #e4e4e4;
-    text-decoration: none;
-    font-weight: 500;
-    margin-right: 30px;
-}
+
 
 .background {
     top: 0;
