@@ -60,6 +60,25 @@
         exit;
     }
 
+    // czy gra istnieje
+    $zapytanie = $pdo->prepare("SELECT `id`, `name` FROM `games` WHERE `id` = :gameID");
+    $zapytanie->bindParam(':gameID', $gameID, PDO::PARAM_INT);
+    $zapytanie->execute();
+    $gierka = $zapytanie->fetch(PDO::FETCH_ASSOC);
+
+    if(!$gierka) {
+        $response['message'] = 'Nie udało się znaleźć gierki';
+        echo json_encode($response);
+        exit;
+    }
+
+    // maksymalny wynik dla snejka to 12500
+    if($gierka['id'] == 2 && $score > 12500) {
+        $response['message'] = 'HAKIER';
+        echo json_encode($response);
+        exit;
+    }
+
     // zapytanie do wysłania danych
     $zapytanie = $pdo->prepare("INSERT INTO `scores` (`user_id`, `game_id`, `score`) VALUES (:id, :gameID, :score)");
     $zapytanie->bindParam(':id', $id, PDO::PARAM_INT);
