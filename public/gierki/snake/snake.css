@@ -24,6 +24,9 @@
     background-color: rgb(94, 36, 109);
 
 }
+.header .nawigacja button > a{
+  padding: initial;
+}
 .header #wyloguj{
     display: flex;
     float: right;
