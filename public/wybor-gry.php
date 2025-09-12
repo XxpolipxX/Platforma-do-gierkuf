@@ -20,6 +20,7 @@
 <body>
     <div id="test"></div>
     <a href="../logowanie/wyloguj-link.php">Wyloguj</a>
+    <a href="../menu/index.html">Wybór gierki</a>
     <script>
         const user = <?php echo json_encode([
             'id' => $user['id'],
