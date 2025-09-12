@@ -312,7 +312,7 @@ body {
 }
 #wstecz {
     grid-area: btn;
-    margin-left: 10px;
+    margin-left: 40px;
     margin-top: 40%;
 }
 #options {
@@ -323,7 +323,7 @@ body {
 }
 #play {
     grid-area: btn;
-    margin-left: 10px;
+    margin-left: 40px;
     position: relative;
     margin-top: -27%;
 }
