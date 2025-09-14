@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Minesweeper</title>
+    <link rel="stylesheet" href="saper.css">
+    <link href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <h1>Miny: <span id="mineCounter">0</span></h1>
+        <div class="lose hide">
+            <img id="explosion" src="./explosion.gif" alt="">
+        </div>
+        <div class="ramka">
+            <div class="menuArea">
+                <div class="menu">
+                    <img src="./title.png" alt="">
+                     <div class="opcje">
+                        <div class="easy">
+                            <button id="easy">Początkujący</button>
+                            <p>Wielkość: 9x9 <br>
+                                Liczba min: 10
+                            </p>
+                        </div>
+                        <div class="med">
+                            <p>Wielkość: 16x16 <br>
+                                Liczba min: 40
+                            </p>
+                            <button id="med">Normalny</button>
+                        </div>
+                        <div class="exp">
+                            <button id="exp">Ekspert</button>
+                            <p>Wielkość: 30x16 <br>
+                                Liczba min: 99
+                            </p>
+                        </div>
+                     </div>
+                     <div id="block">
+                         <button id="startBtn">Start</button>
+                     </div>
+                </div>
+            </div>
+            <div id="plansza" class="hide"></div>
+            <br>
+            <div class="nav-space">
+                <div id="face">
+                    <button id="resetBtn">
+                        <img id="tenna" src="idle.gif" alt="">
+                    </button>
+                </div>
+                <button id="flag-button">🚩</button>
+                <div id="timer">00:00</div>
+            </div>
+            <div class="score hide">Twój wynik: <span id="score"></span><img class="laugh" src="" alt="">
+            <button id="back" onclick="back()">Powrót</button>
+            </div>
+        </div>
+        <script defer src="saper.js"></script>
+    </body>
+</html>
