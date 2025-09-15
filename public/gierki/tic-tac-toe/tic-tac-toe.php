@@ -19,8 +19,9 @@
             <button id="join" class="font-bold font-2em">Dołącz</button>
         </div>
 
-        <div id="generate-code" class="hide container align-center justify-center center-element-on-parent flex-row">
+        <div id="generate-code" class="hide flex-column container align-center justify-center center-element-on-parent flex-row">
             <input type="text" id="generated-code" class="font-bold font-2em text-center" disabled>
+            <button class="back font-bold font-2em text-center">WSTECZ</button>
         </div>
 
         <div id="join-container" class="hide container center-element-on-parent">
@@ -29,7 +30,10 @@
                     <label for="code" class="font-bold font-2em">Wpisz kod</label>
                     <input type="text" id="code" name="code" class="font-bold font-2em" maxlength="6">
                 </div>
-                <button type="submit" class="font-bold font-2em" id="send-code">Dołącz</button>
+                <div class="flex-row justify-center">
+                    <button type="submit" class="font-bold font-2em" id="send-code">Dołącz</button>
+                    <button class="back font-bold font-2em text-center">WSTECZ</button>
+                </div>
             </form>
         </div>
     </div>
