@@ -133,6 +133,7 @@ body {
     flex-direction: column;
     justify-content: center;
     border-radius: 30px;
+    overflow-y: hidden;
 }
 .click {
     display: flex;;
@@ -413,3 +414,24 @@ img {
     from {transform: translate(-150%);}
     to {transform: translate(150%);}
 }
+
+/* tabelka */
+.table {
+    border: lime 5px solid;
+    justify-content: center;
+    width: 60%;
+    box-shadow: 
+    0 0 10px lime,
+    0px 10px rgb(0, 110, 0);
+    align-self: anchor-center;
+    overflow-y: scroll;
+    margin-top: 10%;
+}
+#snake-table td, #snake-table th {
+    width: 100%;
+    border-right: 1px solid rgba(0, 0, 0, 0.253);
+    padding: 8px;
+    text-align: start;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.253);
+}
+#snake-table tr:nth-child(even) {background-color: #00000013;}

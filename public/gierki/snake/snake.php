@@ -93,7 +93,14 @@
     </div>
     <div class="leaderboard hide">
         <div class="table">
-            <table id="snake-table"></table>
+            <table id="snake-table">
+                <tr>
+                    <th>NR</th>
+                    <th>Login</th>
+                    <th>Gra</th>
+                    <th>Liczba pkt</th>
+                </tr>
+            </table>
         </div>
         <button id="wstecz" style="margin: 20%;" onclick="wsteczTable()">Wstecz</button>
     </div>
