@@ -11,6 +11,20 @@ export default class Buttons {
         this.generateCodeButton = document.getElementById('create');
         this.joinRoomButton = document.getElementById('join');
 
+        // button wstecz
+        this.buttons = document.querySelectorAll('.back');
+        this.buttons.forEach((button) => {
+            button.addEventListener('click', () => {
+                this.toggleVisibility(this.createMenuElement);
+                if(!this.generateMenuElement.classList.contains('hide')) {
+                    this.generateMenuElement.classList.add('hide');
+                }
+                if(!this.joinMenuElement.classList.contains('hide')) {
+                    this.joinMenuElement.classList.add('hide');
+                }
+            });
+        });
+
         // inputy
         this.codeInput = document.getElementById('code');
         this.generatedCodeInput = document.getElementById('generated-code');
@@ -24,6 +38,7 @@ export default class Buttons {
             this.toggleVisibility(this.generateMenuElement);
 
             this.generateCode().then(code => {
+                console.log(code.joinCode);
                 this.generatedCodeInput.value = code.joinCode;
             });
         });
@@ -32,14 +47,6 @@ export default class Buttons {
             this.toggleVisibility(this.createMenuElement);
             this.toggleVisibility(this.joinMenuElement);
         });
-
-        // przesłanie formularza
-        /*
-
-            TO DO
-
-
-        */
     }
 
     // toglowanie klasy hide

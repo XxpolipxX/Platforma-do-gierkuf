@@ -17,6 +17,7 @@
 
     function script() {
         global $user;
+        $user = getUserData($_SESSION['user_id']);
         echo "<script>
             window.userData = " . json_encode([
                 'id' => $user['id'],
