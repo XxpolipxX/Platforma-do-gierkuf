@@ -18,7 +18,8 @@ let block = document.getElementById("block");
 
 //audio
 
-let explosion = new Audio("./audio/explosion.mp3")
+let explosion = new Audio("./audio/explosion.mp3");
+let mine = new Audio("./audio/mineClick.mp3");
 //plansza
 let plansza = document.getElementById("plansza");
 let board = [];
@@ -36,7 +37,7 @@ let flagCounter;
 
 let gameOver = false;
 
-let multiplier, devider, minTime;
+let multiplier, minTime;
 let points = 0;
 let timePoints;
 let pointsFinal;
@@ -46,15 +47,13 @@ let easy = document.getElementById("easy");
 let med = document.getElementById("med");
 let exp = document.getElementById("exp");
 
-
 let small, big, norm, anim;
 
 easy.addEventListener("click", () =>{
     rows = 9;
     columns = 9;
     mineCounter = flagCounter = 10;
-    multiplier = 7.5;
-    devider = 20;
+    multiplier = 5;
     minTime = 360;
 
     anim = "9x9";
@@ -90,7 +89,6 @@ med.addEventListener("click", () =>{
     columns = 16;
     mineCounter = flagCounter = 40;
     multiplier = 10;
-    devider = 17.5;
     minTime = 600;
 
     anim = "16x16";
@@ -127,7 +125,6 @@ exp.addEventListener("click", () =>{
     columns = 30;
     mineCounter = flagCounter = 99;
     multiplier = 15;
-    devider = 15;
     minTime = 900;
 
     anim = "30x16";
@@ -229,8 +226,25 @@ function diffBtn(){
 }
 
 startBtn.addEventListener("click", () => {
+    for(let i = 0; i < rows; i++){
+        for(let j = 0; j < columns; j++){
+            plansza.querySelectorAll("div").forEach(div => div.remove());
+        }
+    }
+    gameOver = false;
+    face.src = "./idle.gif";
+    plansza.classList.remove("hide");
+    scoreText.classList.add("hide");
+    tileClicked = 0;
+    row = [];
+    mineLocation = [];
+    points = 0;
+    pointsFinal = 0;
+    board = [];
+    document.getElementById("timer").innerHTML = "00:00"
     face.src = "./idle.gif"
     document.getElementById("flagCounter").innerText = flagCounter;
+    //animacja na wejście
     if(anim == "9x9"){
         menu.classList.add("startAnim9x9");
         plansza.classList.remove("hide");
@@ -291,9 +305,12 @@ restartBtn.addEventListener("click", () => {
     pointsFinal = 0;
     board = [];
     document.getElementById("timer").innerHTML = "00:00";
+    mine.pause();
+    mine.currentTime = 0;
     startTimer(100);
-
+    
     startGame();
+    document.getElementById("flagCounter").innerText = flagCounter;
 })
 //timer
 
@@ -355,7 +372,6 @@ function startGame(){
     document.getElementById("flag-button").addEventListener("click", setFlag)
 
     setMines();
-
     for(let i = 0; i < rows; i++){
         let row = [];
         for(let j = 0; j < columns; j++){
@@ -409,6 +425,20 @@ function clickTile(){
     }
 
     let tile = this;
+    if(tile.innerText == "🚩" && !flagMode){
+        return;
+    }
+    if (flagCounter == 0) {
+        if(flagMode){
+            if (flagMode && tile.innerText == "🚩"){
+                    tile.innerText = "";
+                    console.log("tak")
+                    flagCounter += 1;
+                    document.getElementById("flagCounter").innerText = flagCounter;
+            }
+            return;
+        } 
+    }
     if(flagCounter > 0){
     if(flagMode){
         if(tile.innerText == ""){
@@ -423,17 +453,6 @@ function clickTile(){
         }
         return;
     }}
-    if (flagCounter == 0) {
-        if(flagMode){
-            if(tile.innerText == "🚩"){
-            tile.innerText = "";
-            flagCounter++;
-            document.getElementById("flagCounter").innerText = flagCounter;
-            } else {
-
-            }
-        }
-    }
     
     //kiedy płytka z minom zostanie wciśnięta
     if(mineLocation.includes(tile.id)){
@@ -442,6 +461,7 @@ function clickTile(){
         stopTimer();
         face.src = "./lose.gif"
         revealMines();
+        mine.play();
         //wybuh gif
         setTimeout(() => {
             if(gameOver){
@@ -461,12 +481,10 @@ function clickTile(){
                 clearTimeout(faceID);
                 clearTimeout(loseID);
             }
-        }, 1800)
+        }, 1600)
         //liczenie po przegranej
-        pointsFinal = (points * Math.ceil((minTime / (timePoints +1)))) / devider
-        if(pointsFinal == NaN){
-            pointsFinal = 0;
-        }
+        pointsFinal = Math.floor((points * Math.ceil((minTime - 300 / (timePoints +1)))))
+        
         score.innerText = pointsFinal;
         return;
     }
@@ -478,7 +496,7 @@ function clickTile(){
 }
 
 
-
+//pokazuje miny
 function revealMines(){
     for (let i = 0; i < rows; i++){
         for(let j = 0; j < columns; j++){
@@ -490,7 +508,6 @@ function revealMines(){
         }
     }
 }
-
 //super-duper wykrywacz min 3000™
 function checkMine(r, c){
     if(r < 0 || r >= rows || c < 0 || c >= columns){
@@ -499,7 +516,14 @@ function checkMine(r, c){
     if(board[r][c].classList.contains("tile-clicked")) {
         return;
     }
+
+    //jeśli wykryje flage - zwraca użytkownikowi
     board[r][c].classList.add("tile-clicked");
+    if(board[r][c].innerText == "🚩"){
+        flagCounter++;
+        document.getElementById("flagCounter").innerText = flagCounter;
+        
+    }
     board[r][c].innerText = "";
     tileClicked += 1;
 
@@ -538,10 +562,38 @@ function checkMine(r, c){
     if(tileClicked == rows * columns - mineCounter){
         face.src = "./win.gif"
         //liczenie po wygranej
-        pointsFinal = (points * Math.ceil((minTime / (timePoints +1)))) * multiplier;
-        score.innerText = pointsFinal
+        pointsFinal = Math.floor((points * Math.ceil((minTime - 300 / (timePoints +1)))) * multiplier);
+        score.innerText = pointsFinal;
         gameOver = "true";
         stopTimer();
+        revealMines();
+        setTimeout(() => {
+            if(anim == "9x9"){
+                menu.classList.remove("hide");
+                menu.classList.add("endAnim9x9");
+                document.querySelector(".menuArea").classList.remove("hide");
+                setTimeout(() => {
+                    plansza.classList.add("hide");
+                    menu.classList.remove("endAnim9x9");
+                }, 1150)
+            } else if(anim == "16x16"){
+                menu.classList.remove("hide");
+                menu.classList.add("endAnim16x16");
+                document.querySelector(".menuArea").classList.remove("hide");
+                setTimeout(() => {
+                    plansza.classList.add("hide");
+                    menu.classList.remove("endAnim16x16");
+                }, 1950)
+            } else if (anim == "30x16"){
+                menu.classList.remove("hide");
+                menu.classList.add("endAnim30x16");
+                document.querySelector(".menuArea").classList.remove("hide");
+                setTimeout(() => {
+                    plansza.classList.add("hide");
+                    menu.classList.remove("endAnim30x16");
+                }, 1950)
+            }
+        }, 1600)
     }
 
 }
@@ -552,8 +604,7 @@ function checkTile(r, c){
         return 0;
     }
     if (mineLocation.includes(r.toString() + "-" + c.toString())){
-        points += 10;
-        console.log(points)
+        points += 1;
         return 1;
     }
     return 0;
