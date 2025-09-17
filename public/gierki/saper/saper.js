@@ -76,9 +76,8 @@ easy.addEventListener("click", () =>{
     explosionGif.style.width = "60%"
     explosionGif.style.transform = "translate(-450px, -400px)"
 
-    opcje.style.width = "500px"
+    opcje.style.width = "475px"
     opcje.style.height = "400px"
-    opcje.style.marginLeft = "28%"
 
     block.style.pointerEvents = "all";
     diffBtn();
@@ -112,9 +111,8 @@ med.addEventListener("click", () =>{
     explosionGif.style.width = "70%"
     explosionGif.style.transform = "translate(-600px, -400px)"
 
-    opcje.style.width = "600px"
+    opcje.style.width = "592px"
     opcje.style.height = "542px"
-    opcje.style.marginLeft = "35%"
     block.style.pointerEvents = "all";
 
     diffBtn();
@@ -149,9 +147,8 @@ exp.addEventListener("click", () =>{
     explosionGif.style.width = "75%"
     explosionGif.style.transform = "translate(-600px, -550px)"
 
-    opcje.style.width = "628px";
+    opcje.style.width = "750px";
     opcje.style.height = "350px"
-    opcje.style.marginLeft = "32%"
     block.style.pointerEvents = "all";
 
     diffBtn();
@@ -569,31 +566,31 @@ function checkMine(r, c){
         revealMines();
         setTimeout(() => {
             if(anim == "9x9"){
-                menu.classList.remove("hide");
-                menu.classList.add("endAnim9x9");
+                scoreText.classList.remove("hide");
+                scoreText.classList.add("endAnim9x9");
                 document.querySelector(".menuArea").classList.remove("hide");
                 setTimeout(() => {
                     plansza.classList.add("hide");
-                    menu.classList.remove("endAnim9x9");
+                    scoreText.classList.remove("endAnim9x9");
                 }, 1150)
             } else if(anim == "16x16"){
-                menu.classList.remove("hide");
-                menu.classList.add("endAnim16x16");
+                scoreText.classList.remove("hide");
+                scoreText.classList.add("endAnim16x16");
                 document.querySelector(".menuArea").classList.remove("hide");
                 setTimeout(() => {
                     plansza.classList.add("hide");
-                    menu.classList.remove("endAnim16x16");
+                    scoreText.classList.remove("endAnim16x16");
                 }, 1950)
             } else if (anim == "30x16"){
-                menu.classList.remove("hide");
-                menu.classList.add("endAnim30x16");
+                scoreText.classList.remove("hide");
+                scoreText.classList.add("endAnim30x16");
                 document.querySelector(".menuArea").classList.remove("hide");
                 setTimeout(() => {
                     plansza.classList.add("hide");
-                    menu.classList.remove("endAnim30x16");
+                    scoreText.classList.remove("endAnim30x16");
                 }, 1950)
             }
-        }, 1600)
+        }, 2000)
     }
 
 }
