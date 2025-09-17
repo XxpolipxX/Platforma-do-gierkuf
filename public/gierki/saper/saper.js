@@ -32,6 +32,7 @@ let minesLeft;
 
 let tileClicked = 0;
 let flagMode = false;
+let flagCounter;
 
 let gameOver = false;
 
@@ -51,7 +52,7 @@ let small, big, norm, anim;
 easy.addEventListener("click", () =>{
     rows = 9;
     columns = 9;
-    mineCounter = 10;
+    mineCounter = flagCounter = 10;
     multiplier = 7.5;
     devider = 20;
     minTime = 360;
@@ -87,7 +88,7 @@ easy.addEventListener("click", () =>{
 med.addEventListener("click", () =>{
     rows = 16;
     columns = 16;
-    mineCounter = 40;
+    mineCounter = flagCounter = 40;
     multiplier = 10;
     devider = 17.5;
     minTime = 600;
@@ -124,7 +125,7 @@ med.addEventListener("click", () =>{
 exp.addEventListener("click", () =>{
     rows = 16;
     columns = 30;
-    mineCounter = 99;
+    mineCounter = flagCounter = 99;
     multiplier = 15;
     devider = 15;
     minTime = 900;
@@ -229,6 +230,7 @@ function diffBtn(){
 
 startBtn.addEventListener("click", () => {
     face.src = "./idle.gif"
+    document.getElementById("flagCounter").innerText = flagCounter;
     if(anim == "9x9"){
         menu.classList.add("startAnim9x9");
         plansza.classList.remove("hide");
@@ -317,7 +319,7 @@ function startTimer(timeout){
                 sec = 0;
                 document.getElementById("timer").innerHTML = min10 + "" + min + ":" + sec10 + "" + sec;
             } 
-            if(min10 >= 10){
+            if(min >= 10){
                 min10++;
                 min = 0;
             }
@@ -335,6 +337,7 @@ function stopTimer(){
 //randomowa lokalizacja minuf
 function setMines(){
     minesLeft = mineCounter;
+    flagCounter = mineCounter;
     while(minesLeft > 0){
         let r =  Math.floor(Math.random() * rows);
         let c = Math.floor(Math.random() * columns);
@@ -350,6 +353,7 @@ function setMines(){
 
 function startGame(){
     document.getElementById("flag-button").addEventListener("click", setFlag)
+
     setMines();
 
     for(let i = 0; i < rows; i++){
@@ -395,6 +399,8 @@ function setFlag() {
     }
 }
 
+
+
 //klikanie płytek
 function clickTile(){
 
@@ -403,17 +409,32 @@ function clickTile(){
     }
 
     let tile = this;
+    if(flagCounter > 0){
     if(flagMode){
         if(tile.innerText == ""){
             tile.innerText = "🚩";
-
+            flagCounter--;
+            document.getElementById("flagCounter").innerText = flagCounter;
         }
         else if(tile.innerText == "🚩"){
             tile.innerText = "";
-
+            flagCounter++;
+            document.getElementById("flagCounter").innerText = flagCounter;
         }
         return;
+    }}
+    if (flagCounter == 0) {
+        if(flagMode){
+            if(tile.innerText == "🚩"){
+            tile.innerText = "";
+            flagCounter++;
+            document.getElementById("flagCounter").innerText = flagCounter;
+            } else {
+
+            }
+        }
     }
+    
     //kiedy płytka z minom zostanie wciśnięta
     if(mineLocation.includes(tile.id)){
         gameOver = true;
