@@ -12,6 +12,16 @@
     <link href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css" rel="stylesheet">
     <script src="./main.js" defer type="module"></script>
 </head>
+    <header>
+        <nav class="menu">
+            <a href="../../menu/index.html">Home</a>
+            <a href="#">Leaderboards</a>
+                        <!-- nazwa użytkownika -->
+            <div class="user_name"><b>dasdafsafsa</b></div>
+            <button id="wyloguj"><a href="../../logowanie/wyloguj-link.php"><i class='bxr  bx-arrow-out-right-square-half wyloguj-button'></i>Wyloguj się</a></button>
+        </nav>
+    </header>
+    <div class="background"></div>
 <body>
     <div id="options-container" class="menu-container justify-center center-element-on-screen">
         <div id="create-join" class="center-element-on-parent justify-center container align-center flex-row">

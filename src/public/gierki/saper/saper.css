@@ -482,3 +482,9 @@ header button i{
 h1{
     color: white;
 }
+       .user_name{
+        float: right;
+        position:relative;
+        margin-right: 110px;
+        color:#fff176;
+    }

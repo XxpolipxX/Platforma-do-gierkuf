@@ -435,3 +435,9 @@ img {
     border-bottom: 1px solid rgba(0, 0, 0, 0.253);
 }
 #snake-table tr:nth-child(even) {background-color: #00000013;}
+       .user_name{
+        float: right;
+        position:relative;
+        margin-right: 110px;
+        color:#fff176;
+    }
