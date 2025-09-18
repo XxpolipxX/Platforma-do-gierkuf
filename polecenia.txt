@@ -1,0 +1,6 @@
+- zbudowanie obrazów
+docker-compose build
+- uruchomienie kontenerów --detach-mode
+docker-compose up -d
+- zakmnięcie kontenerów
+docker-compose down

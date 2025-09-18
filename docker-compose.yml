@@ -1,0 +1,33 @@
+version: "3.1"
+services:
+  php:
+    build:
+      dockerfile: Dockerfile/php
+    volumes:
+      - ./src/:/var/www/html
+    networks:
+      - app_net
+    ports:
+      - 80:80
+  
+  db:
+    container_name: db_container
+    image: mariadb:11
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: gierkowo
+    volumes:
+      - db_gierkowo:/var/lib/mysql
+      - ./database/run.sql:/docker-entrypoint-initdb.d/dump.sql
+    networks:
+      - app_net
+    ports:
+      - 3306:3306
+
+volumes:
+  db_gierkowo:
+
+networks:
+  app_net:
+    driver: bridge
