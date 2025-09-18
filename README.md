@@ -48,7 +48,7 @@ Aplikacja działa **lokalnie** – nie posiada hostingu, więc uruchamiana jest 
    - Lub pobierz jako `.zip` i rozpakuj w wybranej lokalizacji.
 
 2. **Zainstaluj i skonfiguruj Dockera**  
-   - Pobierz [Docker]([https://www.apachefriends.org/pl/index.html](https://www.docker.com/get-started/))  
+   - Pobierz Docker [https://www.docker.com/get-started/](https://www.docker.com/get-started/)  
 
 3. **Skonfiguruj połączenie z bazą**  
    - Przejdź do pliku:
