@@ -1,26 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leaderboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css" rel="stylesheet">
+    <link href='https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
+
 </head>
 <body>
-    <table id="leaderboard-dino">
-        <tr>
-            <th>Autor</th>
-            <th>Gra</th>
-            <th>Wynik</th>
-        </tr>
-    </table>
-    <table id="leaderboard-snake">
-        <tr>
-            <th>Autor</th>
-            <th>Gra</th>
-            <th>Wynik</th>
-        </tr>
-    </table>
+    <header>
+        <nav class="menu">
+            <a href="../../menu/index.html">Home</a>
+            <a href="#">Leaderboards</a>
+            <button id="wyloguj"><a href="../../logowanie/wyloguj-link.php"><i class='bxr  bx-arrow-out-right-square-half wyloguj-button'></i>Wyloguj się</a></button>
+        </nav>
+    </header>
+    <div class="background"></div>
 
+    <div class="container">
+        <div class="row">
+            <div class="tile">
+                <table id="leaderboard-dino">
+            <tr>
+                <th>Autor</th>
+                <th>Gra</th>
+                <th>Wynik</th>
+            </tr>
+        </table>
+        <table id="leaderboard-snake">
+            <tr>
+                <th>Autor</th>
+                <th>Gra</th>
+                <th>Wynik</th>
+            </tr>
+        </table>
     <script type="module" src="./leaderboard.js"></script>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
