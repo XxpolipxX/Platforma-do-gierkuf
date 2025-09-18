@@ -103,5 +103,11 @@ header button i{
         border-radius: 12px;
         
     }
-
+       .user_name{
+        float: right;
+        position:relative;
+        margin-right: 110px;
+        color:#fff176;
+        text-shadow: 2px 2px 0px rgb(41, 41, 41);
+    }
 

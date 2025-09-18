@@ -29,6 +29,8 @@
         <nav class="nawigacja">
             <a href="../../../menu/index.html">Home</a>
             <a href="../../../leaderboard/index.html">Leaderboards</a>
+                        <!-- nazwa użytkownika -->
+            <div class="user_name"><b>dasdafsafsa</b></div>
             <button id="wyloguj">            <a href="../../../logowanie/wyloguj-link.php"><i class='bxr  bx-arrow-out-right-square-half wyloguj-button'></i>Wyloguj się</a></button>
         </nav>
     </div>
