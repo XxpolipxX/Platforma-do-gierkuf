@@ -21,7 +21,7 @@ body{
     filter: blur(10px);
 }
 #wideo {
-    width: 177vw;
+    width: 100vw;
     height: 115%;
     position: absolute;
     top: 50%;
