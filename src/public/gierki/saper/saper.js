@@ -20,6 +20,8 @@ let block = document.getElementById("block");
 
 let explosion = new Audio("./audio/explosion.mp3");
 let mine = new Audio("./audio/mineClick.mp3");
+let music = new Audio
+
 //plansza
 let plansza = document.getElementById("plansza");
 let board = [];
@@ -302,7 +304,7 @@ startBtn.addEventListener("click", () => {
             menu.classList.remove("startAnim30x16");
         }, 1950)
     }
-        startTimer(2000);
+        startTimer(1000);
 })
 
 restartBtn.addEventListener("click", () => {
@@ -492,6 +494,7 @@ function clickTile(){
         face.src = "./lose.gif"
         revealMines();
         mine.play();
+        document.getElementById("state").innerText = "Przegrana!"
         //wybuh gif
         setTimeout(() => {
             if(gameOver){
@@ -597,6 +600,26 @@ function checkMine(r, c){
         gameOver = "true";
         stopTimer();
         revealMines();
+        document.getElementById("state").innerText = "Wygrana!"
+                setTimeout(() => {
+            if(gameOver){
+                lose.classList.remove("hide")
+                explosion.play();
+                faceID = setTimeout(() => {
+                    face.src = "./win.gif";
+                }, 1000)
+                setTimeout(() => {
+                    plansza.classList.add("hide");
+                    scoreText.classList.remove("hide");
+                }, 500);
+                loseID = setTimeout(() => {
+                    lose.classList.add("hide")
+                }, 1800)
+            }else if(!gameOver){
+                clearTimeout(faceID);
+                clearTimeout(loseID);
+            }
+        }, 1600)
 
     }
 
@@ -612,4 +635,9 @@ function checkTile(r, c){
         return 1;
     }
     return 0;
+}
+
+function musicRandom(){
+    let index = Math.floor(Math.random() * 3) + 1;
+    music.src = "./audio/music" + index + ".mp3";
 }

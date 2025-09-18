@@ -23,8 +23,9 @@
     try {
         $roomManager = new Room($pdo);
         if(!$roomManager->checkCode($code, $userID)) {
-            $roomOwner = $roomManager->getUser1ID();
-            echo json_encode(['message' => 'Udało się dołączyć do pokoju użytkownika o id: ' . $roomOwner]);
+            // $roomOwner = $roomManager->getUser1ID();
+            // echo json_encode(['message' => 'Udało się dołączyć do pokoju użytkownika o id: ' . $roomOwner]);
+            echo json_encode(['message' => 'dołaczyłeś do innego pokoju']);
         }
     } catch (Exception $e) {
         echo json_encode([

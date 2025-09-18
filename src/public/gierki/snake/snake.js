@@ -143,10 +143,10 @@ click.addEventListener("click", () => {             //"kliknij aby rozpocząć" 
     menu_music.play();
     menu_music.volume = 0.3;
     startText.style.display = "none";
-    setTimeout(() => click.classList.add("hide"), 4000);
-    setTimeout(() => slider.classList.add("move-left"), 3450)
-    setTimeout(() => slider.classList.remove("move-left"), 4700);
-    setTimeout(() => menu.classList.remove("hide"), 4000);
+    setTimeout(() => click.classList.add("hide"), 1000);
+    setTimeout(() => slider.classList.add("move-left"), 1000)
+    setTimeout(() => slider.classList.remove("move-left"), 2500);
+    setTimeout(() => menu.classList.remove("hide"), 1000);
 })
 //plansza
 
