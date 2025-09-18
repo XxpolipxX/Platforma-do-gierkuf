@@ -314,7 +314,7 @@ body {
     81%{transform: translateY(481px);}
     87%{transform: translateY(518px);}
     94%{transform: translateY(555px);}
-    100%{transform: translateY(1100px);}
+    100%{transform: translateY(629px);}
 }
 .startAnim30x16 {
     animation-name: startAnim30x16;
@@ -322,22 +322,22 @@ body {
     animation-timing-function: linear(0 0%, 1 -0%);
 }
 @keyframes startAnim30x16 {
-    6%{transform: translateY(25px);}
-    12%{transform: translateY(50px);}
-    19%{transform: translateY(75px);}
-    25%{transform: translateY(100px);}
-    31%{transform: translateY(125px);}
-    37%{transform: translateY(150px);}
-    44%{transform: translateY(175px);}
-    50%{transform: translateY(200px);}
-    56%{transform: translateY(225px);}
-    62%{transform: translateY(250px);}
-    69%{transform: translateY(275px);}
-    75%{transform: translateY(300px);}
-    81%{transform: translateY(325px);}
-    87%{transform: translateY(350px);}
-    94%{transform: translateY(375px);}
-    100%{transform: translateY(1100px);}
+    100%{transform: translateY(629px);}
+    94%{transform: translateY(555px);}
+    87%{transform: translateY(518px);}
+    81%{transform: translateY(481px);}
+    75%{transform: translateY(444px);}
+    69%{transform: translateY(407px);}
+    62%{transform: translateY(370px);}
+    56%{transform: translateY(333px);}
+    50%{transform: translateY(296px);}
+    44%{transform: translateY(259px);}
+    37%{transform: translateY(222px);}
+    31%{transform: translateY(185px);}
+    25%{transform: translateY(148px);}
+    19%{transform: translateY(111px);}
+    12%{transform: translateY(74px);}
+    6%{transform: translateY(37px);}
 }
 .endAnim9x9 {
     animation-name: endAnim9x9;
@@ -362,7 +362,7 @@ body {
     animation-timing-function: linear(0 0%, 1 -0%);
 }
 @keyframes endAnim16x16 {
-    6%{transform: translateY(1100px);}
+    6%{transform: translateY(629px);}
     12%{transform: translateY(555px);}
     19%{transform: translateY(518px);}
     25%{transform: translateY(481px);}
@@ -385,7 +385,7 @@ body {
     animation-timing-function: linear(0 0%, 1 -0%);
 }
 @keyframes endAnim30x16 {
-    6%{transform: translateY(1100px);}
+    6%{transform: translateY(629px);}
     12%{transform: translateY(555px);}
     19%{transform: translateY(518px);}
     25%{transform: translateY(481px);}

@@ -155,27 +155,59 @@ exp.addEventListener("click", () =>{
 })
 
 function back(){
-    plansza.classList.add("hide");
-    scoreText.classList.add("hide");
-    menu.classList.remove("hide");
-    opcje.classList.remove("hide");
-    menuArea.classList.remove("hide");
-    tileClicked = 0;
-    row = [];
-    mineLocation = [];
-    points = 0;
-    pointsFinal = 0;
-    block.style.pointerEvents = "none";
-    anim = ""
-    diffBtn();
-    board = [];
-    document.getElementById("timer").innerHTML = "00:00";
-    gameOver = false;
-    for(let i = 0; i < rows; i++){
-        for(let j = 0; j < columns; j++){
-            plansza.querySelectorAll("div").forEach(div => div.remove());
+    if(anim == "9x9"){
+        menu.classList.add("endAnim9x9");
+        menu.classList.remove("hide");
+        document.querySelector(".menuArea").classList.remove("hide");
+        setTimeout(() => {
+            plansza.classList.add("hide");
+            menu.classList.remove("endAnim9x9");
+        }, 1950)
+    } else if(anim == "16x16"){
+        menu.classList.remove("hide");
+        menuArea.classList.remove("hide");
+        menu.classList.add("endAnim16x16");
+        document.querySelector(".menuArea").classList.remove("hide");
+        setTimeout(() => {
+            plansza.classList.add("hide");
+            menu.classList.remove("endAnim16x16");
+        }, 1950)
+    } else if (anim == "30x16"){
+        menu.classList.remove("hide");
+        menuArea.classList.remove("hide");
+        menu.classList.add("endAnim30x16");
+        document.querySelector(".menuArea").classList.remove("hide");
+        setTimeout(() => {
+            plansza.classList.add("hide");
+            menu.classList.remove("endAnim30x16");
+        }, 1950)
+    };
+
+    setTimeout(() => {
+        plansza.classList.add("hide");
+        scoreText.classList.add("hide");
+        menu.classList.remove("hide");
+        opcje.classList.remove("hide");
+        menuArea.classList.remove("hide");
+        tileClicked = 0;
+        row = [];
+        mineLocation = [];
+        points = 0;
+        pointsFinal = 0;
+        block.style.pointerEvents = "none";
+        anim = ""
+        diffBtn();
+        board = [];
+        document.getElementById("timer").innerHTML = "00:00";
+        gameOver = false;
+
+        for(let i = 0; i < rows; i++){
+            for(let j = 0; j < columns; j++){
+                plansza.querySelectorAll("div").forEach(div => div.remove());
+            }
         }
-    }
+    }, 1600)
+
 }
 function diffBtn(){
     if(anim == "9x9"){
@@ -295,6 +327,7 @@ restartBtn.addEventListener("click", () => {
     face.src = "./idle.gif";
     plansza.classList.remove("hide");
     scoreText.classList.add("hide");
+    menuArea.classList.add("hide");
     tileClicked = 0;
     row = [];
     mineLocation = [];
@@ -564,33 +597,7 @@ function checkMine(r, c){
         gameOver = "true";
         stopTimer();
         revealMines();
-        setTimeout(() => {
-            if(anim == "9x9"){
-                scoreText.classList.remove("hide");
-                scoreText.classList.add("endAnim9x9");
-                document.querySelector(".menuArea").classList.remove("hide");
-                setTimeout(() => {
-                    plansza.classList.add("hide");
-                    scoreText.classList.remove("endAnim9x9");
-                }, 1150)
-            } else if(anim == "16x16"){
-                scoreText.classList.remove("hide");
-                scoreText.classList.add("endAnim16x16");
-                document.querySelector(".menuArea").classList.remove("hide");
-                setTimeout(() => {
-                    plansza.classList.add("hide");
-                    scoreText.classList.remove("endAnim16x16");
-                }, 1950)
-            } else if (anim == "30x16"){
-                scoreText.classList.remove("hide");
-                scoreText.classList.add("endAnim30x16");
-                document.querySelector(".menuArea").classList.remove("hide");
-                setTimeout(() => {
-                    plansza.classList.add("hide");
-                    scoreText.classList.remove("endAnim30x16");
-                }, 1950)
-            }
-        }, 2000)
+
     }
 
 }
