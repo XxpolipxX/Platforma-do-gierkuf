@@ -1,7 +1,7 @@
 # 🎮 Platforma do grania w gry przeglądarkowe
 
 **Platforma** to aplikacja webowa umożliwiająca zalogowanym użytkownikom rozgrywkę w gry przeglądarkowe oraz rywalizację z innymi graczami dzięki systemowi punktów i rankingów.  
-Aplikacja działa **lokalnie** – nie posiada hostingu, więc uruchamiana jest na własnym serwerze (np. poprzez **XAMPP**).
+Aplikacja działa **lokalnie** – nie posiada hostingu, więc uruchamiana jest na własnym serwerze (np. poprzez **Docker**).
 
 ---
 
@@ -10,7 +10,7 @@ Aplikacja działa **lokalnie** – nie posiada hostingu, więc uruchamiana jest 
 - 🕹 **Rozgrywka online** — możliwość gry w różne klasyczne gry przeglądarkowe  
 - 🏆 **Ranking punktowy** — rywalizacja między użytkownikami na podstawie zdobytych punktów  
 - 📊 **Profil gracza** — podgląd swoich wyników oraz statystyk  
-- ⚙️ **Serwer lokalny** — aplikacja działa w środowisku **XAMPP** z wykorzystaniem **PHP** i **MariaDB**
+- ⚙️ **Serwer lokalny** — aplikacja działa w środowisku **Docker** z wykorzystaniem **PHP** i **MariaDB**
 
 ---
 
@@ -18,11 +18,11 @@ Aplikacja działa **lokalnie** – nie posiada hostingu, więc uruchamiana jest 
 
 | Gra          | Status          | Opis                              |
 |-------------|----------------|------------------------------------|
-| 🐍 Snake    | 🔧 Do poprawy   | Klasyczna gra, zbieranie punktów i wzrost węża |
-| 💣 Saper    | ❌ Do zrobienia       | Odkrywaj pola i unikaj min        |
+| 🐍 Snake    | ✔️ Gotowy   | Klasyczna gra, zbieranie punktów i wzrost węża |
+| 💣 Saper    | 🔧 Do poprawy       | Odkrywaj pola i unikaj min        |
 | 🧩 Tetris   | ❌ Do zrobienia       | Układaj klocki, zdobywaj punkty   |
 | ❌ Tic Tac Toe | ❌ Do zrobienia   | Popularna gra w kółko i krzyżyk   |
-| 🦖 Dino Run | 🔧 Do poprawy | Gra inspirowana trybem offline w Chrome |
+| 🦖 Dino Run | 🔧 Do poprawy (lekkie poprawy) | Gra inspirowana trybem offline w Chrome |
 
 ---
 
@@ -36,6 +36,7 @@ Aplikacja działa **lokalnie** – nie posiada hostingu, więc uruchamiana jest 
 - 10.4.32-MariaDB MySQL
 - Boxicons(https://boxicons.com/) — ikony
 - pakiet XAMPP v3.3.0
+- Docker
 - AJAX - Wysyłanie danych za pomocą JSON z plików JS do PHP
 
 ### ⚡ Szybka instalacja
@@ -46,44 +47,33 @@ Aplikacja działa **lokalnie** – nie posiada hostingu, więc uruchamiana jest 
      ```
    - Lub pobierz jako `.zip` i rozpakuj w wybranej lokalizacji.
 
-2. **Zainstaluj i skonfiguruj XAMPP**  
-   - Pobierz [XAMPP v3.3.0](https://www.apachefriends.org/pl/index.html)  
-   - Upewnij się, że używasz **PHP 8.2.12** i bazy **MariaDB 10.4.32**.  
-   - Uruchom **Apache** oraz **MySQL** w panelu XAMPP.
-  
-3. **Skonfiguruj bazę danych**  
-   - Otwórz `http://localhost/phpmyadmin`.
-   - Utwórz nową bazę danych (w projekcie jest użyta nazwa `gierkowo`).
-   - Zaimportuj plik `gierkowo.sql` znajdujący się w folderze projektu, np.:
-     ```
-     /Platforma-do-gierkuf/baza/gierkowo.sql
-     ```
+2. **Zainstaluj i skonfiguruj Dockera**  
+   - Pobierz Docker [https://www.docker.com/get-started/](https://www.docker.com/get-started/)  
 
-4. **Skonfiguruj połączenie z bazą**  
+3. **Skonfiguruj połączenie z bazą**  
    - Przejdź do pliku:
      ```
-     /Platforma-do-gierkuf/php/db.php
+     /Platforma-do-gierkuf/src/php/db.php
      ```
    - Uzupełnij dane dostępowe:
      ```php
-     $host = 'localhost';
+     $host = 'db';
      $db   = 'gierkowo';
      $user = 'root';
-     $pass = '';
+     $pass = 'root';
      $charset = 'utf8mb4';
      ```
+4. **Odpal Dockera**  
+   - Zbuduj kontener
+     ``` bash
+     docker-compose build
+     ```
+   - Odpal kontener
+     ``` bash
+     docker-compose up -d
+     ```
 
-5. **Umieść projekt w katalogu serwera**  
-   - Przenieś folder projektu do:
-     ```
-     C:\xampp\htdocs\
-     ```
-   - Następnie uruchom projekt w przeglądarce:
-     ```
-     http://localhost/Platforma-do-gierkuf
-     ```
-
-6. **Sprawdź działanie AJAX i Boxicons**  
+5. **Sprawdź działanie AJAX i Boxicons**  
    - Upewnij się, że masz dostęp do internetu — Boxicons są ładowane z CDN.
    - Skrypty JS komunikują się z plikami PHP poprzez AJAX z użyciem **JSON**.
 
