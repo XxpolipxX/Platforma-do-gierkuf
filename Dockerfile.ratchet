@@ -1,0 +1,14 @@
+FROM php:8.2-cli
+
+# Zainstaluj wymagane rozszerzenia (np. dla PDO jeśli potrzebujesz bazy w Ratchet)
+RUN docker-php-ext-install pdo pdo_mysql
+
+WORKDIR /var/www
+
+# Skopiuj vendor i pliki projektu
+COPY ./vendor ./vendor
+COPY ./composer.json ./composer.json
+COPY ./composer.lock ./composer.lock
+
+# Domyślnie uruchamiaj Ratchet
+CMD ["php", "websocketServer.php"]

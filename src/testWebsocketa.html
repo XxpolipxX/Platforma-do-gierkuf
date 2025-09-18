@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Test WebSocket</title>
+</head>
+<body>
+  <script>
+    const socket = new WebSocket("ws://localhost:8081");
+
+    socket.onopen = () => {
+      console.log("Połączono z serwerem");
+      socket.send("Hello Ratchet!");
+    };
+
+    socket.onmessage = (event) => {
+      console.log("Odpowiedź:", event.data);
+    };
+
+    socket.onclose = () => console.log("Rozłączono");
+  </script>
+</body>
+</html>

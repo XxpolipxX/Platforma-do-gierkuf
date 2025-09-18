@@ -1,4 +1,5 @@
 version: "3.1"
+
 services:
   php:
     build:
@@ -9,7 +10,33 @@ services:
       - app_net
     ports:
       - 80:80
-  
+    depends_on:
+      - ratchet
+
+  ratchet:
+    build:
+      context: .
+      dockerfile: Dockerfile.ratchet
+    volumes:
+      - ./src/:/var/www/html
+      - ./websocketServer.php:/var/www/websocketServer.php
+      - ./vendor:/var/www/vendor
+      - ./composer.json:/var/www/composer.json
+      - ./composer.lock:/var/www/composer.lock
+    networks:
+      - app_net
+    ports:
+      - "8081:8081"
+
+
+  composer:
+    image: composer:2
+    volumes:
+      - .:/app
+    working_dir: /app
+    networks:
+      - app_net
+
   db:
     container_name: db_container
     image: mariadb:11
