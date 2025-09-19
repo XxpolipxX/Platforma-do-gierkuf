@@ -13,9 +13,26 @@ class EchoServer implements MessageComponentInterface {
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {
-        echo "Otrzymano od {$from->resourceId}: $msg\n";
-        // Odesłanie tej samej wiadomości do klienta
-        $from->send("Echo: " . $msg);
+        // echo "Otrzymano od {$from->resourceId}: $msg\n";
+        // // Odesłanie tej samej wiadomości do klienta
+        // $from->send("Echo: " . $msg);
+        echo "Otrzymano od {$from->resourceID}: $msg\n";
+
+        // parsowanie JSONA                 // true zwraca tablice asocjacji, false daje obiekty
+        $data = json_decode($msg, true);
+
+        if(json_last_error() === JSON_ERROR_NONE) {
+            if($data['type'] === 'button_click') {
+                $x = $data['x'];
+                $y = $data['y'];
+                echo "Kliknięto przycisk x={$x}, y={$y}\n";
+
+                // odpowiedź do tego samego klienta
+                $from->send("Kliknięto przycisk na pozycji ($x, $y)");
+            }
+        } else {
+            $from->send("Błąd: niepoprawny JSON");
+        }
     }
 
     public function onClose(ConnectionInterface $conn) {
@@ -38,5 +55,6 @@ $server = IoServer::factory(
     8081
 );
 
-echo "✅ Echo WebSocket działa na ws://0.0.0.0:8080\n";
+echo "✅ Echo WebSocket działa na ws://0.0.0.0:8081\n";
 $server->run();
+?>

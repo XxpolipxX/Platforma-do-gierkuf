@@ -81,16 +81,14 @@ form {
 header {
     padding: 20px;
     background-color: rgb(111, 39, 129);
-        }
+}
 header .menu a{
     color: rgba(255, 255, 255);
     text-decoration: none;
     padding: 10px;
-    
 }
 header .menu a:hover{
     background-color: rgb(94, 36, 109);
-
 }
 header #wyloguj{
     display: flex;
@@ -101,7 +99,6 @@ header #wyloguj{
     top: 14px;
     padding-left: 20px;
     padding-right: -2px;
-
 }
 header button{
     border-radius: 10px;
@@ -111,8 +108,6 @@ header button{
     color: rgb(255, 255, 255);
     transition: 0.3s ease-in-out;
     cursor: pointer;
-
-    
 }
 header button:hover{
     background-color: rgb(122, 46, 141);
@@ -131,12 +126,12 @@ header button i{
     left: 5px;
     top: 7px;
 }
-       .user_name{
-        float: right;
-        position:relative;
-        margin-right: 110px;
-        color:#fff176;
-    }
+.user_name{
+    float: right;
+    position:relative;
+    margin-right: 110px;
+    color:#fff176;
+}
 
 .background {
     position: fixed;
@@ -148,4 +143,26 @@ header button i{
     background-size: cover;
     background-position: center;
     z-index: -1;
-        }
+}
+
+#game-container {
+    display: grid;
+    grid-template-columns: repeat(3, calc((100% / 3) - 10px));
+    gap: 10px;
+}
+
+#game-container > button {
+    border: none;
+    cursor: pointer;
+    background-color: #EAE7DA;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 5px 8px #888888;
+    font-weight: 700;
+    transition: all .3s ease-in;
+}
+
+#game-container > button:hover {
+    background-color: #2e49ca;
+    box-shadow: 5px 8px #8888AA;
+}
