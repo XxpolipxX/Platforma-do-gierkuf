@@ -38,6 +38,8 @@ Aplikacja działa **lokalnie** – nie posiada hostingu, więc uruchamiana jest 
 - pakiet XAMPP v3.3.0
 - Docker
 - AJAX - Wysyłanie danych za pomocą JSON z plików JS do PHP
+- Composer - biblioteka języka PHP
+- Ratchet - biblioteka języka PHP służąca do tworzenia połączeń WebSocket
 
 ### ⚡ Szybka instalacja
 1. **Pobierz projekt**  
@@ -146,3 +148,4 @@ Baza składa się z kilku tabel przechowujących informacje potrzebne do działa
 - Wszystkie relacje obsługiwane są za pomocą **PDO**.
 - Dla kluczy obcych ustawiono **ON DELETE CASCADE**.
 - Hasła użytkowników są szyfrowane za pomocą funkcji `password_hash()` w języku PHP.
+- Aplikacja na portach 3306(baza danych), 8080(apache), 8081(WebSocket).
