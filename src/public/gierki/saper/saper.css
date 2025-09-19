@@ -19,7 +19,22 @@ body {
 }
 
 /* menu gierki */
-
+.click {
+    display: flex;
+    width: 510px;
+    height: 655px;
+    background-color: black;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.496);
+    font-family: 'timer';
+    align-items: center;
+    font-size: 50px;
+    justify-content: center;
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    transform: translateX(-50%);
+}
 .menu {
     width: 450px;
     height: 600px;
@@ -42,7 +57,42 @@ body {
     height: 400px;
     justify-content: space-evenly;
 }
-
+.med label {
+    font-family: timer;
+    font-size: 20px;
+}
+#music_check::before {
+    position: relative;
+    content: "";
+    width: 11px;
+    height: 11px;
+    border-top: 3px solid gray;
+    border-left: 3px solid gray;
+    border-right: 3px solid whitesmoke;
+    border-bottom: 3px solid whitesmoke;
+    display: block;
+    transform: translate(-2px, -2px);
+}
+#music_check::after {
+    background-color: whitesmoke;
+    position: relative;
+    display: block;
+    left: 1px;
+    top: -16px;
+    width: 11px;
+    height: 11px;
+    content: "";
+    background-image: url(./X.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+#music_check:checked::after {
+    background-image: url(./check.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
 .easy, .exp {
     margin-top: 40%;
     margin-left: 3%;
@@ -56,7 +106,9 @@ body {
     padding-bottom: 20px;
     font-family: timer;
     font-size: larger;
+    text-wrap: nowrap;
 }
+
 .menuArea {
     width: 460px;
     height: 625px;
@@ -101,10 +153,12 @@ body {
     border-right: 5px solid gray;
     font-family: timer;
 }
+
 #block {
     width: 100px;
     height: 50px;
     pointer-events: none;
+    margin-right: 25px;
 }
 #flagCounter {
     font-family: timer;
@@ -481,10 +535,11 @@ header button i{
 }
 h1{
     color: white;
+    margin: 20px;
 }
        .user_name{
         float: right;
         position:relative;
-        margin-right: 110px;
+        margin-right: 150px;
         color:#fff176;
     }

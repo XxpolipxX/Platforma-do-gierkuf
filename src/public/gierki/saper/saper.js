@@ -10,17 +10,68 @@ let explosionGif = document.getElementById("explosion");
 let opcje = document.querySelector(".opcje");
 let score = document.getElementById("score");
 let scoreText = document.querySelector(".score");
+let click = document.querySelector(".click");
+let startText = document.getElementById("startText");
+
+click.addEventListener("click", () => {
+    musicRandom();
+    startText.classList.add("hide");
+    music.play();
+    click.classList.add("hide");
+})
 //przyciski
 
 let startBtn = document.getElementById("startBtn");
 let restartBtn = document.getElementById("resetBtn");
 let block = document.getElementById("block");
+let music_check = document.getElementById("music_check");
 
 //audio
 
 let explosion = new Audio("./audio/explosion.mp3");
 let mine = new Audio("./audio/mineClick.mp3");
 let music = new Audio
+music.volume = 0.5
+let buttonTick = new Audio("./audio/tick.mp3");
+let flagOn = new Audio("./audio/on.mp3");
+let flagOff = new Audio("./audio/off.mp3");
+let index = [0, 1, 2, 3];
+
+function musicRandom(){
+    let num = Math.floor(Math.random() * index.length);
+    let songNum = index[num];
+    music.src = "./audio/music" + songNum + ".mp3";
+    index.splice(num, 1);
+    if(index.length == 0){
+        index = [0, 1, 2, 3];
+    }
+}
+
+music_check.addEventListener("change", () => {
+    if(music_check.checked){
+        On(flagOn);
+        music.play();
+        music.muted = false;
+    } else {
+        Off(flagOff);
+        music.pause();
+        music.muted = true
+    }
+})
+
+function On(on_sound){
+    let smth = on_sound.cloneNode();
+    smth.play();
+}
+function Off(off_sound){
+    let smth = off_sound.cloneNode();
+    smth.play();
+}
+
+music.addEventListener("ended", () => {
+    musicRandom();
+    music.play();
+})
 
 //plansza
 let plansza = document.getElementById("plansza");
@@ -83,6 +134,7 @@ easy.addEventListener("click", () =>{
 
     block.style.pointerEvents = "all";
     diffBtn();
+    buttonTick.play();
 });
 
 med.addEventListener("click", () =>{
@@ -118,6 +170,7 @@ med.addEventListener("click", () =>{
     block.style.pointerEvents = "all";
 
     diffBtn();
+    buttonTick.play();
 })
 
 exp.addEventListener("click", () =>{
@@ -133,7 +186,7 @@ exp.addEventListener("click", () =>{
     small = true;
 
     menu.style.width = "750px";
-    menu.style.height = "550px";
+    menu.style.height = "540px";
     
     menuArea.style.width = "760px";
     menuArea.style.height = "550px";
@@ -154,6 +207,7 @@ exp.addEventListener("click", () =>{
     block.style.pointerEvents = "all";
 
     diffBtn();
+    buttonTick.play();
 })
 
 function back(){
@@ -184,6 +238,7 @@ function back(){
             menu.classList.remove("endAnim30x16");
         }, 1950)
     };
+    buttonTick.play();
 
     setTimeout(() => {
         plansza.classList.add("hide");
@@ -262,6 +317,7 @@ startBtn.addEventListener("click", () => {
             plansza.querySelectorAll("div").forEach(div => div.remove());
         }
     }
+    buttonTick.play();
     gameOver = false;
     face.src = "./idle.gif";
     plansza.classList.remove("hide");
@@ -434,12 +490,14 @@ function startGame(){
 function setFlag() {
     if(flagMode && !gameOver){
         flagMode = false;
+        Off(flagOff);
         document.getElementById("flag-button").style.borderBottom = "5px solid gray"
         document.getElementById("flag-button").style.borderRight = "5px solid gray"
         document.getElementById("flag-button").style.borderTop = "5px solid whitesmoke"
         document.getElementById("flag-button").style.borderLeft = "5px solid whitesmoke"
     } else if(!flagMode && !gameOver) {
         flagMode = true;
+        On(flagOn);
         document.getElementById("flag-button").style.borderTop = "5px solid gray"
         document.getElementById("flag-button").style.borderLeft = "5px solid gray"
         document.getElementById("flag-button").style.borderBottom = "5px solid whitesmoke"
@@ -637,7 +695,3 @@ function checkTile(r, c){
     return 0;
 }
 
-function musicRandom(){
-    let index = Math.floor(Math.random() * 3) + 1;
-    music.src = "./audio/music" + index + ".mp3";
-}
