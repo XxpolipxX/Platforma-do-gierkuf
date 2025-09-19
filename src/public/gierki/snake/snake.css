@@ -19,6 +19,14 @@
 .nawigacja{
     text-align: start;
     font-family: sans-serif;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.nawigacja > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 .header .nawigacja a:hover{
     background-color: rgb(94, 36, 109);
@@ -29,11 +37,11 @@
 }
 .header #wyloguj{
     display: flex;
-    float: right;
+    /* float: right; */
     padding: 6px;
-    position: absolute;
+    /* position: absolute;
     right: 40px;
-    top: 14px;
+    top: 14px; */
     padding-left: 20px;
     padding-right: -2px;
 
@@ -436,8 +444,9 @@ img {
 }
 #snake-table tr:nth-child(even) {background-color: #00000013;}
        .user_name{
-        float: right;
-        position:relative;
-        margin-right: 110px;
+        /* float: right;
+        position:relative; */
+        /* margin-right: 110px; */
         color:#fff176;
+        font-weight: 700;
     }
