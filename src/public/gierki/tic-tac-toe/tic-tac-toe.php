@@ -39,7 +39,7 @@
                 <form id="send-code-form" class="flex-column justify-center center-element-on-parent">
                     <div class="flex-row justify-center align-center">
                         <label for="code" class="font-bold font-2em">Wpisz kod</label>
-                        <input type="text" id="code" name="code" class="font-bold font-2em" maxlength="6">
+                        <input type="text" id="code" name="code" class="font-bold font-2em" maxlength="6" placeholder="Wprowadź kod">
                     </div>
                     <div class="flex-row justify-center">
                         <button type="submit" class="font-bold font-2em" id="send-code">Dołącz</button>

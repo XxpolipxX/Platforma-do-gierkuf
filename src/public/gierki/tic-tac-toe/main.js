@@ -1,3 +1,45 @@
+// 
+// odczytanie ID i logina usera z ciastka
+function getCookie(name) {
+    const cookies = document.cookie.split(';');
+    for(let cookie of cookies) {
+        cookie = cookie.trim();
+        if(cookie.startsWith(name + '=')) {
+            return cookie.substring(name.length + 1);
+        }
+    }
+    return null; // ciastka ni ma
+}
+
+const userID = getCookie('userID');
+const userLogin = getCookie('userLogin');
+// 
+// 
+// serwer websocketa
+const socket = new WebSocket("ws://localhost:8081");
+
+socket.onopen = () => {
+    // alert("Połączono z websocketem");
+    let message = {
+        userID: userID,
+        userLogin: userLogin
+    };
+    socket.send(JSON.stringify(message));
+};
+
+socket.onmessage = (event) => {
+    // alert(JSON.stringify(event.data));
+    console.log("Odpowiedź: ", event.data);
+};
+
+socket.onclose = () => console.log("Rozłączono");
+
+// 
+// 
+// 
+// 
+
+
 // kontener na opcje
 const optionContainer = document.getElementById("options-container");
 // główne menu z przyciskami dołącz i stwórz
@@ -74,9 +116,6 @@ backFromJoinContainer.addEventListener("click", (e) => {
     toggle(joinContainer);
 });
 // 
-// 
-// 
-// 
 // generowanie przycisków
 // plansza przycisków
 const gameContainer = document.getElementById("game-container");
@@ -84,7 +123,7 @@ const gameContainer = document.getElementById("game-container");
 for(let y = 1; y <= 3; y++) {
     for(let x = 1; x <= 3; x++) {
     const button = document.createElement('button');
-    button.textContent = "X";
+    // button.textContent = "X";
     button.dataset.x = x;
     button.dataset.y = y;
 
