@@ -84,9 +84,14 @@ const gameContainer = document.getElementById("game-container");
 for(let y = 1; y <= 3; y++) {
     for(let x = 1; x <= 3; x++) {
     const button = document.createElement('button');
-    button.textContent = "X";
+    button.textContent = "O";
     button.dataset.x = x;
     button.dataset.y = y;
+
+    button.classList.add('game-button')
+
+    // testowa klasa dla testowania kolorków
+    button.classList.add('circle');
 
     button.addEventListener("click", () => {
         const message = {

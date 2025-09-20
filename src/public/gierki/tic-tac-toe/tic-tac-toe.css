@@ -151,18 +151,46 @@ header button i{
     gap: 10px;
 }
 
-#game-container > button {
+.game-button {
     border: none;
     cursor: pointer;
     background-color: #EAE7DA;
-    margin: 10px;
+    margin: 20px;
     border-radius: 10px;
     box-shadow: 5px 8px #888888;
     font-weight: 700;
-    transition: all .3s ease-in;
+    font-size: 12em;
+    transition: all .3s ease-in-out;
 }
 
-#game-container > button:hover {
+.game-button:hover, 
+.game-button:active,
+.game-button:focus {
     background-color: #2e49ca;
-    box-shadow: 5px 8px #8888AA;
+    box-shadow: 8px 10px #8888AA;
+    text-shadow: 2px 2px 5px #0072007a;
+    transform: scale(1.05);
+    outline: none;
+}
+
+/* Kolorek dla kółka */
+.circle {
+    color: #1A936F;
+}
+
+.circle:hover,
+.circle:active,
+.circle:focus {
+    color: #34d1a0;
+}
+
+/* kolorek dla X */
+.cross {
+    color: #D62828;
+}
+
+.cross:hover,
+.cross:active,
+.cross:focus {
+    color: #ff4d4d;
 }
