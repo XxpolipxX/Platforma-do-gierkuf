@@ -14,7 +14,8 @@
 </head>
     <header>
         <nav class="menu">
-            <a href="../../menu/index.html">Home</a>
+            <!-- <a href="../../menu/index.html">Home</a> -->
+             <a href="../../wybor-gry.php">Home</a>
             <a href="#">Leaderboards</a>
                         <!-- nazwa użytkownika -->
             <div class="user_name"><b>dasdafsafsa</b></div>
@@ -23,7 +24,7 @@
     </header>
     <div class="background"></div>
     <body>
-        <div id="options-container" class="hide menu-container justify-center center-element-on-screen">
+        <div id="options-container" class=" menu-container justify-center center-element-on-screen">
             <div id="create-join" class="center-element-on-parent justify-center container align-center flex-row">
                 <button id="create" class="font-bold font-2em">Stwórz kod</button>
                 <button id="join" class="font-bold font-2em">Dołącz</button>
@@ -47,6 +48,6 @@
                 </form>
             </div>
         </div>
-        <div id="game-container" class="menu-container justify-center center-element-on-screen"></div>
+        <div id="game-container" class="hide menu-container justify-center center-element-on-screen"></div>
     </body>
 </html>

@@ -9,6 +9,8 @@
     }
     // pobierz dane usera
     $user = getUserData($_SESSION['user_id']);
+    setcookie('userID', $user['id']);
+    setcookie('userLogin', $user['username']);
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -22,13 +24,14 @@
     <a href="../menu/index.html">Wybór gierki</a>
     <script>
         const user = <?php echo json_encode([
-            'id' => $user['id'],
-            'login' => $user['username']
+            'id' => $_COOKIE['userID'],
+            'login' => $_COOKIE['userLogin']
         ]); ?>;
-        console.log(user);
         const userID = user.id;
         const userLogin = user.login;
-        document.getElementById("test").innerHTML = `Cześć ${userLogin}, twoje id to ${userID}`;
+        window.userID = userID;
+        window.userLogin = userLogin;
+        document.getElementById("test").innerHTML = `Cześć ${window.userLogin}, twoje id to ${window.userID}`;
     </script>
 </body>
 </html>
