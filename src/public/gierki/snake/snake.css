@@ -319,9 +319,6 @@ body {
 #options {
     margin-bottom: 20px;
 }
-#board{
-
-}
 #play {
     grid-area: btn;
     margin-left: 40px;

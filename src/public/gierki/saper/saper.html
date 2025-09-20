@@ -51,12 +51,26 @@
                      </div>
                      <div id="block">
                          <button id="startBtn">Start</button>
-                     </div>
+                         <button id="leaderboardBtn">Leaderboard</button>
+                    </div>
                 </div>
             </div>
             <div id="plansza" class="hide"></div>
+            <div class="leaderboard hide">
+            <div class="table">
+                <table id="saper-table">
+                    <tr>
+                        <th>NR</th>
+                        <th>Login</th>
+                        <th>Gra</th>
+                        <th>Liczba pkt</th>
+                    </tr>
+                </table>
+            </div>
+                <button id="back" style="width: 100px; height: 50px;" onclick="backLeaderboard()">Powrót</button>
+            </div>
             <br>
-            <div class="nav-space">
+            <div class="nav-space hide">
                 <div id="face">
                     <button id="resetBtn">
                         <img id="tenna" src="idle.gif" alt="">

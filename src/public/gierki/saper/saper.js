@@ -12,6 +12,7 @@ let score = document.getElementById("score");
 let scoreText = document.querySelector(".score");
 let click = document.querySelector(".click");
 let startText = document.getElementById("startText");
+let leaderboard = document.querySelector(".leaderboard");
 
 click.addEventListener("click", () => {
     musicRandom();
@@ -25,6 +26,9 @@ let startBtn = document.getElementById("startBtn");
 let restartBtn = document.getElementById("resetBtn");
 let block = document.getElementById("block");
 let music_check = document.getElementById("music_check");
+let leaderboardBtn = document.getElementById("leaderboardBtn")
+let backBtn = document.getElementById("back");
+
 
 //audio
 
@@ -87,7 +91,6 @@ let minesLeft;
 let tileClicked = 0;
 let flagMode = false;
 let flagCounter;
-
 let gameOver = false;
 
 let multiplier, minTime;
@@ -101,6 +104,7 @@ let med = document.getElementById("med");
 let exp = document.getElementById("exp");
 
 let small, big, norm, anim;
+anim = "9x9";
 
 easy.addEventListener("click", () =>{
     rows = 9;
@@ -113,8 +117,8 @@ easy.addEventListener("click", () =>{
 
     big = true;
     small = norm = false;
-    menu.style.width = "450px";
-    menu.style.height = "600px";
+    menu.style.width = leaderboard.style.width = "450px";
+    menu.style.height = leaderboard.style.height = "600px";
     
     menuArea.style.width = "460px";
     menuArea.style.height = "625px";
@@ -149,8 +153,8 @@ med.addEventListener("click", () =>{
     norm = true;
     small = big = false;
 
-    menu.style.width = "592px";
-    menu.style.height = "742px";
+    menu.style.width = leaderboard.style.width = "592px";
+    menu.style.height = leaderboard.style.height = "742px";
     
     menuArea.style.width = "602px";
     menuArea.style.height = "767px";
@@ -185,8 +189,8 @@ exp.addEventListener("click", () =>{
     big = norm = false;
     small = true;
 
-    menu.style.width = "750px";
-    menu.style.height = "540px";
+    menu.style.width = leaderboard.style.width = "750px";
+    menu.style.height = leaderboard.style.height = "540px";
     
     menuArea.style.width = "760px";
     menuArea.style.height = "550px";
@@ -202,7 +206,7 @@ exp.addEventListener("click", () =>{
     explosionGif.style.width = "75%"
     explosionGif.style.transform = "translate(-600px, -550px)"
 
-    opcje.style.width = "750px";
+    opcje.style.width = "500px";
     opcje.style.height = "350px"
     block.style.pointerEvents = "all";
 
@@ -210,7 +214,7 @@ exp.addEventListener("click", () =>{
     buttonTick.play();
 })
 
-function back(){
+function backLeaderboard(){
     if(anim == "9x9"){
         menu.classList.add("endAnim9x9");
         menu.classList.remove("hide");
@@ -218,7 +222,7 @@ function back(){
         setTimeout(() => {
             plansza.classList.add("hide");
             menu.classList.remove("endAnim9x9");
-        }, 1950)
+        }, 1200)
     } else if(anim == "16x16"){
         menu.classList.remove("hide");
         menuArea.classList.remove("hide");
@@ -227,7 +231,7 @@ function back(){
         setTimeout(() => {
             plansza.classList.add("hide");
             menu.classList.remove("endAnim16x16");
-        }, 1950)
+        }, 1500)
     } else if (anim == "30x16"){
         menu.classList.remove("hide");
         menuArea.classList.remove("hide");
@@ -236,24 +240,25 @@ function back(){
         setTimeout(() => {
             plansza.classList.add("hide");
             menu.classList.remove("endAnim30x16");
-        }, 1950)
+        }, 1500)
     };
     buttonTick.play();
-
     setTimeout(() => {
         plansza.classList.add("hide");
         scoreText.classList.add("hide");
         menu.classList.remove("hide");
         opcje.classList.remove("hide");
         menuArea.classList.remove("hide");
+        leaderboard.classList.add("hide");
+        navSpace.classList.add("hide");
         tileClicked = 0;
         row = [];
         mineLocation = [];
         points = 0;
         pointsFinal = 0;
-        block.style.pointerEvents = "none";
-        anim = ""
-        diffBtn();
+        if(anim == ""){
+            block.style.pointerEvents = "none";
+        }
         board = [];
         document.getElementById("timer").innerHTML = "00:00";
         gameOver = false;
@@ -263,8 +268,12 @@ function back(){
                 plansza.querySelectorAll("div").forEach(div => div.remove());
             }
         }
-    }, 1600)
+    }, 1400)
 
+}
+function back(){
+    backLeaderboard();
+    diffBtn();
 }
 function diffBtn(){
     if(anim == "9x9"){
@@ -311,6 +320,38 @@ function diffBtn(){
         startBtn.style.borderRight = "5px solid gray"
 }
 
+leaderboardBtn.addEventListener("click", () => {
+    backBtn.style.pointerEvents = "none";
+    if(anim == "9x9"){
+        menu.classList.add("startAnim9x9");
+        leaderboard.classList.remove("hide");
+        setTimeout(() => {menu.classList.add("hide")}, 1100)
+        setTimeout(() => {
+            document.querySelector(".menuArea").classList.add("hide");
+            backBtn.style.pointerEvents = "all";
+            menu.classList.remove("startAnim9x9");
+        }, 1200)
+    } else if(anim == "16x16"){
+        menu.classList.add("startAnim16x16");
+        leaderboard.classList.remove("hide");
+        setTimeout(() => {menu.classList.add("hide")}, 1400)
+        setTimeout(() => {
+            document.querySelector(".menuArea").classList.add("hide");
+            backBtn.style.pointerEvents = "all";
+            menu.classList.remove("startAnim16x16");
+        }, 1500)
+    } else if (anim == "30x16"){
+        menu.classList.add("startAnim30x16");
+        leaderboard.classList.remove("hide");
+        setTimeout(() => {menu.classList.add("hide")}, 1400)
+        setTimeout(() => {
+            document.querySelector(".menuArea").classList.add("hide");
+            backBtn.style.pointerEvents = "all";
+            menu.classList.remove("startAnim30x16");
+        }, 1500)
+    }
+
+})
 startBtn.addEventListener("click", () => {
     for(let i = 0; i < rows; i++){
         for(let j = 0; j < columns; j++){
@@ -321,6 +362,7 @@ startBtn.addEventListener("click", () => {
     gameOver = false;
     face.src = "./idle.gif";
     plansza.classList.remove("hide");
+    navSpace.classList.remove("hide");
     scoreText.classList.add("hide");
     tileClicked = 0;
     row = [];
@@ -335,30 +377,30 @@ startBtn.addEventListener("click", () => {
     if(anim == "9x9"){
         menu.classList.add("startAnim9x9");
         plansza.classList.remove("hide");
+        setTimeout(() => {menu.classList.add("hide")}, 1490);
         startGame();
         setTimeout(() => {
-            menu.classList.add("hide");
             document.querySelector(".menuArea").classList.add("hide");
             menu.classList.remove("startAnim9x9");
-        }, 1150)
+        }, 1200)
     } else if(anim == "16x16"){
         menu.classList.add("startAnim16x16");
         plansza.classList.remove("hide");
+        setTimeout(() => {menu.classList.add("hide")}, 1490);
         startGame();
         setTimeout(() => {
-            menu.classList.add("hide");
             document.querySelector(".menuArea").classList.add("hide");
             menu.classList.remove("startAnim16x16");
-        }, 1950)
+        }, 1500)
     } else if (anim == "30x16"){
         menu.classList.add("startAnim30x16");
         plansza.classList.remove("hide");
+        setTimeout(() => {menu.classList.add("hide")}, 1490);
         startGame();
         setTimeout(() => {
-            menu.classList.add("hide");
             document.querySelector(".menuArea").classList.add("hide");
             menu.classList.remove("startAnim30x16");
-        }, 1950)
+        }, 1500)
     }
         startTimer(1000);
 })

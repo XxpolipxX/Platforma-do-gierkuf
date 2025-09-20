@@ -31,11 +31,11 @@ body {
     font-size: 50px;
     justify-content: center;
     position: absolute;
-    z-index: 2;
+    z-index: 3;
     left: 50%;
     transform: translateX(-50%);
 }
-.menu {
+.menu, .leaderboard {
     width: 450px;
     height: 600px;
     background-color: lightgray;
@@ -45,11 +45,14 @@ body {
     justify-content: space-around;
     align-items: center;
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     border-top: 5px solid gray;
     border-left: 5px solid gray;
     border-bottom: 5px solid whitesmoke;
     border-right: 5px solid whitesmoke;
+}
+.leaderboard {
+    z-index: 1;
 }
 .opcje {
     display: flex;
@@ -74,7 +77,7 @@ body {
     transform: translate(-2px, -2px);
 }
 #music_check::after {
-    background-color: whitesmoke;
+    background-color: lightgray;
     position: relative;
     display: block;
     left: 1px;
@@ -143,7 +146,7 @@ body {
     height: 125px;
     transform: translateY(-10px);
 }
-#easy, #med, #exp, #startBtn {
+#easy, #med, #exp, #startBtn, #leaderboardBtn {
     width: 110px;
     height: 50px;
     background-color: lightgray;
@@ -155,10 +158,9 @@ body {
 }
 
 #block {
-    width: 100px;
+    width: 300px;
     height: 50px;
     pointer-events: none;
-    margin-right: 25px;
 }
 #flagCounter {
     font-family: timer;
@@ -168,13 +170,37 @@ body {
     border-left: 5px solid gray;
     border-bottom: 5px solid whitesmoke;
     border-right: 5px solid whitesmoke;
+    margin-right: 60px;
 }
-#startBtn:active {
+#startBtn:active, #leaderboardBtn:active {
     border-top: 5px solid gray !important;
     border-left: 5px solid gray !important;
     border-bottom: 5px solid whitesmoke !important;
     border-right: 5px solid whitesmoke !important;
 }
+#leaderboardBtn{
+    pointer-events: all;
+}
+.table {
+    border-top: 5px solid gray;
+    border-left: 5px solid gray;
+    border-bottom: 5px solid whitesmoke;
+    border-right: 5px solid whitesmoke;
+    justify-content: center;
+    width: 60%;
+    align-self: anchor-center;
+    overflow-y: scroll;
+    margin-top: 10%;
+    scrollbar-width: thin;
+}
+#saper-table td, #saper-table th {
+    width: 100%;
+    border-right: 1px solid rgba(0, 0, 0, 0.253);
+    padding: 8px;
+    text-align: start;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.253);
+}
+#saper-table tr:nth-child(even) {background-color: #00000013;}
 .lose {
     overflow: hidden;
 }
@@ -184,6 +210,7 @@ body {
     width: 60%;
     transform: translate(-450px, -500px);
     overflow: hidden;
+    pointer-events: none;
 }
 /* gierka */
 .ramka {
@@ -215,7 +242,7 @@ body {
     border-right: 5px solid whitesmoke;
     
     background-color: lightgray;
-
+    
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
@@ -225,16 +252,16 @@ body {
     height: 44px;
     border-left: 3px solid whitesmoke;
     border-top: 3px solid whitesmoke;
-
+    
     border-right: 3px solid gray;
     border-bottom: 3px solid gray;
-
-
+    
+    
     font-size: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    
 }
 .tile-clicked {
     border-left: 3px solid gray !important;
@@ -244,6 +271,7 @@ body {
     background-color: gray;
     
 }
+
 
 .x1 {
     color: blue;
@@ -336,62 +364,78 @@ body {
     animation-timing-function: linear(0 0%, 1 -0%);
 }
 @keyframes startAnim9x9 {
-    11%{transform: translateY(50px);}
-    22%{transform: translateY(100px);}
-    33%{transform: translateY(150px);}
-    44%{transform: translateY(200px);}
-    55%{transform: translateY(250px);}
-    66%{transform: translateY(300px);}
-    77%{transform: translateY(350px);}
-    88%{transform: translateY(400px);}
-    99%{transform: translateY(450px);}
-    100%{transform: translateY(500px);}
+    8%{transform: translateY(50px);}
+    16%{transform: translateY(100px);}
+    24%{transform: translateY(150px);}
+    32%{transform: translateY(200px);}
+    40%{transform: translateY(250px);}
+    48%{transform: translateY(300px);}
+    56%{transform: translateY(350px);}
+    64%{transform: translateY(400px);}
+    72%{transform: translateY(450px);}
+    80%{transform: translateY(500px);}
+    88%{transform: translateY(550px);}
+    96%{transform: translateY(600px);}
+    100%{transform: translateY(650px);}
 }
 .startAnim16x16 {
     animation-name: startAnim16x16;
-    animation-duration: 2s;
+    animation-duration: 1.5s;
     animation-timing-function: linear(0 0%, 1 -0%);
 }
 @keyframes startAnim16x16 {
-    6%{transform: translateY(37px);}
-    12%{transform: translateY(74px);}
-    19%{transform: translateY(111px);}
-    25%{transform: translateY(148px);}
-    31%{transform: translateY(185px);}
-    37%{transform: translateY(222px);}
-    44%{transform: translateY(259px);}
-    50%{transform: translateY(296px);}
-    56%{transform: translateY(333px);}
-    62%{transform: translateY(370px);}
-    69%{transform: translateY(407px);}
-    75%{transform: translateY(444px);}
-    81%{transform: translateY(481px);}
-    87%{transform: translateY(518px);}
-    94%{transform: translateY(555px);}
-    100%{transform: translateY(629px);}
+    5%{transform: translateY(37px);}
+    9%{transform: translateY(74px);}
+    14%{transform: translateY(111px);}
+    19%{transform: translateY(148px);}
+    25%{transform: translateY(185px);}
+    29%{transform: translateY(222px);}
+    34%{transform: translateY(259px);}
+    38%{transform: translateY(296px);}
+    43%{transform: translateY(333px);}
+    47%{transform: translateY(370px);}
+    52%{transform: translateY(407px);}
+    56%{transform: translateY(444px);}
+    61%{transform: translateY(481px);}
+    65%{transform: translateY(518px);}
+    70%{transform: translateY(555px);}
+    74%{transform: translateY(592px);}
+    79%{transform: translateY(629px);}
+    83%{transform: translateY(666px);}
+    88%{transform: translateY(703px);}
+    93%{transform: translateY(740px);}
+    100%{transform: translateY(767px);}
 }
 .startAnim30x16 {
     animation-name: startAnim30x16;
-    animation-duration: 2s;
+    animation-duration: 1.5s;
     animation-timing-function: linear(0 0%, 1 -0%);
 }
 @keyframes startAnim30x16 {
-    100%{transform: translateY(629px);}
-    94%{transform: translateY(555px);}
-    87%{transform: translateY(518px);}
-    81%{transform: translateY(481px);}
-    75%{transform: translateY(444px);}
-    69%{transform: translateY(407px);}
-    62%{transform: translateY(370px);}
-    56%{transform: translateY(333px);}
-    50%{transform: translateY(296px);}
-    44%{transform: translateY(259px);}
-    37%{transform: translateY(222px);}
-    31%{transform: translateY(185px);}
-    25%{transform: translateY(148px);}
-    19%{transform: translateY(111px);}
-    12%{transform: translateY(74px);}
-    6%{transform: translateY(37px);}
+    4%{transform: translateY(25px);}
+    8%{transform: translateY(50px);}
+    12%{transform: translateY(75px);}
+    17%{transform: translateY(100px);}
+    21%{transform: translateY(125px);}
+    25%{transform: translateY(150px);}
+    29%{transform: translateY(175px);}
+    34%{transform: translateY(200px);}
+    38%{transform: translateY(225px);}
+    42%{transform: translateY(250px);}
+    46%{transform: translateY(275px);}
+    51%{transform: translateY(300px);}
+    55%{transform: translateY(325px);}
+    59%{transform: translateY(350px);}
+    63%{transform: translateY(375px);}
+    68%{transform: translateY(400px);}
+    72%{transform: translateY(425px);}
+    76%{transform: translateY(450px);}
+    80%{transform: translateY(475px);}
+    85%{transform: translateY(500px);}
+    89%{transform: translateY(525px);}
+    93%{transform: translateY(550px);}
+    97%{transform: translateY(575px);}
+    100%{transform: translateY(600px);}
 }
 .endAnim9x9 {
     animation-name: endAnim9x9;
@@ -399,62 +443,78 @@ body {
     animation-timing-function: linear(0 0%, 1 -0%);
 }
 @keyframes endAnim9x9 {
-    11%{transform: translateY(500px);}
-    22%{transform: translateY(450px);}
-    33%{transform: translateY(400px);}
-    44%{transform: translateY(350px);}
-    55%{transform: translateY(300px);}
-    66%{transform: translateY(250px);}
-    77%{transform: translateY(200px);}
+    8%{transform: translateY(650px);}
+    16%{transform: translateY(600px);}
+    24%{transform: translateY(550px);}
+    32%{transform: translateY(500px);}
+    40%{transform: translateY(450px);}
+    48%{transform: translateY(400px);}
+    56%{transform: translateY(350px);}
+    64%{transform: translateY(300px);}
+    72%{transform: translateY(250px);}
+    80%{transform: translateY(200px);}
     88%{transform: translateY(150px);}
-    99%{transform: translateY(100px);}
-    100%{transform: translateY(0px);}
+    96%{transform: translateY(100px);}
+    100%{transform: translateY(50px);}
 }
 .endAnim16x16 {
     animation-name: endAnim16x16;
-    animation-duration: 2s;
+    animation-duration: 1.5s;
     animation-timing-function: linear(0 0%, 1 -0%);
 }
 @keyframes endAnim16x16 {
-    6%{transform: translateY(629px);}
-    12%{transform: translateY(555px);}
-    19%{transform: translateY(518px);}
-    25%{transform: translateY(481px);}
-    31%{transform: translateY(444px);}
-    37%{transform: translateY(407px);}
-    44%{transform: translateY(370px);}
-    50%{transform: translateY(333px);}
-    56%{transform: translateY(296px);}
-    62%{transform: translateY(259px);}
-    69%{transform: translateY(222px);}
-    75%{transform: translateY(185px);}
-    81%{transform: translateY(148px);}
-    87%{transform: translateY(111px);}
-    94%{transform: translateY(74px);}
+    5%{transform: translateY(767px);}
+    9%{transform: translateY(740px);}
+    14%{transform: translateY(703px);}
+    19%{transform: translateY(666px);}
+    25%{transform: translateY(629px);}
+    29%{transform: translateY(592px);}
+    34%{transform: translateY(555px);}
+    38%{transform: translateY(518px);}
+    43%{transform: translateY(481px);}
+    47%{transform: translateY(444px);}
+    52%{transform: translateY(407px);}
+    56%{transform: translateY(370px);}
+    61%{transform: translateY(333px);}
+    65%{transform: translateY(296px);}
+    70%{transform: translateY(259px);}
+    74%{transform: translateY(222px);}
+    79%{transform: translateY(185px);}
+    83%{transform: translateY(148px);}
+    88%{transform: translateY(111px);}
+    93%{transform: translateY(74px);}
     100%{transform: translateY(37px);}
 }
 .endAnim30x16 {
     animation-name: endAnim30x16;
-    animation-duration: 2s;
+    animation-duration: 1.5s;
     animation-timing-function: linear(0 0%, 1 -0%);
 }
 @keyframes endAnim30x16 {
-    6%{transform: translateY(629px);}
-    12%{transform: translateY(555px);}
-    19%{transform: translateY(518px);}
-    25%{transform: translateY(481px);}
-    31%{transform: translateY(444px);}
-    37%{transform: translateY(407px);}
-    44%{transform: translateY(370px);}
-    50%{transform: translateY(333px);}
-    56%{transform: translateY(296px);}
-    62%{transform: translateY(259px);}
-    69%{transform: translateY(222px);}
-    75%{transform: translateY(185px);}
-    81%{transform: translateY(148px);}
-    87%{transform: translateY(111px);}
-    94%{transform: translateY(74px);}
-    100%{transform: translateY(37px);}
+    4%{transform: translateY(600px);}
+    8%{transform: translateY(575px);}
+    12%{transform: translateY(550px);}
+    17%{transform: translateY(525px);}
+    21%{transform: translateY(500px);}
+    25%{transform: translateY(475px);}
+    29%{transform: translateY(450px);}
+    34%{transform: translateY(425px);}
+    38%{transform: translateY(400px);}
+    42%{transform: translateY(375px);}
+    46%{transform: translateY(350px);}
+    51%{transform: translateY(325px);}
+    55%{transform: translateY(300px);}
+    59%{transform: translateY(275px);}
+    63%{transform: translateY(250px);}
+    68%{transform: translateY(225px);}
+    72%{transform: translateY(200px);}
+    76%{transform: translateY(175px);}
+    80%{transform: translateY(150px);}
+    85%{transform: translateY(125px);}
+    89%{transform: translateY(100px);}
+    93%{transform: translateY(75px);}
+    97%{transform: translateY(50px);}
+    100%{transform: translateY(25px);}
 }
 /* wielkosci */
 .big {
