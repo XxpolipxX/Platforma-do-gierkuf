@@ -71,6 +71,8 @@ class GameServer implements MessageComponentInterface {
         $zapytanie->execute();
         $roomID = $this->db->lastInsertId();
 
+        $this->connections[$userID] = $conn;    // zapamiętanie połączenia
+
         $conn->send(json_encode([
             "event" => "room_created",
             "room_id" => $roomID,
@@ -106,6 +108,9 @@ class GameServer implements MessageComponentInterface {
         $zapytanie = $this->db->prepare("UPDATE `multiplayer_rooms` SET `player2_id` = :user2ID, `status` = 'in_progress' WHERE `id` = :roomID");
         $zapytanie->bindParam(':user2ID', $userID, PDO::PARAM_INT);
         $zapytanie->bindParam(':roomID', $room['id'], PDO::PARAM_INT);
+        $zapytanie->execute();
+
+        $this->connections[$userID] = $conn; // zapamiętanie playera 2
 
         // odpowiedź dla gracza 2
         $conn->send(json_encode([
@@ -113,15 +118,26 @@ class GameServer implements MessageComponentInterface {
             "room_id" => $room['id']
         ]));
 
-        // 
-        // 
-        //          TODO powiadomienie do gracza 1
-        // 
-        // 
+        $player1ID = $room['player1_id'];
+        if(isset($this->connections[$player1ID])) {
+            $this->connections[$player1ID]->send(json_encode([
+                "event" => "opponent_joined",
+                "room_id" => $room['id'],
+                "opponent_id" => $userID
+            ]));
+        }
     }
 
     public function onClose(ConnectionInterface $conn) {
         $this->clients->detach($conn);
+
+        // usunięcie połączeń
+        foreach($this->connections as $uid => $c) {
+            if($c === $conn) {
+                unset($this->connections[$uid]);
+                break;
+            }
+        }
         echo "Połączenie zamknięte: {$conn->resourceId}\n";
     }
 

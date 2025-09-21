@@ -4,3 +4,5 @@ docker-compose build
 docker-compose up -d
 - zakmnięcie kontenerów
 docker-compose down
+- przeglądanie bazy danych  hasło - root
+docker run -it --rm --network platforma-do-gierkuf_app_net mysql:8.1 mysql -h db -u root -p gierkowo

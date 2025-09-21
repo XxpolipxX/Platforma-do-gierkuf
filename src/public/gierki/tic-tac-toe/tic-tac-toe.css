@@ -164,8 +164,7 @@ header button i{
 }
 
 .game-button:hover, 
-.game-button:active,
-.game-button:focus {
+.game-button:active {
     background-color: #2e49ca;
     box-shadow: 8px 10px #8888AA;
     text-shadow: 2px 2px 5px #0072007a;

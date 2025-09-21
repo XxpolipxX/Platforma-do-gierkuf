@@ -34,7 +34,13 @@ socket.onmessage = (event) => {
     try {
         const data = JSON.parse(event.data);
         console.log(data);
+        console.log(event);
         switch(data.event) {
+            // to będzie można wywalić
+            case "connected to websocket":
+                alert("Połączono z websoketem");
+                break;
+            // 
             case "room_created":
                 kod = data.join_code;
                 alert("Utworzyłeś pokój o ID: ", data.room_id);
@@ -46,6 +52,13 @@ socket.onmessage = (event) => {
                 break;
             case "joined_room":
                 alert("Dołączyłeś do pokoju o ID: ", data.room_id);
+                toggle(optionContainer);
+                toggle(gameContainer);
+                break;
+            case "opponent_joined":
+                alert("Twoim przeciwnikiem będzie gracz o ID: ", data.opponent_id);
+                toggle(optionContainer);
+                toggle(gameContainer);
                 break;
             default:
                 console.warn("Nieznany event: ", data.event);
