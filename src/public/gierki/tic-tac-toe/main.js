@@ -19,17 +19,40 @@ const userLogin = getCookie('userLogin');
 const socket = new WebSocket("ws://localhost:8081");
 
 socket.onopen = () => {
-    // alert("Połączono z websocketem");
+    alert("Połączono z websocketem");
     let message = {
+        action: 'open',
         userID: userID,
         userLogin: userLogin
     };
     socket.send(JSON.stringify(message));
 };
 
+let kod;
+
 socket.onmessage = (event) => {
-    // alert(JSON.stringify(event.data));
-    console.log("Odpowiedź: ", event.data);
+    try {
+        const data = JSON.parse(event.data);
+        console.log(data);
+        switch(data.event) {
+            case "room_created":
+                kod = data.join_code;
+                alert("Utworzyłeś pokój o ID: ", data.room_id);
+                if(isCodeGenerated) {
+                    generatedCodeContainer.disabled = false;
+                    generatedCodeContainer.value = kod;
+                    generatedCodeContainer.disabled = true;
+                }
+                break;
+            case "joined_room":
+                alert("Dołączyłeś do pokoju o ID: ", data.room_id);
+                break;
+            default:
+                console.warn("Nieznany event: ", data.event);
+        }
+    } catch (err) {
+        console.error("Błąd parsowania na JSON: ", err);
+    }
 };
 
 socket.onclose = () => console.log("Rozłączono");
@@ -54,6 +77,11 @@ const toggle = (element) => {
 };
 // button do stworzenia kodu
 const createButton = document.getElementById("create");
+createButton.disabled = true;
+
+socket.onopen = () => {
+    createButton.disabled = false;
+}
 // button do dołączenia do pokoju
 const joinButton = document.getElementById("join");
 // disabled input do wyświetlenia wygenerowanego kodu
@@ -64,19 +92,19 @@ const backFromGenerateCodeButton = document.getElementById("back-generate-code")
 const form = document.getElementById("send-code-form");
 // przycisk do wysłania kodu do dołączenia
 const sendCodeButton = document.getElementById("send-code");
+// input z wpisanym kodem do dołączenia
+const sendJoinCodeInput = document.getElementById("code");
 // przycisk back w menu do wpisania kodu do dołączenia
 const backFromJoinContainer = document.getElementById("back-join-container");
 // zmienna logiczna do tego czy jest już kod czy nie żeby nie pytać serwera cały czas
 let isCodeGenerated = false;
-// zmienna do kodu
-let kod = 'TEN KOD DO ZMIANY';
 /*
 
     TESTOWO
 
 
 */
-isCodeGenerated = true;
+isCodeGenerated = false;
 // 
 // 
 // 
@@ -90,13 +118,26 @@ isCodeGenerated = true;
 createButton.addEventListener("click", () => {
     toggle(createJoin);
     toggle(generateCode);
-    /*
-        TODO
-        GENEROWANIE KODU
-    */
-   if(isCodeGenerated) {
-        generatedCodeContainer.value = kod;
-   }
+    if(!isCodeGenerated) {
+        let message = {
+            action: 'create_room',
+            userID: userID
+        };
+        console.log(message);
+        socket.send(JSON.stringify(message));
+        isCodeGenerated = true;
+    }
+});
+// dołączenie do pokoju
+sendCodeButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    let message = {
+        action: 'join_room',
+        userID: userID,
+        kod: sendJoinCodeInput.value
+    };
+    console.log(message);
+    socket.send(JSON.stringify(message));
 });
 // back z wygenerowanego kodu
 backFromGenerateCodeButton.addEventListener("click", () => {

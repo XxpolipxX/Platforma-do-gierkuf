@@ -1,5 +1,3 @@
-version: "3.1"
-
 services:
   php:
     build:
@@ -38,7 +36,6 @@ services:
       - app_net
 
   db:
-    container_name: db_container
     image: mariadb:11
     restart: always
     environment:

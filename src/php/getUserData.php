@@ -4,9 +4,7 @@
         exit;
     }
     function getUserData($userID) {
-        require(__DIR__ . '/db.php');
-    
-        $pdo = $GLOBALS['pdo']; // przypisanie do lokalnej zmiennej
+        $pdo = require(__DIR__ . '/db.php');
 
         $zapytanie = $pdo->prepare('SELECT `id`, `username` FROM `users` WHERE `id` = :id');
         $zapytanie->bindParam(':id', $userID, PDO::PARAM_INT);

@@ -16,10 +16,29 @@
     ];
 
     // echo 'TEST DB.PHP';
+    // to testowo
+    $maxAttempts = 5;
+    $pdo = null;
 
-    try {
-        $GLOBALS['pdo'] = new PDO($dsn, $user, $pass, $options);
-    } catch(PDOException $e) {
-        die("Błąd połączenia z bazą: " . $e->getMessage());
+    for($i = 0; $i < $maxAttempts; $i++) {
+        try {
+            $pdo = new PDO($dsn, $user, $pass, $options);
+            break;
+        } catch (PDOException $e) {
+            echo "Próba " . ($i + 1) . " nieudana...\n";
+            sleep(2);
+        }
     }
+
+    if(!$pdo) {
+        die("Nie udało się nawiązać połączenia z bazą danych");
+    }
+
+    return $pdo;
+
+    // try {
+    //     $GLOBALS['pdo'] = new PDO($dsn, $user, $pass, $options);
+    // } catch(PDOException $e) {
+    //     die("Błąd połączenia z bazą: " . $e->getMessage());
+    // }
 ?>
