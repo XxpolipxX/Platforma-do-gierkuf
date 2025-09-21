@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+button {
+    cursor: pointer;
+}
+
 .hide {
     display: none !important;
 }
@@ -153,7 +157,6 @@ header button i{
 
 .game-button {
     border: none;
-    cursor: pointer;
     background-color: #EAE7DA;
     margin: 20px;
     border-radius: 10px;

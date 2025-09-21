@@ -20,12 +20,6 @@ const socket = new WebSocket("ws://localhost:8081");
 
 socket.onopen = () => {
     alert("Połączono z websocketem");
-    let message = {
-        action: 'open',
-        userID: userID,
-        userLogin: userLogin
-    };
-    socket.send(JSON.stringify(message));
 };
 
 let kod;
@@ -41,6 +35,9 @@ socket.onmessage = (event) => {
                 alert("Połączono z websoketem");
                 break;
             // 
+            case "self_join":
+                alert(data.message);
+                break;
             case "room_created":
                 kod = data.join_code;
                 alert("Utworzyłeś pokój o ID: ", data.room_id);
@@ -59,6 +56,9 @@ socket.onmessage = (event) => {
                 alert("Twoim przeciwnikiem będzie gracz o ID: ", data.opponent_id);
                 toggle(optionContainer);
                 toggle(gameContainer);
+                break;
+            case "bad_code":
+                alert(data.message);
                 break;
             default:
                 console.warn("Nieznany event: ", data.event);
@@ -157,7 +157,6 @@ backFromGenerateCodeButton.addEventListener("click", () => {
     toggle(createJoin);
     toggle(generateCode);
 });
-
 // dołączenie do pokoju
 joinButton.addEventListener("click", () => {
     toggle(createJoin);
@@ -181,7 +180,8 @@ for(let y = 1; y <= 3; y++) {
     button.dataset.x = x;
     button.dataset.y = y;
 
-    button.classList.add('game-button')
+    button.classList.add('game-button');
+    button.type = "button";
 
     // testowa klasa dla testowania kolorków
     button.classList.add('cross');

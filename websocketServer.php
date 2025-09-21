@@ -93,15 +93,19 @@ class GameServer implements MessageComponentInterface {
             return;
         }
 
-        $zapytanie = $this->db->prepare("SELECT * FROM `multiplayer_rooms` WHERE `join_code` = :code AND `status` = 'waiting' LIMIT 1");
+        $zapytanie = $this->db->prepare("SELECT * FROM `multiplayer_rooms` WHERE `join_code` = :code AND `status` = 'waiting' AND `player1_id` != :player2_id LIMIT 1");
         $zapytanie->bindParam(':code', $code, PDO::PARAM_STR);
+        $zapytanie->bindParam(':player2_id', $userID, PDO::PARAM_INT);
         $zapytanie->execute();
         $room = $zapytanie->fetch();
 
         print_r($room);
 
         if(!$room) {
-            $conn->send(json_encode(["error" => "Nie znaleziono pokoju"]));
+            $conn->send(json_encode([
+                "event" => "bad_code",
+                "message" => "Zły kod dołączenia do pokoju"
+            ]));
             return;
         }
 

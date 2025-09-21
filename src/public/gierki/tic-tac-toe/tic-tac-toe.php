@@ -19,20 +19,20 @@
             <a href="#">Leaderboards</a>
                         <!-- nazwa użytkownika -->
             <div class="user_name"><b>dasdafsafsa</b></div>
-            <button id="wyloguj"><a href="../../logowanie/wyloguj-link.php"><i class='bxr  bx-arrow-out-right-square-half wyloguj-button'></i>Wyloguj się</a></button>
+            <button type="button" id="wyloguj"><a href="../../../logowanie/wyloguj-link.php"><i class='bxr  bx-arrow-out-right-square-half wyloguj-button'></i>Wyloguj się</a></button>
         </nav>
     </header>
     <div class="background"></div>
     <body>
         <div id="options-container" class=" menu-container justify-center center-element-on-screen">
             <div id="create-join" class="center-element-on-parent justify-center container align-center flex-row">
-                <button id="create" class="font-bold font-2em">Stwórz kod</button>
-                <button id="join" class="font-bold font-2em">Dołącz</button>
+                <button type="button" id="create" class="font-bold font-2em">Stwórz kod</button>
+                <button type="button" id="join" class="font-bold font-2em">Dołącz</button>
             </div>
 
             <div id="generate-code" class="hide flex-column container align-center justify-center center-element-on-parent flex-row">
                 <input type="text" id="generated-code" class="font-bold font-2em text-center" disabled>
-                <button id="back-generate-code" class="back font-bold font-2em text-center">WSTECZ</button>
+                <button type="button" id="back-generate-code" class="back font-bold font-2em text-center">WSTECZ</button>
             </div>
 
             <div id="join-container" class="hide container center-element-on-parent">
@@ -43,7 +43,7 @@
                     </div>
                     <div class="flex-row justify-center">
                         <button type="submit" class="font-bold font-2em" id="send-code">Dołącz</button>
-                        <button id="back-join-container" class="back font-bold font-2em text-center">WSTECZ</button>
+                        <button type="button" id="back-join-container" class="back font-bold font-2em text-center">WSTECZ</button>
                     </div>
                 </form>
             </div>
