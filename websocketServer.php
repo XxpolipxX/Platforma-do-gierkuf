@@ -31,7 +31,7 @@ class GameServer implements MessageComponentInterface {
         $data = json_decode($msg, true);
 
         if(!$data) {
-            $from->send(json_encode(['error' => "Niepoprawny JSON"]));
+            $from->send(json_encode(['event' => "Niepoprawny JSON"]));
             return;
         }
 
@@ -48,14 +48,14 @@ class GameServer implements MessageComponentInterface {
                 break;
 
             default:
-                $from->send(json_encode(["error" => "Nieznana akcja"]));
+                $from->send(json_encode(["event" => "Nieznana akcja"]));
         }
     }
 
     private function handleCreateRoom(ConnectionInterface $conn, $data) {
         $userID = $data['userID'] ?? null;
         if(!$userID) {
-            $conn->send(json_encode(["error" => "Brak userID"]));
+            $conn->send(json_encode(["event" => "Brak userID"]));
             return;
         }
         echo 'userID ' . $userID;
@@ -85,11 +85,11 @@ class GameServer implements MessageComponentInterface {
         $code = $data['kod'] ?? null;
 
         if(!$userID) {
-            $conn->send(json_encode(['error' => 'ni ma userID']));
+            $conn->send(json_encode(['event' => 'ni ma userID']));
             return;
         }
         if(!$code) {
-            $conn->send(json_encode(['error' => 'ni ma koda']));
+            $conn->send(json_encode(['event' => 'ni ma koda']));
             return;
         }
 
