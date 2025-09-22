@@ -52,13 +52,30 @@ class GameServer implements MessageComponentInterface {
         }
     }
 
+    private function checkIfUserInGame(int $userID): bool {
+        $zapytanie = $this->db->prepare("SELECT * FROM `multiplayer_rooms` WHERE `status` = 'in_progress' AND (`player1_id` = :userID OR `player2_id = :userID) LIMIT 1");
+        $zapytanie->bindParam(':userID', $userID, PDO::PARAM_INT);
+        $zapytanie->execute();
+        $wynik = $zapytanie->fetch(PDO::FETCH_ASSOC);
+
+        if($wynik) {
+            return true;
+        }
+
+        return false;
+    }
+
     private function handleCreateRoom(ConnectionInterface $conn, $data) {
         $userID = $data['userID'] ?? null;
         if(!$userID) {
             $conn->send(json_encode(["event" => "Brak userID"]));
             return;
         }
-        echo 'userID ' . $userID;
+
+        if($this->checkIfUserInGame($userID)) {
+            $conn->send(json_encode(['event' => 'User jest już w grze']));
+            return;
+        }
 
         // tworzenie kodu
         $code = strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 6));
@@ -88,6 +105,12 @@ class GameServer implements MessageComponentInterface {
             $conn->send(json_encode(['event' => 'Brak userID']));
             return;
         }
+
+        if($this->checkIfUserInGame($userID)) {
+            $conn->send(json_encode(['event' => 'User jest już w grze']));
+            return;
+        }
+
         if(!$code) {
             $conn->send(json_encode(['event' => 'ni ma koda']));
             return;
@@ -132,6 +155,10 @@ class GameServer implements MessageComponentInterface {
         }
     }
 
+    // private function handleGame(int $roomID, int $player1ID, int $player2ID) {
+            // TODO
+    // }
+
     public function onClose(ConnectionInterface $conn) {
         $this->clients->detach($conn);
 
@@ -142,7 +169,6 @@ class GameServer implements MessageComponentInterface {
                 break;
             }
         }
-        echo "Połączenie zamknięte: {$conn->resourceId}\n";
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e) {

@@ -30,7 +30,6 @@ socket.onmessage = (event) => {
         const data = JSON.parse(event.data);
         console.log(data);
         console.log(event);
-        let buttons = document.querySelectorAll('button');
         switch(data.event) {
             case "Nieznana akcja":
                 alert(data.event);
