@@ -85,7 +85,7 @@ class GameServer implements MessageComponentInterface {
         $code = $data['kod'] ?? null;
 
         if(!$userID) {
-            $conn->send(json_encode(['event' => 'ni ma userID']));
+            $conn->send(json_encode(['event' => 'Brak userID']));
             return;
         }
         if(!$code) {

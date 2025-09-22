@@ -32,11 +32,16 @@ socket.onmessage = (event) => {
         console.log(event);
         let buttons = document.querySelectorAll('button');
         switch(data.event) {
+            case "Nieznana akcja":
+                alert(data.event);
+                break;
+            case "Niepoprawny JSON":
+                alert("Nie udało się wysłać poprawnego JSONA");
+                break;
             // to będzie można wywalić
             case "connected to websocket":
                 alert("Połączono z websoketem");
                 break;
-            // 
             case "self_join":
                 alert(data.message);
                 break;
@@ -64,6 +69,13 @@ socket.onmessage = (event) => {
             case "bad_code":
                 alert(data.message);
                 break;
+            case "Brak userID":
+                alert("Nie udało się wysłać twojego ID");
+                break;
+            case 'ni ma koda':
+                alert("Nie udało się wysłać kodu dołączenia");
+                break;
+            
             default:
                 console.warn("Nieznany event: ", data.event);
         }
@@ -209,9 +221,20 @@ function generatePlansza(character) {
             y: button.dataset.y
             }
             button.textContent = character;
-            // tu będzie wysłanie danych
+            sendMoveToServer(x, y);
         });
         gameContainer.appendChild(button);
         }
     }
+}
+
+function sendMoveToServer(xCord, yCord) {
+    let message = {
+        action: 'sendMove',
+        userID: userID,
+        x: xCord,
+        y: yCord
+    };
+    message = JSON.stringify(message);
+    socket.send(message);
 }
