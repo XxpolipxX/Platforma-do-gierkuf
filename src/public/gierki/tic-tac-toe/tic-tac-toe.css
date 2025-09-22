@@ -2,6 +2,8 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: sans-serif;
+
 }
 
 button {
@@ -85,11 +87,13 @@ form {
 header {
     padding: 20px;
     background-color: rgb(111, 39, 129);
+    
 }
 header .menu a{
     color: rgba(255, 255, 255);
     text-decoration: none;
     padding: 10px;
+    
 }
 header .menu a:hover{
     background-color: rgb(94, 36, 109);
