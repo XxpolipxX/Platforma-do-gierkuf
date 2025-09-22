@@ -220,7 +220,7 @@ let colors = [
     "orange",
 ];
 
-let arena = createPiece(22, 28);
+let arena = createPiece(18, 24);
 
 let player = {
     pos: {x: 0, y: 0},
