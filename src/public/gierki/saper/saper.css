@@ -6,7 +6,6 @@
 body {
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
     overflow: hidden;
     background-image: url("../background.jpg");
     background-repeat: no-repeat;
@@ -548,6 +547,7 @@ header .nawigacja a{
     color: rgba(255, 255, 255);
     text-decoration: none;
     padding: 10px;
+    font-weight: 300;
     
 }
 header .nawigacja a:hover{
@@ -602,8 +602,8 @@ h1{
         position:relative;
         margin-right: 150px;
         color:#fff176;
-        bottom: 3px;
+        bottom: 5px;
         text-shadow: 2px 2px 0px rgb(41, 41, 41);
         font-family: sans-serif;
-
+        top: 0;
     }

@@ -3,6 +3,10 @@
     padding: 0;
     box-sizing: border-box;
     font-family: sans-serif;
+
+        }
+body {
+    text-align: center;
 }
 
 /* nawigacja */
@@ -11,7 +15,7 @@ header {
     background-color: rgb(111, 39, 129);
     top: 0;
     width: 100%;
-
+    
         }
         .nawigacja{
     text-align: start;

@@ -1,3 +1,4 @@
+const gameContainer = document.getElementById("game-container");
 // 
 // odczytanie ID i logina usera z ciastka
 function getCookie(name) {
@@ -29,6 +30,7 @@ socket.onmessage = (event) => {
         const data = JSON.parse(event.data);
         console.log(data);
         console.log(event);
+        let buttons = document.querySelectorAll('button');
         switch(data.event) {
             // to będzie można wywalić
             case "connected to websocket":
@@ -51,11 +53,13 @@ socket.onmessage = (event) => {
                 alert("Dołączyłeś do pokoju o ID: ", data.room_id);
                 toggle(optionContainer);
                 toggle(gameContainer);
+                generatePlansza("O");
                 break;
             case "opponent_joined":
                 alert("Twoim przeciwnikiem będzie gracz o ID: ", data.opponent_id);
                 toggle(optionContainer);
                 toggle(gameContainer);
+                generatePlansza("X");
                 break;
             case "bad_code":
                 alert(data.message);
@@ -171,29 +175,43 @@ backFromJoinContainer.addEventListener("click", (e) => {
 // 
 // generowanie przycisków
 // plansza przycisków
-const gameContainer = document.getElementById("game-container");
-// przyciski
-for(let y = 1; y <= 3; y++) {
-    for(let x = 1; x <= 3; x++) {
-    const button = document.createElement('button');
-    // button.textContent = "X";
-    button.dataset.x = x;
-    button.dataset.y = y;
+function generatePlansza(character) {
+    let klasa;
+    switch(character) {
+        case 'X':
+            klasa = 'cross';
+            break;
+        case 'O':
+            klasa = 'circle';
+            break;
+        default:
+            alert("NIEZNANY ZNAK");
+            return;
+    }
+    // przyciski
+    for(let y = 1; y <= 3; y++) {
+        for(let x = 1; x <= 3; x++) {
+        const button = document.createElement('button');
+        button.dataset.x = x;
+        button.dataset.y = y;
 
-    button.classList.add('game-button');
-    button.type = "button";
+        button.classList.add('game-button');
+        button.type = "button";
 
-    // testowa klasa dla testowania kolorków
-    button.classList.add('cross');
+        button.classList.add(klasa);
 
-    button.addEventListener("click", () => {
-        const message = {
-        type: "button-click",
-        x: button.dataset.x,
-        y: button.dataset.y
+        button.innerHTML = "&nbsp;";
+
+        button.addEventListener("click", () => {
+            const message = {
+            type: "button-click",
+            x: button.dataset.x,
+            y: button.dataset.y
+            }
+            button.textContent = character;
+            // tu będzie wysłanie danych
+        });
+        gameContainer.appendChild(button);
         }
-        // tu będzie wysłanie danych
-    });
-    gameContainer.appendChild(button);
     }
 }

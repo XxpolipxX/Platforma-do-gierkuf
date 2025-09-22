@@ -15,7 +15,7 @@
     <header>
         <nav class="menu">
             <!-- <a href="../../menu/index.html">Home</a> -->
-             <a href="../../wybor-gry.php">Home</a>
+            <a href="../../../menu/index.html">Home</a>
             <a href="#">Leaderboards</a>
                         <!-- nazwa użytkownika -->
             <div class="user_name"><b>dasdafsafsa</b></div>
