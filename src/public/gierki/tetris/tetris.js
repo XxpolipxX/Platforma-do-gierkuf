@@ -211,13 +211,13 @@ function updateScore(){
 }
 let colors = [
     null,
-    "red",
-    "blue",
-    "violet",
-    "green",
-    "pink",
-    "yellow",
-    "orange",
+    "#999",          //T
+    "#0ff",         //O
+    "#ff0",       //L
+    "#f0f",         //J
+    "#f00",         //I
+    "#00f",       //S
+    "#0f0",         //Z
 ];
 
 let arena = createPiece(19, 24);    //wielkość planszy!!
