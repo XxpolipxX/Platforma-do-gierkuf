@@ -1,3 +1,9 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+        }
 body {
     text-align: center;
 }
@@ -27,7 +33,7 @@ header #wyloguj{
     padding: 6px;
     position: absolute;
     right: 15px;
-    top: 22px;
+    top: 14px;
     padding-left: 20px;
     padding-right: -2px;
     
@@ -67,7 +73,7 @@ h1{
        .user_name{
         float: right;
         position:relative;
-        margin-right: 150px;
+        margin-right: 130px;
         color:#fff176;
         text-shadow: 2px 2px 0px rgb(41, 41, 41);
 
