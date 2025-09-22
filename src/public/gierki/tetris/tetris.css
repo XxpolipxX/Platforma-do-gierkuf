@@ -6,6 +6,7 @@
         }
 body {
     text-align: center;
+/* nawigacja */
 }
 header {
     padding: 20px;
@@ -73,8 +74,20 @@ h1{
        .user_name{
         float: right;
         position:relative;
-        margin-right: 130px;
+        margin-right: 110px;
         color:#fff176;
         text-shadow: 2px 2px 0px rgb(41, 41, 41);
 
     }
+    /* tło */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../background.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+        }
