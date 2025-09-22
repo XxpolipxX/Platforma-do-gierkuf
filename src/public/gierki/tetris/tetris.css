@@ -3,11 +3,9 @@
     padding: 0;
     box-sizing: border-box;
     font-family: sans-serif;
-        }
-body {
-    text-align: center;
-/* nawigacja */
 }
+
+/* nawigacja */
 header {
     padding: 20px;
     background-color: rgb(111, 39, 129);
@@ -90,4 +88,38 @@ h1{
     background-size: cover;
     background-position: center;
     z-index: -1;
-        }
+}
+.UI {
+    display: grid;
+    grid-template-areas: 
+    'canvas canvas score'
+    'canvas canvas next';
+    
+    width: 700px;
+    height: 600px;
+    background-color: #40423f;
+    justify-self: center;
+    margin-top: 50px;
+}
+#canvas {
+    grid-area: canvas;
+}
+.score {
+    grid-area: score;
+    display: flex;
+    width: 225px;
+    height: 200px;
+    flex-direction: column;
+    color: white;
+    font-size: 40px;
+    align-items: center;
+    justify-content: center;
+}
+.next {
+    grid-area: next;
+    width: 225px;
+    height: 400px;
+}
+#score {
+    font-size: 60px;
+}
