@@ -16,6 +16,8 @@ class GameServer implements MessageComponentInterface {
     protected $connections; // łączenie connID z userID
     protected $db;
 
+    protected $games = []; // roomID => [board => [...], turn => userID]
+
     public function __construct($db) {
         $this->clients = new \SplObjectStorage;
         $this->connections = [];
@@ -31,14 +33,11 @@ class GameServer implements MessageComponentInterface {
         $data = json_decode($msg, true);
 
         if(!$data) {
-            $from->send(json_encode(['event' => "Niepoprawny JSON"]));
+            $from->send(json_encode(['event' => "bad_JSON"]));
             return;
         }
 
         switch($data['action'] ?? '') {
-            case 'open':
-                $from->send(json_encode(['event' => "connected to websocket"]));
-                break;
             case 'create_room':
                 $this->handleCreateRoom($from, $data);
                 break;
@@ -46,19 +45,39 @@ class GameServer implements MessageComponentInterface {
             case 'join_room':
                 $this->handleJoinRoom($from, $data);
                 break;
+            case 'send-move':
+                $this->handleMove($from, $data);
+                break;
 
             default:
-                $from->send(json_encode(["event" => "Nieznana akcja"]));
+                $from->send(json_encode(["event" => "unknown"]));
         }
+    }
+
+    private function checkIfUserInGame(int $userID): bool {
+        $zapytanie = $this->db->prepare("SELECT * FROM `multiplayer_rooms` WHERE `status` = 'in_progress' AND (`player1_id` = :userID OR `player2_id` = :userID) LIMIT 1");
+        $zapytanie->bindParam(':userID', $userID, PDO::PARAM_INT);
+        $zapytanie->execute();
+        $wynik = $zapytanie->fetch(PDO::FETCH_ASSOC);
+
+        if($wynik) {
+            return true;
+        }
+
+        return false;
     }
 
     private function handleCreateRoom(ConnectionInterface $conn, $data) {
         $userID = $data['userID'] ?? null;
         if(!$userID) {
-            $conn->send(json_encode(["event" => "Brak userID"]));
+            $conn->send(json_encode(["event" => "no_userID"]));
             return;
         }
-        echo 'userID ' . $userID;
+
+        if($this->checkIfUserInGame($userID)) {
+            $conn->send(json_encode(['event' => 'user_already_in_game']));
+            return;
+        }
 
         // tworzenie kodu
         $code = strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 6));
@@ -85,11 +104,17 @@ class GameServer implements MessageComponentInterface {
         $code = $data['kod'] ?? null;
 
         if(!$userID) {
-            $conn->send(json_encode(['event' => 'Brak userID']));
+            $conn->send(json_encode(['event' => 'no_userID']));
             return;
         }
+
+        if($this->checkIfUserInGame($userID)) {
+            $conn->send(json_encode(['event' => 'user_already_in_game']));
+            return;
+        }
+
         if(!$code) {
-            $conn->send(json_encode(['event' => 'ni ma koda']));
+            $conn->send(json_encode(['event' => 'no_code']));
             return;
         }
 
@@ -102,10 +127,7 @@ class GameServer implements MessageComponentInterface {
         print_r($room);
 
         if(!$room) {
-            $conn->send(json_encode([
-                "event" => "bad_code",
-                "message" => "Zły kod dołączenia do pokoju"
-            ]));
+            $conn->send(json_encode(["event" => "bad_code"]));
             return;
         }
 
@@ -130,6 +152,153 @@ class GameServer implements MessageComponentInterface {
                 "opponent_id" => $userID
             ]));
         }
+        $this->startGame($room['id'], $this->connections[$player1ID], $this->connections[$userID]);
+    }
+
+    private function getUserID(ConnectionInterface $conn): int {
+        foreach($this->connections as $uid => $connection) {
+            if($connection === $conn) {
+                return $uid;
+            }
+        }
+        return 0;
+    }
+
+    private function getRoomByUserID(int $userID) {
+        $zapytanie = $this->db->prepare("SELECT * FROM `multiplayer_rooms` WHERE `status` = 'in_progress' AND (`player1_id` = :uid OR `player2_id` = :uid) LIMIT 1");
+        $zapytanie->bindParam(':uid', $userID, PDO::PARAM_INT);
+        $zapytanie->execute();
+        return $zapytanie->fetch(PDO::FETCH_ASSOC);
+    }
+
+    private function startGame(int $roomID, ConnectionInterface $player1, ConnectionInterface $player2) {
+        $this->games[$roomID] = [
+            'board' => array_fill(0, 9, null),  // 9 pustych pól
+            'turn' => $this->getUserID($player1),                                 // na start plejer 1
+            'player1' => $this->getUserID($player2)
+        ];
+
+        $player1->send(json_encode(["event" => "your_move"]));
+        $player2->send(json_encode(["event" => "opponent_move"]));
+    }
+
+    private function handleMove(ConnectionInterface $from, $data) {
+        $userID = $data['userID'] ?? null;
+        $index = $data['index'] ?? null;
+
+        if($userID == null || $index == null) {
+            return;
+        }
+
+        $room = $this->getRoomByUserID($userID);
+
+        if(!$room) {
+            return;
+        }
+
+        $roomID = $room['id'];
+
+        // czy gra istnieje w pamięci
+        if(!isset($this->games[$roomID])) {
+            return;
+        }
+
+        $game = &$this->games[$roomID];
+
+        // czy to ruch tego gracza co powinien mieć ruch
+        if($game['turn'] != $userID) {
+            $from->send(json_encode(['event' => 'not_your_turn']));
+            return;
+        }
+
+        // czy wolne
+        if($game['board'][$index] != null) {
+            $from->send(json_encode(['event' => 'bad_move']));
+            return;
+        }
+
+        // symbol gracza
+        $symbol = ($room['player1_id'] == $userID) ? 'X' : 'O';
+        $game['board'][$index] = $symbol;
+
+        // info do graczy
+        foreach ([$game['player1'], $game['player2']] as $pid) {
+            if (isset($this->connections[$pid])) {
+                $this->connections[$pid]->send(json_encode([
+                    'event'  => 'move_made',
+                    'player' => $userID,
+                    'index'  => $index,
+                    'symbol' => $symbol
+                ]));
+            }
+        }
+
+        // sprawdź zwycięstwo
+        $state = $this->checkGameState($game['board'], $symbol);
+
+        if($state === 'win') {
+            foreach([$game['player1'], $game['player2']] as $pid) {
+                if(isset($this->connections[$pid])) {
+                    $this->connections[$pid]->send(json_encode([
+                        'event' => 'game_over',
+                        'winner' => $userID
+                    ]));
+                }
+            }
+            // to sie już nie przyda w pamięci
+            unset($this->games[$roomID]);
+            return;
+        } elseif($state === 'draw') {
+            foreach([$game['player1'], $game['player2']] as $pid) {
+                if(isset($this->connections[$pid])) {
+                    $this->connections[$pid]->send(json_encode([
+                        'event' => 'game_over',
+                        'winner' => null
+                    ]));
+                }
+            }
+            // nie przyda się
+            unset($this->games[$roomID]);
+            return;
+        }
+
+        // zmiana tury
+        $game['turn'] = ($userID === $game['player1']) ? $game['player2'] : $game['player1'];
+
+        // powiadomienie kto ma ruch
+        foreach([$game['player1'], $game['player2']] as $pid) {
+            if(isset($this->connections[$pid])) {
+                $event = ($pid === $game['turn']) ? 'your_move' : 'opponent_move';
+                $this->connections[$pid]->send(json_encode(['event' => $event]));
+            }
+        }
+    }
+
+    private function checkGameState(array $board, string $symbol): ?string {
+        $wins = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], // rząd
+            [0, 3, 6], [1, 4, 7], [2, 5, 8], // kolumna
+            [0, 4, 8], [2, 4, 6]             // ukos
+        ];
+
+        // sprawdzenie zwycięstwa
+        foreach ($wins as $combo) {
+            if (
+                $board[$combo[0]] === $symbol &&
+                $board[$combo[1]] === $symbol &&
+                $board[$combo[2]] === $symbol
+            ) {
+                return 'win';
+            }
+        }
+
+        // sprawdzenie remisu
+        if (!in_array(null, $board, true)) {
+            return 'draw';
+        }
+
+        // gra trwa nadal
+        return null;
     }
 
     public function onClose(ConnectionInterface $conn) {
@@ -142,7 +311,6 @@ class GameServer implements MessageComponentInterface {
                 break;
             }
         }
-        echo "Połączenie zamknięte: {$conn->resourceId}\n";
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e) {

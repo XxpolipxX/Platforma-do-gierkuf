@@ -181,6 +181,10 @@ header button i{
     outline: none;
 }
 
+.game-button:disabled {
+    background-color: #575654;
+}
+
 /* Kolorek dla kółka */
 .circle {
     color: #1A936F;

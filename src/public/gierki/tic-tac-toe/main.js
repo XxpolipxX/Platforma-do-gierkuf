@@ -30,17 +30,38 @@ socket.onmessage = (event) => {
         const data = JSON.parse(event.data);
         console.log(data);
         console.log(event);
-        let buttons = document.querySelectorAll('button');
         switch(data.event) {
+            case 'user_already_in_game':
+                alert("Już jesteś w grze");
+                break;
+            case 'no_code':
+                alert("Nie wysłano kodu");
+                break;
+            case 'no_userID':
+                alert("Nie wysłano userID");
+                break;
+            case 'unknown':
+                alert("Nieznana akcja");
+                break;
+            case 'bad_JSON':
+                alert("Zły JSON");
+                break;
+            case 'your_move':
+                alert("Twój ruch");
+                document.querySelectorAll('#game-container button').forEach(button => button.disabled = false);
+                break;
+            case 'opponent_move':
+                alert("Ruch przeciwnika");
+                document.querySelectorAll('#game-container button').forEach(button => button.disabled = true);
+                break;
+            case 'not_your_turn':
+                alert("Teraz trwa tura przeciwnika a nie twoja");
+                break;
+            case 'bad_move':
+                alert("Nie powinieneś móc zrobić takiego ruchu");
+                break;
             case "Nieznana akcja":
                 alert(data.event);
-                break;
-            case "Niepoprawny JSON":
-                alert("Nie udało się wysłać poprawnego JSONA");
-                break;
-            // to będzie można wywalić
-            case "connected to websocket":
-                alert("Połączono z websoketem");
                 break;
             case "self_join":
                 alert(data.message);
@@ -66,16 +87,30 @@ socket.onmessage = (event) => {
                 toggle(gameContainer);
                 generatePlansza("X");
                 break;
+            case 'move_made':
+                let index = data.index;
+                let symbol = data.symbol;
+                const button = document.querySelector(`#game-container button[data-i='${index}']`);
+                if(button) {
+                    button.textContent = symbol;
+                    button.disabled = true;
+                }
+                break;
+            case 'game_over':
+                let winner = data.winner;
+                if(winner === null) {
+                    alert("REMIS");
+                    toggle(createJoin);
+                    toggle(generateCode);
+                } else {
+                    alert(`Wygrał gracz o ID: ${winner}`);
+                    toggle(createJoin);
+                    toggle(generateCode);
+                }
+                break;
             case "bad_code":
-                alert(data.message);
+                alert("Błędny kod");
                 break;
-            case "Brak userID":
-                alert("Nie udało się wysłać twojego ID");
-                break;
-            case 'ni ma koda':
-                alert("Nie udało się wysłać kodu dołączenia");
-                break;
-            
             default:
                 console.warn("Nieznany event: ", data.event);
         }
@@ -201,12 +236,9 @@ function generatePlansza(character) {
             return;
     }
     // przyciski
-    for(let y = 1; y <= 3; y++) {
-        for(let x = 1; x <= 3; x++) {
+    for(let i = 0; i < 9; i++) {
         const button = document.createElement('button');
-        button.dataset.x = x;
-        button.dataset.y = y;
-
+        button.setAttribute('data-i', i);
         button.classList.add('game-button');
         button.type = "button";
 
@@ -215,26 +247,14 @@ function generatePlansza(character) {
         button.innerHTML = "&nbsp;";
 
         button.addEventListener("click", () => {
-            const message = {
-            type: "button-click",
-            x: button.dataset.x,
-            y: button.dataset.y
+            let message = {
+                action: 'send-move',
+                userID: userID,
+                index: button.dataset.i
             }
-            button.textContent = character;
-            sendMoveToServer(x, y);
+            message = JSON.stringify(message);
+            socket.send(message);
         });
         gameContainer.appendChild(button);
-        }
     }
-}
-
-function sendMoveToServer(xCord, yCord) {
-    let message = {
-        action: 'sendMove',
-        userID: userID,
-        x: xCord,
-        y: yCord
-    };
-    message = JSON.stringify(message);
-    socket.send(message);
 }

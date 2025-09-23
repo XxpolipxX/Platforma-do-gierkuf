@@ -23,12 +23,10 @@
     <a href="../logowanie/wyloguj-link.php">Wyloguj</a>
     <a href="../menu/index.html">Wybór gierki</a>
     <script>
-        const user = <?php echo json_encode([
-            'id' => $_COOKIE['userID'],
-            'login' => $_COOKIE['userLogin']
-        ]); ?>;
-        const userID = user.id;
-        const userLogin = user.login;
+        <?php
+            echo  "const userID = " . json_encode($user['id']) . ";";
+            echo 'const userLogin = ' . json_encode($user['username']) . ";";
+        ?>;
         window.userID = userID;
         window.userLogin = userLogin;
         document.getElementById("test").innerHTML = `Cześć ${window.userLogin}, twoje id to ${window.userID}`;
