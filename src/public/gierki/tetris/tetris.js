@@ -4,10 +4,37 @@ let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext('2d');
 let blockSize = 25;
 
+//czas
+let dropCounter = 0;
+let dropInterval = 1000; //sekunda odświeżania
+
+let lastTime = 0;
 
 ctx.fillStyle = 'black';
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+//NEXT klocek
+
+let nextImg = document.getElementById("nextImg");
+
+function randomPiece(){
+    let pieces = "ILJOTSZ";
+    return pieces[Math.floor(pieces.length * Math.random())];          // losuje literę; można zapisać również [pieces.length * Math.random() | 0], znak | 0 to inaczej Math.floor()
+}
+let nextPieceType = randomPiece();
+nextImg.src = "./klocki/" + nextPieceType + ".png"
+
+function nextPiece(){
+    let pieceType = nextPieceType;
+    nextPieceType = randomPiece();
+    if (nextPieceType){
+        nextImg.src = "./klocki/" + nextPieceType + ".png"
+    }
+    return pieceType;
+}
+
+
+//Czyści cały wiersz klocków
 function arenaSweep(){
     let rowCount = 1;
     amogus: for (let y = arena.length - 1; y > 0; y--){
@@ -22,7 +49,8 @@ function arenaSweep(){
         ++y;
 
         player.score += rowCount * 10;
-        rowCount *= 2;
+        rowCount *= 4;
+        updateScore();
     }
 }
 
@@ -34,6 +62,9 @@ function collide(arena, player) {
             if(m[y][x] != 0 && 
                 (arena[y + o.y] && 
                 arena[y + o.y][x + o.x]) != 0){
+                    if(dropInterval > 120){             //limit przyśpieszenia
+                        dropInterval -= 10;            //przyspieszanie czasu co klocek
+                    }
                 return true;
             }
         }
@@ -122,7 +153,7 @@ function drawPiece(piece, location){
     })
 }
 
-//jeśli gracz kliknie strzałke w dół, klocek przesówa się o jeden niżej i jeśli dotknie ziemi - ustawia tam klocka
+//jeśli gracz kliknie strzałke w dół, klocek przesuwa się o jeden niżej i jeśli dotknie ziemi - ustawia tam klocka
 function playerDrop(){
     player.pos.y++;
     if(collide(arena, player)){
@@ -144,8 +175,8 @@ function playerMove(k){
 }
 
 function playerReset(){
-    let pieces = "ILJOTSZ";
-    player.piece = createPieceType(pieces[Math.floor(pieces.length * Math.random())]);   // losuje literę; można zapisać również [pieces.length * Math.random() | 0], znak | 0 to inaczej Math.floor()
+    pieceType = nextPiece();
+    player.piece = createPieceType(pieceType);   
     player.pos.y = 0;
     player.pos.x = Math.floor((arena[0].length / 2)) - Math.floor(player.piece[0].length / 2);  //resetuje pozycję gracza na środek osi X
 
@@ -186,10 +217,7 @@ function rotate(piece, k){
         piece.reverse();
     }
 }
-let dropCounter = 0;
-let dropInterval = 1000;
 
-let lastTime = 0;
 
 //update canvasu
 function update(time = 0){
@@ -207,8 +235,22 @@ function update(time = 0){
 
 //pkt
 function updateScore(){
+    if(player.score > 0 && player.score < 100){
+        document.getElementById("score").innerHTML = "0000" + player.score;
+    }
+     else if(player.score >= 100 && player.score < 1000){
+        document.getElementById("score").innerHTML = "000" + player.score;
+    } else if (player.score >= 1000 && player.score < 10000) {
+        document.getElementById("score").innerHTML = "00" + player.score;
+    } else if (player.score >= 10000 && player.score < 100000) {
+        document.getElementById("score").innerHTML = "0" + player.score;
+    } else if (player.score >= 100000 && player.score < 1000000) {
+        document.getElementById("score").innerHTML = player.score;
+    } else {
+        document.getElementById("score").innerHTML = "0000" + player.score + "0";
+    }
+    }
 
-}
 let colors = [
     null,
     "#999",          //T
@@ -227,6 +269,41 @@ let player = {
     piece: null,
     score: 0,
 }
+
+let can = true;
+let pauza = document.querySelector(".pauza");
+
+// function pause(){
+//     if(can == false || gameOver == true){
+//         return;
+//     }else{
+//         pauza.classList.toggle("hide");
+//         if(!pauza.classList.contains("hide")){
+//             if(mute_check()){
+//                 game_music.muted = true;
+//                 pause_music.muted = true;
+//             } else{
+//                 game_music.muted = true;
+//                 pause_music.muted = false;
+//             }
+//             clearInterval(game);
+//             can = false;
+//             setTimeout(() => can = true, 500)
+//         } else {
+//             tick3();
+//             setTimeout(() => tick2(), 300);
+//             setTimeout(() => tick1(), 600);
+//             game_music.muted = false;
+//             pause_music.muted = true;
+//             mute_check();
+//             setTimeout(() => game = setInterval(update, clock), 900);
+//             can = false;
+//             setTimeout(() => can = true, 500),
+//             900
+
+//         }
+//     }
+// }
 
 //sterowanie
 document.addEventListener("keydown", e => {
@@ -247,5 +324,11 @@ document.addEventListener("keydown", e => {
             }
 })
 
+nextPiece();
 playerReset();
 update();
+
+// debug
+function addPoints(point){
+    player.score += point;
+}

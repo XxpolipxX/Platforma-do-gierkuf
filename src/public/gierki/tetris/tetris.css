@@ -4,7 +4,12 @@
     box-sizing: border-box;
     font-family: sans-serif;
 
-        }
+}
+
+@font-face {
+    font-family: tetris;
+    src: url(./tetris.otf);
+}
 body {
     text-align: center;
 }
@@ -109,6 +114,7 @@ h1{
     grid-area: canvas;
 }
 .score {
+    font-family: tetris;
     grid-area: score;
     display: flex;
     width: 225px;
@@ -120,10 +126,42 @@ h1{
     justify-content: center;
 }
 .next {
+    font-family: tetris;
     grid-area: next;
     width: 225px;
     height: 400px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: 40px;
+    align-items: center;
+    justify-content: center;
+
 }
 #score {
     font-size: 60px;
+    font-family: tetris;
+}
+#next {
+    width: 150px;
+    height: 150px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+#nextImg {
+    max-width: 150px;
+    max-height: 150px;
+    image-rendering: pixelated ;
+}
+.hide {
+    display: none;
+}
+.pauza {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: tetris;
 }
