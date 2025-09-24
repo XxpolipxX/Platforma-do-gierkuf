@@ -28,7 +28,7 @@ let kod;
 socket.onmessage = (event) => {
     try {
         const data = JSON.parse(event.data);
-        console.log(data);
+        // console.log(data);
         console.log(event);
         switch(data.event) {
             case 'user_already_in_game':
@@ -48,11 +48,11 @@ socket.onmessage = (event) => {
                 break;
             case 'your_move':
                 alert("Twój ruch");
-                document.querySelectorAll('#game-container button').forEach(button => button.disabled = false);
+                // document.querySelectorAll('#game-container button').forEach(button => button.disabled = false);
                 break;
             case 'opponent_move':
                 alert("Ruch przeciwnika");
-                document.querySelectorAll('#game-container button').forEach(button => button.disabled = true);
+                // document.querySelectorAll('#game-container button').forEach(button => button.disabled = true);
                 break;
             case 'not_your_turn':
                 alert("Teraz trwa tura przeciwnika a nie twoja");
@@ -91,6 +91,7 @@ socket.onmessage = (event) => {
                 let index = data.index;
                 let symbol = data.symbol;
                 const button = document.querySelector(`#game-container button[data-i='${index}']`);
+                console.log(button);
                 if(button) {
                     button.textContent = symbol;
                     button.disabled = true;
@@ -254,6 +255,7 @@ function generatePlansza(character) {
             }
             message = JSON.stringify(message);
             socket.send(message);
+            alert(button.dataset.i);
         });
         gameContainer.appendChild(button);
     }

@@ -2,9 +2,6 @@
 require __DIR__ . '/vendor/autoload.php';
 $pdo = require __DIR__ . '/html/php/db.php';
 
-$zapytanie = $pdo->query("SELECT NOW()");
-echo "CZAS: " . $zapytanie->fetchColumn();
-
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 use Ratchet\Server\IoServer;
@@ -26,7 +23,6 @@ class GameServer implements MessageComponentInterface {
 
     public function onOpen(ConnectionInterface $conn) {
         $this->clients->attach($conn);
-        echo "Nowe połączenie: {$conn->resourceId}\n";
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {
@@ -82,8 +78,6 @@ class GameServer implements MessageComponentInterface {
         // tworzenie kodu
         $code = strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 6));
 
-        echo 'KOD: ' . $code;
-
         $zapytanie = $this->db->prepare("INSERT INTO `multiplayer_rooms` (`player1_id`, `join_code`, `status`) VALUES (:user1_ID, :code, 'waiting')");
         $zapytanie->bindParam(':user1_ID', $userID, PDO::PARAM_INT);
         $zapytanie->bindParam(':code', $code, PDO::PARAM_STR);
@@ -123,8 +117,6 @@ class GameServer implements MessageComponentInterface {
         $zapytanie->bindParam(':player2_id', $userID, PDO::PARAM_INT);
         $zapytanie->execute();
         $room = $zapytanie->fetch();
-
-        print_r($room);
 
         if(!$room) {
             $conn->send(json_encode(["event" => "bad_code"]));
@@ -175,7 +167,8 @@ class GameServer implements MessageComponentInterface {
         $this->games[$roomID] = [
             'board' => array_fill(0, 9, null),  // 9 pustych pól
             'turn' => $this->getUserID($player1),                                 // na start plejer 1
-            'player1' => $this->getUserID($player2)
+            'player1' => $this->getUserID($player1),
+            'player2' => $this->getUserID($player2)
         ];
 
         $player1->send(json_encode(["event" => "your_move"]));
@@ -224,6 +217,7 @@ class GameServer implements MessageComponentInterface {
         // info do graczy
         foreach ([$game['player1'], $game['player2']] as $pid) {
             if (isset($this->connections[$pid])) {
+                echo $pid;
                 $this->connections[$pid]->send(json_encode([
                     'event'  => 'move_made',
                     'player' => $userID,
