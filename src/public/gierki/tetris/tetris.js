@@ -156,8 +156,22 @@ function createPieceType(type){
 function draw(){
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    if(backgroundReady){
-        ctx.drawImage(background, 0, -3.7);
+    ctx.setLineDash([22, 3]);
+    ctx.lineWidth = 1.5
+    for(let i = 0; i < canvas.width; i += blockSize){           //w pionie linie
+        ctx.lineWidth = 2
+        ctx.strokeStyle = "#484848"
+        ctx.beginPath();
+        ctx.moveTo(i + 1, 0);
+        ctx.lineTo(i + 1, canvas.height);
+        ctx.stroke();
+    }
+    for(let i = 0; i < canvas.height; i += blockSize){          //w poziomie linie
+        ctx.strokeStyle = "lightgray";
+        ctx.beginPath();
+        ctx.moveTo(0, i + 1);
+        ctx.lineTo(canvas.width, i + 1);
+        ctx.stroke();
     }
     drawPiece(arena, {x: 0, y: 0})
     drawPiece(player.piece, player.pos);
@@ -167,8 +181,10 @@ function drawPiece(piece, location){
     piece.forEach((row, y) => {
         row.forEach((value, x) => {
             if(value != 0) {
+                ctx.fillStyle = colorShadow[value]
+                ctx.fillRect((x*blockSize) + (location.x*blockSize), (y*blockSize) + (location.y*blockSize), blockSize - 1, blockSize - 1);
                 ctx.fillStyle = colors[value];
-                ctx.fillRect((x*blockSize) + (location.x*blockSize), (y*blockSize) + (location.y*blockSize), blockSize, blockSize);
+                ctx.fillRect(((x*blockSize) + 3) + (location.x*blockSize) - 1, ((y*blockSize) + 3) + (location.y*blockSize) - 1, blockSize - 5, blockSize - 5);
             }
         })
     })
@@ -285,6 +301,16 @@ let colors = [
     "#f00",         //I
     "#00f",       //S
     "#0f0",         //Z
+];
+let colorShadow = [
+    null,
+    "#606060ff",          //T
+    "#008080ff",         //O
+    "#808000ff",       //L
+    "#800080ff",         //J
+    "#800000ff",         //I
+    "#000080ff",       //S
+    "#008000ff",         //Z
 ];
 
 let arena = createPiece(15, 24);    //wielkość planszy!!

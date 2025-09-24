@@ -3,5 +3,6 @@ Muzyka [-]
 Pauza [X]
 Czcionka Tetra 84 [-]
 Wygrana i przegrana [-]
+Tekstury klocków [-]
 
 ? Spacja powoduje instant upuszczenie klocka [-] ?

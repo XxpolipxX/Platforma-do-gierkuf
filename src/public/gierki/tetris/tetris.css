@@ -138,7 +138,7 @@ h1{
 
 }
 #score {
-    font-size: 60px;
+    font-size: 40px;
     font-family: tetris;
 }
 #next {
@@ -197,12 +197,20 @@ h1{
     border: 5px solid #6f2781;
     border-radius: 0.5rem;
     transition: 0.15s ease-in-out;
+    font-family: tetris;
+    font-size: large;
 }
 #startBtn:hover, #leaderboardBtn:hover {
     background-color: #6f27814f;
 }
 #logo {
     grid-area: logo;
+    display: flex;
     width: 600px;
-    height: 400px;
+    height: 300px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-family: tetris;
+    font-size: 90px;
 }
