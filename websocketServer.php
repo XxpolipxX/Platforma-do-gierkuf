@@ -183,7 +183,46 @@ class GameServer implements MessageComponentInterface {
             $zapytanie->bindParam(':id', $roomID, PDO::PARAM_INT);
         }
         $zapytanie->execute();
+
+        $zapytanie = $this->db->prepare("SELECT `winner_id`, `loser_id` FROM `multiplayer_rooms` WHERE `id` = :id");
+        $zapytanie->bindParam(':id', $roomID, PDO::PARAM_INT);
+        $zapytanie->execute();
+
+        $wynik = $zapytanie->fetch(PDO::FETCH_ASSOC);
+        $winner = $wynik['winner_id'];
+        $loser = $wynik['loser_id'];
+        if($winnerID != null) {
+            $this->updateWinStreak($winner, true);
+            $this->updateWinStreak($loser, false);
+        }
     }
+
+    private function updateWinStreak(int $player, bool $win) {
+        $zapytanie = $this->db->prepare("SELECT `current_win_streak`, `max_win_streak` FROM `users` WHERE `id` = :playerID");
+        $zapytanie->bindParam(':playerID', $player, PDO::PARAM_INT);
+        $zapytanie->execute();
+        $wynik = $zapytanie->fetch(PDO::FETCH_ASSOC);
+
+        $current = $wynik['current_win_streak'];
+        $max = $wynik['max_win_streak'];
+
+        if(!$win) {
+            $current = 0;
+        } else {
+            $current++;
+        }
+
+        if($current > $max) {
+            $zapytanie = $this->db->prepare("UPDATE `users` SET `max_win_streak` = :current WHERE `id` = :playerID");
+            $zapytanie->bindParam(':current', $current, PDO::PARAM_INT);
+            $zapytanie->bindParam(':playerID', $player, PDO::PARAM_INT);
+            $zapytanie->execute();
+        }
+        $zapytanie = $this->db->prepare("UPDATE `users` SET `current_win_streak` = :current WHERE `id` = :playerID");
+        $zapytanie->bindParam(':current', $current, PDO::PARAM_INT);
+        $zapytanie->bindParam(':playerID', $player, PDO::PARAM_INT);
+        $zapytanie->execute();
+    } 
 
     private function startGame(int $roomID, ConnectionInterface $player1, ConnectionInterface $player2) {
         $this->games[$roomID] = [
