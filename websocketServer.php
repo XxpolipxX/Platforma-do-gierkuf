@@ -257,7 +257,12 @@ class GameServer implements MessageComponentInterface {
         }
 
         // zmiana tury
-        $game['turn'] = ($userID === $game['player1']) ? $game['player2'] : $game['player1'];
+        // $game['turn'] = ($userID === $game['player1']) ? $game['player2'] : $game['player1'];
+        if($userID == $game['player1']) {
+            $game['turn'] = $game['player2'];
+        } else {
+            $game['turn'] = $game['player1'];
+        }
 
         // powiadomienie kto ma ruch
         foreach([$game['player1'], $game['player2']] as $pid) {
