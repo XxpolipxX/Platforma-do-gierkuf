@@ -163,6 +163,27 @@ class GameServer implements MessageComponentInterface {
         return $zapytanie->fetch(PDO::FETCH_ASSOC);
     }
 
+    private function endGame(int $roomID, int $winnerID) {
+            $zapytanie = $this->db->prepare("SELECT `player1_id` FROM `multiplayer_rooms` WHERE `player1_id` != :user LIMIT 1");
+            $zapytanie->bindParam(':user', $winnerID, PDO::PARAM_INT);
+            $zapytanie->execute();
+            if($zapytanie->fetch()) {
+                $loser = $zapytanie->fetch();
+            } else {
+                $zapytanie = $this->db->prepare("SELECT `player2_id` FROM `multiplayer_rooms` WHERE `player1_id` != :user LIMIT 1");
+                $zapytanie->bindParam(':user', $winnerID, PDO::PARAM_INT);
+                $zapytanie->execute();
+                $loser = $zapytanie->fetch();
+            }
+            $zapytanie = $this->db->prepare("UPDATE `multiplayer_rooms` SET `status` = 'finished', `winner_id` = :winner, `loser_id` = :loser WHERE `id` = :roomID");
+            $zapytanie->bindParam(':winner', $winnerID, PDO::PARAM_INT);
+            $zapytanie->bindParam(':loser', $loser, PDO::PARAM_INT);
+            $zapytanie->bindParam(':roomID', $roomID, PDO::PARAM_INT);
+            echo 'Winner: ' . $winnerID;
+            echo 'Loser: ' . $loser;
+            $zapytanie->execute();
+    }
+
     private function startGame(int $roomID, ConnectionInterface $player1, ConnectionInterface $player2) {
         $this->games[$roomID] = [
             'board' => array_fill(0, 9, null),  // 9 pustych pól
@@ -239,6 +260,7 @@ class GameServer implements MessageComponentInterface {
                     ]));
                 }
             }
+            $this->endGame($roomID, $userID);
             // to sie już nie przyda w pamięci
             unset($this->games[$roomID]);
             return;
@@ -251,6 +273,7 @@ class GameServer implements MessageComponentInterface {
                     ]));
                 }
             }
+            $this->endGame($roomID, null);
             // nie przyda się
             unset($this->games[$roomID]);
             return;
