@@ -103,8 +103,7 @@ h1{
     grid-template-areas: 
     'canvas canvas score'
     'canvas canvas next';
-    
-    width: 700px;
+    width: 600px;
     height: 600px;
     background-color: #40423f;
     justify-self: center;
@@ -157,11 +156,53 @@ h1{
     image-rendering: pixelated ;
 }
 .hide {
-    display: none;
+    display: none !important;
 }
 .pauza {
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: tetris;
+    width: 375px;
+    height: 600px;
+    background-color: rgba(255, 0, 255, 0.507);
+    position: absolute;
+    font-size: 80px;
+    color: white;
+}
+.menu {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    display: grid;
+    grid-template-areas: 
+        'logo'
+        'start'
+        'leaderboard';
+    background-color: white ;
+}
+#startBtn {
+    grid-area: start;
+}
+#leaderboardBtn {
+    grid-area: leaderboard;
+}
+#startBtn, #leaderboardBtn {
+    width: 200px;
+    height: 50px;
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+    background: transparent;
+    border: 5px solid #6f2781;
+    border-radius: 0.5rem;
+    transition: 0.15s ease-in-out;
+}
+#startBtn:hover, #leaderboardBtn:hover {
+    background-color: #6f27814f;
+}
+#logo {
+    grid-area: logo;
+    width: 600px;
+    height: 400px;
 }

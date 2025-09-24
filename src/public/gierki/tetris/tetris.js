@@ -1,18 +1,36 @@
 
 // gierka
+let menu = document.querySelector(".menu");
 let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext('2d');
 let blockSize = 25;
 
 //czas
 let dropCounter = 0;
-let dropInterval = 1000; //sekunda odświeżania
+let dropInterval = 999999999;
+
 
 let lastTime = 0;
 
+let background = new Image();
+let backgroundReady = false;
+background.addEventListener("load", () => {
+    backgroundReady = true;
+});
+
+background.src = "./tetris-background.jpeg";
 ctx.fillStyle = 'black';
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+//przyciski
+let playBtn = document.getElementById("startBtn");
+let leaderboardBtn = document.getElementById("leaderboardBtn");
+
+
+playBtn.addEventListener("click", () => {
+    menu.classList.add("hide");
+    dropInterval = 1000;        //sekunda odświeżania
+})
 //NEXT klocek
 
 let nextImg = document.getElementById("nextImg");
@@ -62,7 +80,7 @@ function collide(arena, player) {
             if(m[y][x] != 0 && 
                 (arena[y + o.y] && 
                 arena[y + o.y][x + o.x]) != 0){
-                    if(dropInterval > 120){             //limit przyśpieszenia
+                    if(dropInterval > 130){             //limit przyśpieszenia
                         dropInterval -= 10;            //przyspieszanie czasu co klocek
                     }
                 return true;
@@ -138,6 +156,9 @@ function createPieceType(type){
 function draw(){
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    if(backgroundReady){
+        ctx.drawImage(background, 0, -3.7);
+    }
     drawPiece(arena, {x: 0, y: 0})
     drawPiece(player.piece, player.pos);
 }
@@ -180,8 +201,10 @@ function playerReset(){
     player.pos.y = 0;
     player.pos.x = Math.floor((arena[0].length / 2)) - Math.floor(player.piece[0].length / 2);  //resetuje pozycję gracza na środek osi X
 
+    //gameOver
     if(collide(arena, player)) {
         arena.forEach(row => row.fill(0));
+        dropInterval = 1000;
         player.score = 0;
         updateScore();
     }
@@ -225,6 +248,8 @@ function update(time = 0){
     lastTime = time;
 
     dropCounter += deltaTime;
+
+    
     if(dropCounter > dropInterval) {
         playerDrop();
     }
@@ -262,7 +287,7 @@ let colors = [
     "#0f0",         //Z
 ];
 
-let arena = createPiece(19, 24);    //wielkość planszy!!
+let arena = createPiece(15, 24);    //wielkość planszy!!
 
 let player = {
     pos: {x: 0, y: 0},
@@ -272,52 +297,73 @@ let player = {
 
 let can = true;
 let pauza = document.querySelector(".pauza");
+let Stop = false;
 
-// function pause(){
-//     if(can == false || gameOver == true){
-//         return;
-//     }else{
-//         pauza.classList.toggle("hide");
-//         if(!pauza.classList.contains("hide")){
-//             if(mute_check()){
-//                 game_music.muted = true;
-//                 pause_music.muted = true;
-//             } else{
-//                 game_music.muted = true;
-//                 pause_music.muted = false;
-//             }
-//             clearInterval(game);
-//             can = false;
-//             setTimeout(() => can = true, 500)
-//         } else {
-//             tick3();
-//             setTimeout(() => tick2(), 300);
-//             setTimeout(() => tick1(), 600);
-//             game_music.muted = false;
-//             pause_music.muted = true;
-//             mute_check();
-//             setTimeout(() => game = setInterval(update, clock), 900);
-//             can = false;
-//             setTimeout(() => can = true, 500),
-//             900
+function pause(){
 
-//         }
-//     }
-// }
+    if(can == false){
+        return;
+    }else{
+        pauza.classList.toggle("hide");
+        if(!pauza.classList.contains("hide")){
+            // if(mute_check()){
+            //     game_music.muted = true;
+            //     pause_music.muted = true;
+            // } else{
+            //     game_music.muted = true;
+            //     pause_music.muted = false;
+            // }
+            Stop = true;
+            this.dropInterval = dropInterval;
+            dropInterval = 999999999;
+            can = false;
+            setTimeout(() => can = true, 500)
+        } else {
+            // tick3();
+            // setTimeout(() => tick2(), 300);
+            // setTimeout(() => tick1(), 600);
+            // game_music.muted = false;
+            // pause_music.muted = true;
+            // mute_check();
+            dropInterval = this.dropInterval;
+            Stop = false;
+            can = false;
+            setTimeout(() => can = true, 500),
+            900
+
+        }
+    }
+}
 
 //sterowanie
 document.addEventListener("keydown", e => {
             if(e.code == "ArrowUp"){
-                playerRotate(1);
+                if(Stop){
+                    return
+                } else {
+                    playerRotate(1);
+                }
             }
             else if(e.code == "ArrowDown"){
-                playerDrop();
+                if(Stop){
+                    return
+                } else {
+                    playerDrop();
+                }
             }
             else if(e.code == "ArrowLeft"){
-                playerMove(-1);
+                if(Stop){
+                    return
+                } else {
+                    playerMove(-1);
+                }
             }
             else if(e.code == "ArrowRight"){
-                playerMove(+1);
+                if(Stop){
+                    return
+                } else {
+                    playerMove(+1);
+                }
             }
             else if(e.code == "Escape"){
                 pause();

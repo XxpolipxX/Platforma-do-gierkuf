@@ -1,2 +1,7 @@
 Menu główne [-]
 Muzyka [-]
+Pauza [X]
+Czcionka Tetra 84 [-]
+Wygrana i przegrana [-]
+
+? Spacja powoduje instant upuszczenie klocka [-] ?
