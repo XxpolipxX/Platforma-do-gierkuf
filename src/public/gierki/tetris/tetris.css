@@ -187,7 +187,7 @@ h1{
 #leaderboardBtn {
     grid-area: leaderboard;
 }
-#startBtn, #leaderboardBtn {
+#startBtn, #leaderboardBtn, #restartBtn, #backBtn {
     width: 200px;
     height: 50px;
     justify-self: center;
@@ -200,7 +200,7 @@ h1{
     font-family: tetris;
     font-size: large;
 }
-#startBtn:hover, #leaderboardBtn:hover {
+#startBtn:hover, #leaderboardBtn:hover, #restartBtn:hover, #backBtn:hover {
     background-color: #6f27814f;
 }
 #logo {
@@ -213,4 +213,45 @@ h1{
     justify-content: center;
     font-family: tetris;
     font-size: 90px;
+}
+.gameOver {
+    display: grid;
+    grid-template-areas: 
+    'kom'
+    'pkt'
+    'res'
+    'back';
+    width: 600px;
+    height: 600px;
+    background-color: #ffffff;
+    position: absolute;
+    font-size: 30px;
+}
+#komunikat {
+    grid-area: kom;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: tetris;
+    height: 200px;
+    font-size: 40px
+}
+#pkt {
+    grid-area: pkt;
+    font-family: tetris;
+    width: 600px;
+    height: 200px;
+    align-self: center;
+}
+#restartBtn {
+    grid-area: res;
+}
+#backBtn {
+    grid-area: back;
+}
+#points {
+    color: red;
+    font-size: 35px;
+    font-family: tetris;
+    font-weight: bold;
 }

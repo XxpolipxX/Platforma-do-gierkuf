@@ -1,6 +1,8 @@
 
 // gierka
 let menu = document.querySelector(".menu");
+let gameOverMenu = document.querySelector(".gameOver");
+let points = document.getElementById("points");
 let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext('2d');
 let blockSize = 25;
@@ -9,27 +11,37 @@ let blockSize = 25;
 let dropCounter = 0;
 let dropInterval = 999999999;
 
-
+let gameOver = false;
 let lastTime = 0;
 
-let background = new Image();
-let backgroundReady = false;
-background.addEventListener("load", () => {
-    backgroundReady = true;
-});
 
-background.src = "./tetris-background.jpeg";
-ctx.fillStyle = 'black';
+ctx.fillStyle = '#1e2227';
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 //przyciski
 let playBtn = document.getElementById("startBtn");
 let leaderboardBtn = document.getElementById("leaderboardBtn");
+let restartBtn = document.getElementById("restartBtn");
+let backBtn = document.getElementById("backBtn");
+
+restartBtn.addEventListener("click", () => {
+    dropInterval = 1000;
+    gameOverMenu.classList.add("hide")
+    gameOver = false;
+    player.score = 0;
+})
+
+backBtn.addEventListener("click", () => {
+    gameOverMenu.classList.add("hide");
+    menu.classList.remove("hide");
+})
 
 
 playBtn.addEventListener("click", () => {
     menu.classList.add("hide");
     dropInterval = 1000;        //sekunda odświeżania
+    gameOver = false;
+    player.score = 0;
 })
 //NEXT klocek
 
@@ -154,20 +166,19 @@ function createPieceType(type){
     }}
 // rysuje canvas + klocek
 function draw(){
-    ctx.fillStyle = 'black';
+    ctx.fillStyle = '#1e2227';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.setLineDash([22, 3]);
-    ctx.lineWidth = 1.5
-    for(let i = 0; i < canvas.width; i += blockSize){           //w pionie linie
-        ctx.lineWidth = 2
-        ctx.strokeStyle = "#484848"
+    ctx.setLineDash([25, 0]);
+    ctx.lineWidth = 2
+    for(let i = -1; i < canvas.width; i += blockSize){           //w pionie linie
+        ctx.strokeStyle = "#111"
         ctx.beginPath();
         ctx.moveTo(i + 1, 0);
         ctx.lineTo(i + 1, canvas.height);
         ctx.stroke();
     }
-    for(let i = 0; i < canvas.height; i += blockSize){          //w poziomie linie
-        ctx.strokeStyle = "lightgray";
+    for(let i = -1; i < canvas.height; i += blockSize){          //w poziomie linie
+        ctx.strokeStyle = "#111";
         ctx.beginPath();
         ctx.moveTo(0, i + 1);
         ctx.lineTo(canvas.width, i + 1);
@@ -182,9 +193,9 @@ function drawPiece(piece, location){
         row.forEach((value, x) => {
             if(value != 0) {
                 ctx.fillStyle = colorShadow[value]
-                ctx.fillRect((x*blockSize) + (location.x*blockSize), (y*blockSize) + (location.y*blockSize), blockSize - 1, blockSize - 1);
+                ctx.fillRect((x*blockSize) + (location.x*blockSize), (y*blockSize) + (location.y*blockSize), blockSize - 1.5, blockSize - 1.5);
                 ctx.fillStyle = colors[value];
-                ctx.fillRect(((x*blockSize) + 3) + (location.x*blockSize) - 1, ((y*blockSize) + 3) + (location.y*blockSize) - 1, blockSize - 5, blockSize - 5);
+                ctx.fillRect(((x*blockSize)) + (location.x*blockSize) + 1.5, ((y*blockSize)) + (location.y*blockSize) + 1.5, blockSize - 5, blockSize - 5);
             }
         })
     })
@@ -220,9 +231,10 @@ function playerReset(){
     //gameOver
     if(collide(arena, player)) {
         arena.forEach(row => row.fill(0));
-        dropInterval = 1000;
-        player.score = 0;
-        updateScore();
+        dropInterval = 999999999;
+        gameOver = true;
+        points.innerText = player.score;
+        gameOverMenu.classList.remove("hide");
     }
 }
 
@@ -327,7 +339,7 @@ let Stop = false;
 
 function pause(){
 
-    if(can == false){
+    if(can == false || gameOver == true){
         return;
     }else{
         pauza.classList.toggle("hide");
@@ -364,28 +376,28 @@ function pause(){
 //sterowanie
 document.addEventListener("keydown", e => {
             if(e.code == "ArrowUp"){
-                if(Stop){
+                if(Stop || gameOver == true){
                     return
                 } else {
                     playerRotate(1);
                 }
             }
             else if(e.code == "ArrowDown"){
-                if(Stop){
+                if(Stop || gameOver == true){
                     return
                 } else {
                     playerDrop();
                 }
             }
             else if(e.code == "ArrowLeft"){
-                if(Stop){
+                if(Stop || gameOver == true){
                     return
                 } else {
                     playerMove(-1);
                 }
             }
             else if(e.code == "ArrowRight"){
-                if(Stop){
+                if(Stop || gameOver == true){
                     return
                 } else {
                     playerMove(+1);

@@ -1,8 +1,8 @@
-Menu główne [-]
+Menu główne [X]
 Muzyka [-]
 Pauza [X]
-Czcionka Tetra 84 [-]
-Wygrana i przegrana [-]
-Tekstury klocków [-]
+Czcionka Tetra 84 [X]
+Wygrana i przegrana [X]
+Tekstury klocków [X]
 
 ? Spacja powoduje instant upuszczenie klocka [-] ?
