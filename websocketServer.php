@@ -141,7 +141,12 @@ class GameServer implements MessageComponentInterface {
             $this->connections[$player1ID]->send(json_encode([
                 "event" => "opponent_joined",
                 "room_id" => $room['id'],
-                "opponent_id" => $userID
+                // "opponent_id" => $userID
+                "opponent_id" => $this->getUserLoginByID($userID)
+                // 
+                // 
+                // TODO zamienić userID na login
+                // 
             ]));
         }
         $this->startGame($room['id'], $this->connections[$player1ID], $this->connections[$userID]);
@@ -154,6 +159,14 @@ class GameServer implements MessageComponentInterface {
             }
         }
         return 0;
+    }
+
+    private function getUserLoginByID(int $userID): string {
+        $zapytanie = $this->db->prepare("SELECT `username` FROM `users` WHERE `id` = :userID");
+        $zapytanie->bindParam(':userID', $userID, PDO::PARAM_INT);
+        $zapytanie->execute();
+        $login = $zapytanie->fetch(PDO::FETCH_ASSOC);
+        return $login
     }
 
     private function getRoomByUserID(int $userID) {
@@ -281,9 +294,13 @@ class GameServer implements MessageComponentInterface {
                 echo $pid;
                 $this->connections[$pid]->send(json_encode([
                     'event'  => 'move_made',
-                    'player' => $userID,
+                    // 'player' => $userID,
+                    'player' => $this->getUserLoginByID($userID),
                     'index'  => $index,
                     'symbol' => $symbol
+                    // 
+                    // TODO zamienić userID na login
+                    // 
                 ]));
             }
         }
@@ -296,7 +313,11 @@ class GameServer implements MessageComponentInterface {
                 if(isset($this->connections[$pid])) {
                     $this->connections[$pid]->send(json_encode([
                         'event' => 'game_over',
-                        'winner' => $userID
+                        // 'winner' => $userID
+                        'winner' => $this->getUserLoginByID($userID)
+                    // 
+                    // TODO zamienić userID na login
+                    // 
                     ]));
                 }
             }
