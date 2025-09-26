@@ -19,10 +19,10 @@ Aplikacja działa **lokalnie** – nie posiada hostingu, więc uruchamiana jest 
 | Gra          | Status          | Opis                              |
 |-------------|----------------|------------------------------------|
 | 🐍 Snake    | ✔️ Gotowy   | Klasyczna gra, zbieranie punktów i wzrost węża |
-| 💣 Saper    | 🔧 Do poprawy       | Odkrywaj pola i unikaj min        |
-| 🧩 Tetris   | ❌ Do zrobienia       | Układaj klocki, zdobywaj punkty   |
-| ❌ Tic Tac Toe | ❌ Do zrobienia   | Popularna gra w kółko i krzyżyk   |
-| 🦖 Dino Run | 🔧 Do poprawy (lekkie poprawy) | Gra inspirowana trybem offline w Chrome |
+| 💣 Saper    | ✔️ Gotowy       | Odkrywaj pola i unikaj min        |
+| 🧩 Tetris   | ✔️ Gotowy       | Układaj klocki, zdobywaj punkty   |
+| ❌ Tic Tac Toe | 🔧 Do lekkich popraw wizualnych   | Popularna gra w kółko i krzyżyk   |
+| 🦖 Dino Run | ✔️ Gotowy | Gra inspirowana trybem offline w Chrome |
 
 ---
 
