@@ -48,11 +48,9 @@ socket.onmessage = (event) => {
                 break;
             case 'your_move':
                 alert("Twój ruch");
-                // document.querySelectorAll('#game-container button').forEach(button => button.disabled = false);
                 break;
             case 'opponent_move':
                 alert("Ruch przeciwnika");
-                // document.querySelectorAll('#game-container button').forEach(button => button.disabled = true);
                 break;
             case 'not_your_turn':
                 alert("Teraz trwa tura przeciwnika a nie twoja");
@@ -101,12 +99,12 @@ socket.onmessage = (event) => {
                 let winner = data.winner;
                 if(winner === null) {
                     alert("REMIS");
-                    toggle(createJoin);
-                    toggle(generateCode);
+                    toggle(optionContainer);
+                    toggle(gameContainer);
                 } else {
-                    alert(`Wygrał gracz o ID: ${winner}`);
-                    toggle(createJoin);
-                    toggle(generateCode);
+                    alert(`Wygrał gracz o ID: ${winner.username}`);
+                    toggle(optionContainer);
+                    toggle(gameContainer);
                 }
                 break;
             case "bad_code":

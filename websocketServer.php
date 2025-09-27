@@ -161,12 +161,12 @@ class GameServer implements MessageComponentInterface {
         return 0;
     }
 
-    private function getUserLoginByID(int $userID): string {
+    private function getUserLoginByID(int $userID): array {
         $zapytanie = $this->db->prepare("SELECT `username` FROM `users` WHERE `id` = :userID");
         $zapytanie->bindParam(':userID', $userID, PDO::PARAM_INT);
         $zapytanie->execute();
         $login = $zapytanie->fetch(PDO::FETCH_ASSOC);
-        return $login
+        return $login;
     }
 
     private function getRoomByUserID(int $userID) {
